@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bbrvf10jlmadu"]
+
+[ext_resource type="Shader" path="res://GFX/text_shadow.gdshader" id="1_s0kbi"]
+
+[resource]
+shader = ExtResource("1_s0kbi")

@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://cw8kwjf7crkko"]
+
+[ext_resource type="FontFile" uid="uid://n0y2dmqq37wp" path="res://GFX/SilentChill.ttf" id="1_nydxu"]
+[ext_resource type="Script" path="res://Scenes/menu_scene.gd" id="2_qy78y"]
+[ext_resource type="AudioStream" uid="uid://cqs87sfvgtnf4" path="res://SFX/SH Menu Blip 01.mp3" id="3_3qnkc"]
+[ext_resource type="Texture2D" uid="uid://bsddpcwen44pr" path="res://GFX/vkquake0030.png" id="3_lx5rp"]
+[ext_resource type="AudioStream" uid="uid://c6q88idhgtmu2" path="res://SFX/SH Menu Blip 02.mp3" id="4_6ajfg"]
+[ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/MenuButton.tscn" id="4_p85ku"]
+[ext_resource type="AudioStream" uid="uid://bciqsplam8e0t" path="res://SFX/SH Menu Blip 05.mp3" id="5_62156"]
+[ext_resource type="AudioStream" uid="uid://c6dlfcntoexih" path="res://SFX/SH Menu Blip 03.mp3" id="5_kjdt5"]
+[ext_resource type="AudioStream" uid="uid://b5deufl3uil21" path="res://SFX/SH Menu Blip 04.mp3" id="6_33lkf"]
+
+[sub_resource type="Theme" id="Theme_bkcjs"]
+default_font = ExtResource("1_nydxu")
+
+[node name="MenuScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bkcjs")
+script = ExtResource("2_qy78y")
+menu_move = ExtResource("3_3qnkc")
+menu_select = ExtResource("4_6ajfg")
+menu_locked = ExtResource("5_62156")
+menu_back = ExtResource("5_kjdt5")
+menu_quit = ExtResource("6_33lkf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3qnkc")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_lx5rp")
+
+[node name="title_container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 240.0
+grow_horizontal = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="TITLE" type="Label" parent="title_container"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 60
+text = "Helen's Tapes"
+horizontal_alignment = 1
+
+[node name="menu_main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="btn_start" parent="menu_main" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_quit")
+focus_neighbor_bottom = NodePath("../btn_select_vol")
+text = "Start"
+arrow_margin_from_center = 35
+
+[node name="btn_select_vol" parent="menu_main" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_start")
+focus_neighbor_bottom = NodePath("../btn_quit")
+text = "Select Volume"
+arrow_margin_from_center = 65
+
+[node name="btn_quit" parent="menu_main" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_select_vol")
+focus_neighbor_bottom = NodePath("../btn_start")
+text = "Quit"
+arrow_margin_from_center = 30
+
+[node name="menu_select" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="btn_vol1" parent="menu_select" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_back")
+focus_neighbor_bottom = NodePath("../btn_vol2")
+text = "Volume 1: Hometown"
+arrow_margin_from_center = 92
+
+[node name="btn_vol2" parent="menu_select" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_vol1")
+focus_neighbor_bottom = NodePath("../btn_vol3")
+text = "LOCKED"
+arrow_margin_from_center = 47
+
+[node name="btn_vol3" parent="menu_select" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_vol2")
+focus_neighbor_bottom = NodePath("../btn_vol4")
+text = "LOCKED"
+arrow_margin_from_center = 47
+
+[node name="btn_vol4" parent="menu_select" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_vol3")
+focus_neighbor_bottom = NodePath("../btn_vol5")
+text = "LOCKED"
+arrow_margin_from_center = 47
+
+[node name="btn_vol5" parent="menu_select" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_vol4")
+focus_neighbor_bottom = NodePath("../btn_back")
+text = "LOCKED"
+arrow_margin_from_center = 47
+
+[node name="btn_back" parent="menu_select" instance=ExtResource("4_p85ku")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../btn_vol5")
+focus_neighbor_bottom = NodePath("../btn_vol1")
+text = "Back"
+arrow_margin_from_center = 35
+
+[connection signal="pressed" from="menu_main/btn_start" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="menu_main/btn_select_vol" to="." method="_on_btn_select_vol_pressed"]
+[connection signal="pressed" from="menu_main/btn_quit" to="." method="_on_btn_quit_pressed"]
+[connection signal="pressed" from="menu_select/btn_vol1" to="." method="_on_btn_vol_1_pressed"]
+[connection signal="pressed" from="menu_select/btn_vol2" to="." method="_on_locked_pressed"]
+[connection signal="pressed" from="menu_select/btn_vol3" to="." method="_on_locked_pressed"]
+[connection signal="pressed" from="menu_select/btn_vol4" to="." method="_on_locked_pressed"]
+[connection signal="pressed" from="menu_select/btn_vol5" to="." method="_on_locked_pressed"]
+[connection signal="pressed" from="menu_select/btn_back" to="." method="_on_btn_back_pressed"]

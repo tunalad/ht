@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dy27qgq3i8mlx"
+path="res://.godot/imported/SH Blip 04.mp3-392b36a6c7ea31a509c587caa57ddce1.mp3str"
+
+[deps]
+
+source_file="res://SFX/SH Blip 04.mp3"
+dest_files=["res://.godot/imported/SH Blip 04.mp3-392b36a6c7ea31a509c587caa57ddce1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

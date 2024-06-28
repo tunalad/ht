@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmsyhrr1coo1u"]
+
+[ext_resource type="Script" path="res://Scenes/MenuButton.gd" id="1_gid1j"]
+
+[node name="TextureButton" type="TextureButton"]
+custom_minimum_size = Vector2(0, 20)
+script = ExtResource("1_gid1j")
+text = "Text Button"
+arrow_margin_from_center = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+bbcode_enabled = true
+text = "[center] Text Button [/center]"
+
+[node name="ArrowLeft" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -109.5
+offset_top = -1.5
+offset_right = -90.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "<<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowRight" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = -1.5
+offset_right = 110.0
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = ">>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
