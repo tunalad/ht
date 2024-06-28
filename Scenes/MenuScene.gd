@@ -1,51 +1,95 @@
 extends Control
 
-var items_count = 2 # count of options in menu
-var current_menu = MENU.MAIN # menu we're on atm
-var selected_item = 1 # position of our cursor
+@export var menu_move : AudioStreamMP3
+@export var menu_select : AudioStreamMP3
+@export var menu_locked : AudioStreamMP3
+@export var menu_back : AudioStreamMP3
+@export var menu_quit : AudioStreamMP3
 
+@onready var MENU_MAIN = $menu_main.get_children()
+@onready var MENU_SELECT = $menu_select.get_children()
 
-enum MENU { MAIN, SELECT }
+#func play_sound(sound : AudioStreamMP3):
+#	$AudioStreamPlayer.set_stream(sound)
+#	$AudioStreamPlayer.play()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		if current_menu == MENU.MAIN:
-			current_menu = MENU.SELECT
-			change_menu(MENU.SELECT)
-		elif current_menu == MENU.SELECT:
-			current_menu = MENU.MAIN
-			change_menu(MENU.MAIN)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# make sure the correct menu is active
+	$menu_main.show()
+	$menu_select.hide()
 	
-	handle_selected_item()
-
-func split_title_menu():
-	# this gets the size of the sceen
-	# then splits it into two 
-	# one for the title, other for the menu
-	var total_height = get_viewport_rect().size.y
-	var half_height = total_height / 2
+	# focus on the 1st button
+	MENU_MAIN[0].grab_focus()
 	
-	$"Title Container".custom_minimum_size.y = half_height
-	$menu_main.custom_minimum_size.y = half_height
+	# activate the selecting sound
+	for btn in MENU_MAIN:
+		btn.skipped_sound = true
 
-func change_menu(change_menu):
-	if change_menu == MENU.MAIN:
-		$menu_main/menu_select.hide()
-		$menu_main/menu_main.show()
-	if change_menu == MENU.SELECT:
-		$menu_main/menu_select.show()
-		$menu_main/menu_main.hide()
-	pass
+# # # # # # # # # # # # # 
+# # # # MENU MAIN # # # # 
+# # # # # # # # # # # # # 
 
-func handle_selected_item():
-	if Input.is_action_just_pressed("ui_down"):
-		selected_item += 1
-	elif Input.is_action_just_pressed("ui_up"):
-		selected_item -= 1
+func _on_btn_start_pressed():
+	Global.play_sound($AudioStreamPlayer, menu_select)
+	print("start pressed")
+
+
+func _on_btn_select_vol_pressed():
+	Global.play_sound($AudioStreamPlayer, menu_select)
 	
-	if selected_item > items_count or selected_item < 1:
-			selected_item = 1
+	# show the selection menu instead
+	$menu_main.hide()
+	$menu_select.show()
 	
-	# highlight the item by setting it's color to red (default is white)
-	# so we take the child of the menu we're on, and color it red
+	# focus on the 1st button
+	MENU_SELECT[0].grab_focus()
+	
+	# activate sounds for menu_select items
+	for btn in MENU_SELECT:
+		btn.skipped_sound = true
+	
+	# but disable the sound on the other ones
+	for btn in MENU_MAIN:
+		btn.skipped_sound = !true
+
+
+func _on_btn_quit_pressed():
+	$AudioStreamPlayer.set_stream(menu_quit)
+	$AudioStreamPlayer.play()
+	
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
+	
+	get_tree().quit()
+
+# # # # # # # # # # # # # #
+# # # # SELECT MENU # # # # 
+# # # # # # # # # # # # # #
+
+func _on_btn_back_pressed():
+	Global.play_sound($AudioStreamPlayer, menu_back)
+	
+	# show the selection menu instead
+	$menu_main.show()
+	$menu_select.hide()
+	
+	# disable the sounds in menu_select
+	for btn in MENU_SELECT:
+		btn.skipped_sound = !true
+	
+	# focus the 1st button
+	MENU_MAIN[0].grab_focus()
+	
+	# and activate on the main
+	for btn in MENU_MAIN:
+		btn.skipped_sound = true
+
+func _on_locked_pressed():
+	Global.play_sound($AudioStreamPlayer, menu_locked)
+
+func _on_btn_vol_1_pressed():
+	Global.play_sound($AudioStreamPlayer, menu_quit)
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
+	print("and the vol1 starts playing idk")
