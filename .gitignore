@@ -13,3 +13,7 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# HELEN'S TAPES
+
+Music/Vol1/*

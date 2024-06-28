@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://phckjkeryl6u"]
+
+[ext_resource type="FontFile" uid="uid://n0y2dmqq37wp" path="res://GFX/SilentChill.ttf" id="1_nwc2c"]
+
+[resource]
+default_font = ExtResource("1_nwc2c")

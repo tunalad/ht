@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw8kwjf7crkko"]
+[gd_scene load_steps=10 format=3 uid="uid://cw8kwjf7crkko"]
 
-[ext_resource type="FontFile" uid="uid://n0y2dmqq37wp" path="res://GFX/SilentChill.ttf" id="1_43kxs"]
+[ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_6l133"]
 [ext_resource type="Script" path="res://Scenes/MenuScene.gd" id="2_3esvg"]
 [ext_resource type="AudioStream" uid="uid://cqs87sfvgtnf4" path="res://SFX/SH Menu Blip 01.mp3" id="3_6o4i4"]
 [ext_resource type="AudioStream" uid="uid://c6q88idhgtmu2" path="res://SFX/SH Menu Blip 02.mp3" id="4_sc4hg"]
@@ -10,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bsddpcwen44pr" path="res://GFX/vkquake0030.png" id="8_7gewa"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/MenuButton.tscn" id="9_xm7qk"]
 
-[sub_resource type="Theme" id="Theme_bkcjs"]
-default_font = ExtResource("1_43kxs")
-
 [node name="MenuScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -20,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_bkcjs")
+theme = ExtResource("1_6l133")
 script = ExtResource("2_3esvg")
 menu_move = ExtResource("3_6o4i4")
 menu_select = ExtResource("4_sc4hg")
