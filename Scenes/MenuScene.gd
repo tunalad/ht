@@ -92,4 +92,4 @@ func _on_btn_vol_1_pressed():
 	Global.play_sound($AudioStreamPlayer, menu_quit)
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://Scenes/Levels/Vol1Song1.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Levels/v1s1.tscn")

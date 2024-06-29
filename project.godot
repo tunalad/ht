@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="helen's tapes menu"
+config/name="helen's tapes"
 run/main_scene="res://Scenes/MenuScene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"

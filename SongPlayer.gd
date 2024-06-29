@@ -3,14 +3,21 @@ extends Control
 @export var game_background : CompressedTexture2D # main background image
 @export var song_name : String = "Song name" # track title that fades in and out
 @export var audio_file : AudioStream # the song file
-@export var text_fade: float = 4 # seconds that the text (and background) stays on the screen for
+@export var text_fade: float = 2 # seconds that the text (and background) stays on the screen for
 @export var song_start_delay : float = 2 # delay before the fadeout
-@export var next_scene : PackedScene
+@export var next_scene : String
+@export var previous_scene : String
 
 func _ready():
 	# setup
 	$GameBackground.texture = game_background
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
+	
+	if !next_scene:
+		$btn_skip/RichTextLabel.bbcode_text = "[center][color=gray]⏭[/color][/center]"
+	
+	if !previous_scene:
+		$btn_back/RichTextLabel.bbcode_text = "[center][color=gray]⏮[/color][/center]"
 	
 	# fade the text in and stay for like 2 seconds
 	$AnimationPlayer.play("text_fade_in") # fades the track name in
@@ -25,7 +32,10 @@ func _ready():
 	#TransitionScreen.transition()
 	#await TransitionScreen.on_transition_finished
 	
-	get_tree().change_scene_to_packed(next_scene)
+	if (next_scene):
+		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % next_scene)
+	else:
+		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -61,3 +71,15 @@ func draw_bar(percentage : int, bars : int = 20) -> String:
 	var empty = "○ "
 	var filled_bars = int((percentage / 100.0) * bars)
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
+
+
+func _on_btn_back_pressed():
+	print("button back")
+	if previous_scene:
+		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % previous_scene)
+
+
+func _on_btn_skip_pressed():
+	print("button skip")
+	if next_scene:
+		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % next_scene)
