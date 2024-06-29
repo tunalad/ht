@@ -5,7 +5,7 @@ extends Control
 @export var audio_file : AudioStream # the song file
 @export var text_fade: float = 4 # seconds that the text (and background) stays on the screen for
 @export var song_start_delay : float = 2 # delay before the fadeout
-@export var next_scene : String = "res://Scenes/MenuScene.tscn"
+@export var next_scene : PackedScene
 
 func _ready():
 	# setup
@@ -22,10 +22,10 @@ func _ready():
 	
 	await get_tree().create_timer($MusicPlayer.stream.get_length() - 1.0).timeout
 	
-	TransitionScreen.transition()
-	await TransitionScreen.on_transition_finished
+	#TransitionScreen.transition()
+	#await TransitionScreen.on_transition_finished
 	
-	get_tree().change_scene_to_file(next_scene)
+	get_tree().change_scene_to_packed(next_scene)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -33,3 +33,31 @@ func _process(delta):
 		$AnimationPlayer.play("fade_out")
 		await get_tree().create_timer(3).timeout
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
+	
+	if $MusicPlayer.stream:
+		var percentage = track_percentage()
+		var playback_position = $MusicPlayer.get_playback_position()
+		var song_length = $MusicPlayer.stream.get_length()
+		var timer_text = format_timer(playback_position)
+		$Timeline.bbcode_text = "[center] %s | %s | %s [/center]" % [timer_text, draw_bar(percentage), format_timer(song_length)]
+
+
+func track_percentage():
+	if $MusicPlayer.stream:
+		var song_length = $MusicPlayer.stream.get_length()
+		var playback_position = $MusicPlayer.get_playback_position()
+		return int((playback_position / song_length) * 100)
+	else:
+		return 0
+
+func format_timer(time_seconds: float) -> String:
+	var minutes = int(time_seconds) / 60
+	var seconds = int(time_seconds) % 60
+	return "%02d:%02d" % [minutes, seconds]
+
+
+func draw_bar(percentage : int, bars : int = 20) -> String:
+	var filled = "█ "
+	var empty = "○ "
+	var filled_bars = int((percentage / 100.0) * bars)
+	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
