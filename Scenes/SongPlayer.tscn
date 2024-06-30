@@ -183,74 +183,63 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_5gxu1")
 
-[node name="Timeline" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-offset_left = 176.0
-offset_top = 432.0
-offset_right = 464.0
-offset_bottom = 480.0
+[node name="Controller" type="HBoxContainer" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-bbcode_enabled = true
-text = "[center]| ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ |[/center]"
+alignment = 1
 
-[node name="TimeLeft" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(0, 48)
+[node name="btn_back" type="Button" parent="Controller"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 432.0
-offset_right = 184.0
-offset_bottom = 480.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-bbcode_enabled = true
-text = "[center]00:00[/center]"
-
-[node name="TimeRight" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-offset_left = 456.0
-offset_top = 432.0
-offset_right = 520.0
-offset_bottom = 480.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-bbcode_enabled = true
-text = "[center]00:00[/center]"
-
-[node name="btn_back" type="Button" parent="."]
-layout_mode = 2
-offset_left = 96.0
-offset_top = 424.0
-offset_right = 128.0
-offset_bottom = 456.0
+theme_override_font_sizes/font_size = 20
 text = "⏮"
 flat = true
 icon_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="btn_skip" type="Button" parent="."]
+[node name="TimeLeft" type="Label" parent="Controller"]
+custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
-offset_left = 520.0
-offset_top = 424.0
-offset_right = 552.0
-offset_bottom = 456.0
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timeline" type="Label" parent="Controller"]
+custom_minimum_size = Vector2(288, 48)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "| ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ |
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeRight" type="Label" parent="Controller"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_skip" type="Button" parent="Controller"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "⏭"
 flat = true
 icon_alignment = 1
@@ -302,5 +291,5 @@ libraries = {
 "": SubResource("AnimationLibrary_i23tr")
 }
 
-[connection signal="pressed" from="btn_back" to="." method="_on_btn_back_pressed"]
-[connection signal="pressed" from="btn_skip" to="." method="_on_btn_skip_pressed"]
+[connection signal="pressed" from="Controller/btn_back" to="." method="_on_btn_back_pressed"]
+[connection signal="pressed" from="Controller/btn_skip" to="." method="_on_btn_skip_pressed"]
