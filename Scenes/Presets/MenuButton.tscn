@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmsyhrr1coo1u"]
 
-[ext_resource type="Script" path="res://Scenes/MenuButton.gd" id="1_gid1j"]
+[ext_resource type="Script" path="res://Scenes/Presets/MenuButton.gd" id="1_gid1j"]
 
 [node name="TextureButton" type="TextureButton"]
 custom_minimum_size = Vector2(0, 20)

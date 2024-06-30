@@ -7,8 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://bciqsplam8e0t" path="res://SFX/SH Menu Blip 05.mp3" id="5_d5444"]
 [ext_resource type="AudioStream" uid="uid://c6dlfcntoexih" path="res://SFX/SH Menu Blip 03.mp3" id="6_n46as"]
 [ext_resource type="AudioStream" uid="uid://b5deufl3uil21" path="res://SFX/SH Menu Blip 04.mp3" id="7_udoxb"]
-[ext_resource type="Texture2D" uid="uid://bsddpcwen44pr" path="res://GFX/vkquake0030.png" id="8_7gewa"]
-[ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/MenuButton.tscn" id="9_xm7qk"]
+[ext_resource type="Texture2D" uid="uid://rqfp5hlktmnf" path="res://GFX/ht-menu.png" id="8_17r64"]
+[ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="9_xm7qk"]
 
 [node name="MenuScene" type="Control"]
 layout_mode = 3
@@ -35,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("8_7gewa")
+texture = ExtResource("8_17r64")
 
 [node name="title_container" type="VBoxContainer" parent="."]
 layout_mode = 1

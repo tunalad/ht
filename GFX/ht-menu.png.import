@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8o1nsjdaq2a5"
-path="res://.godot/imported/vkquake0025.png-2522986a13d7a0ccbbb384b0db382090.ctex"
+uid="uid://rqfp5hlktmnf"
+path="res://.godot/imported/ht-menu.png-8018ab55afb44c5ddc7b409c03f1c74e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GFX/vkquake0025.png"
-dest_files=["res://.godot/imported/vkquake0025.png-2522986a13d7a0ccbbb384b0db382090.ctex"]
+source_file="res://GFX/ht-menu.png"
+dest_files=["res://.godot/imported/ht-menu.png-8018ab55afb44c5ddc7b409c03f1c74e.ctex"]
 
 [params]
 

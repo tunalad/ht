@@ -19,3 +19,7 @@ func _on_animation_finished(anim_name):
 func transition():
 	color_rect.visible = true
 	animation_player.play("Fade_to_black")
+
+func fade_to_normal():
+	color_rect.visible = true
+	animation_player.play("Fade_to_normal")

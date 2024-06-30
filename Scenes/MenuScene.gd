@@ -18,17 +18,20 @@ func _ready():
 	# make sure the correct menu is active
 	$menu_main.show()
 	$menu_select.hide()
-	
+
 	# focus on the 1st button
 	MENU_MAIN[0].grab_focus()
-	
+
 	# activate the selecting sound
 	for btn in MENU_MAIN:
 		btn.skipped_sound = true
 
-# # # # # # # # # # # # # 
-# # # # MENU MAIN # # # # 
-# # # # # # # # # # # # # 
+	TransitionScreen.fade_to_normal()
+	await TransitionScreen.on_transition_finished
+
+# # # # # # # # # # # # #
+# # # # MENU MAIN # # # #
+# # # # # # # # # # # # #
 
 func _on_btn_start_pressed():
 	Global.play_sound($AudioStreamPlayer, menu_select)
@@ -37,18 +40,18 @@ func _on_btn_start_pressed():
 
 func _on_btn_select_vol_pressed():
 	Global.play_sound($AudioStreamPlayer, menu_select)
-	
+
 	# show the selection menu instead
 	$menu_main.hide()
 	$menu_select.show()
-	
+
 	# focus on the 1st button
 	MENU_SELECT[0].grab_focus()
-	
+
 	# activate sounds for menu_select items
 	for btn in MENU_SELECT:
 		btn.skipped_sound = true
-	
+
 	# but disable the sound on the other ones
 	for btn in MENU_MAIN:
 		btn.skipped_sound = !true
@@ -57,30 +60,30 @@ func _on_btn_select_vol_pressed():
 func _on_btn_quit_pressed():
 	$AudioStreamPlayer.set_stream(menu_quit)
 	$AudioStreamPlayer.play()
-	
+
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
-	
+
 	get_tree().quit()
 
 # # # # # # # # # # # # # #
-# # # # SELECT MENU # # # # 
+# # # # SELECT MENU # # # #
 # # # # # # # # # # # # # #
 
 func _on_btn_back_pressed():
 	Global.play_sound($AudioStreamPlayer, menu_back)
-	
+
 	# show the selection menu instead
 	$menu_main.show()
 	$menu_select.hide()
-	
+
 	# disable the sounds in menu_select
 	for btn in MENU_SELECT:
 		btn.skipped_sound = !true
-	
+
 	# focus the 1st button
 	MENU_MAIN[0].grab_focus()
-	
+
 	# and activate on the main
 	for btn in MENU_MAIN:
 		btn.skipped_sound = true
