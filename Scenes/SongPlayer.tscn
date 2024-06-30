@@ -185,14 +185,11 @@ texture = ExtResource("2_5gxu1")
 
 [node name="Timeline" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(0, 48)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 128.0
-offset_top = -48.0
-offset_right = -128.0
+layout_mode = 2
+offset_left = 176.0
+offset_top = 432.0
+offset_right = 464.0
+offset_bottom = 480.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
@@ -201,53 +198,63 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 bbcode_enabled = true
-text = "[center] 00:00 | ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ | 00:00[/center]"
+text = "[center]| ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ |[/center]"
 
-[node name="btn_back" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 88.0
+[node name="TimeLeft" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+offset_left = 120.0
 offset_top = 432.0
+offset_right = 184.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+bbcode_enabled = true
+text = "[center]00:00[/center]"
+
+[node name="TimeRight" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+offset_left = 456.0
+offset_top = 432.0
+offset_right = 520.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+bbcode_enabled = true
+text = "[center]00:00[/center]"
+
+[node name="btn_back" type="Button" parent="."]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 424.0
 offset_right = 128.0
-offset_bottom = 448.0
+offset_bottom = 456.0
+text = "⏮"
+flat = true
+icon_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="btn_back"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-bbcode_enabled = true
-text = "[center]⏮[/center]"
-fit_content = true
-
-[node name="btn_skip" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 432.0
+[node name="btn_skip" type="Button" parent="."]
+layout_mode = 2
+offset_left = 520.0
+offset_top = 424.0
 offset_right = 552.0
-offset_bottom = 448.0
+offset_bottom = 456.0
+text = "⏭"
+flat = true
+icon_alignment = 1
 metadata/_edit_group_ = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="btn_skip"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-bbcode_enabled = true
-text = "[center]⏭[/center]"
-fit_content = true
 
 [node name="Intro" type="ColorRect" parent="."]
 layout_mode = 2
@@ -279,6 +286,7 @@ text = "[center]Song name goes here or sth idk[/center]"
 fit_content = true
 
 [node name="Exit" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

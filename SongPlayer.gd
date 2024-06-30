@@ -14,10 +14,10 @@ func _ready():
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
 	
 	if !next_scene:
-		$btn_skip/RichTextLabel.bbcode_text = "[center][color=gray]⏭[/color][/center]"
+		$btn_skip.set_disabled(true)
 	
 	if !previous_scene:
-		$btn_back/RichTextLabel.bbcode_text = "[center][color=gray]⏮[/color][/center]"
+		$btn_back.set_disabled(true)
 	
 	# fade the text in and stay for like 2 seconds
 	$AnimationPlayer.play("text_fade_in") # fades the track name in
@@ -45,12 +45,12 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 	
 	if $MusicPlayer.stream:
-		var percentage = track_percentage()
 		var playback_position = $MusicPlayer.get_playback_position()
 		var song_length = $MusicPlayer.stream.get_length()
-		var timer_text = format_timer(playback_position)
-		$Timeline.bbcode_text = "[center] %s | %s | %s [/center]" % [timer_text, draw_bar(percentage), format_timer(song_length)]
-
+		
+		$Timeline.bbcode_text = "[center]| %s |[/center]" % draw_bar(track_percentage())
+		$TimeLeft.bbcode_text = "[center] %s [/center]" % format_timer(playback_position)
+		$TimeRight.bbcode_text = "[center] %s [/center]" % format_timer(song_length)
 
 func track_percentage():
 	if $MusicPlayer.stream:
