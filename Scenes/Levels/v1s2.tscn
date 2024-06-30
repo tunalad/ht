@@ -17,4 +17,5 @@ layout_mode = 1
 game_background = ExtResource("2_ucv6p")
 song_name = "closing for tonight"
 audio_file = ExtResource("3_4vuxk")
+next_scene = "v1s3"
 previous_scene = "v1s1"

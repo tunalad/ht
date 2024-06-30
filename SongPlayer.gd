@@ -13,6 +13,10 @@ func _ready():
 	$GameBackground.texture = game_background
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
 	
+	# making sure visibility for fades is on because I keep forgetting to turn it back on
+	$Intro.visible = true
+	$Exit.visible = true
+	
 	if !next_scene:
 		$Controller/btn_skip.set_disabled(true)
 	
