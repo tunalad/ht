@@ -1,0 +1,7 @@
+" vim: ft=vim
+" project settings for (neo)vim
+" to load these settings automatically, add this to your config (lua):
+"       vim.cmd('autocmd BufEnter * if filereadable(".vimsettings") | source .vimsettings | endif')
+set tabstop=4
+set shiftwidth=4
+set noexpandtab

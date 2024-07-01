@@ -8,6 +8,7 @@ var skipped_sound = false
 
 func _ready():
 	setup_text()
+	setup_neighbours()
 	hide_arrows()
 	set_focus_mode(Control.FOCUS_ALL)
 
@@ -18,6 +19,18 @@ func _process(_delta):
 
 func setup_text():
 	$RichTextLabel.bbcode_text = "[center] %s [/center]" % text
+
+func setup_neighbours():
+	var my_pos = self.get_index()
+	var parent = $"..".get_children()
+	
+	self.set_focus_neighbor(SIDE_TOP, parent[my_pos - 1].get_path())
+	
+	if my_pos + 1 >= len(parent):
+		self.set_focus_neighbor(SIDE_BOTTOM, parent[0].get_path())
+	else:
+		self.set_focus_neighbor(SIDE_BOTTOM, parent[my_pos + 1].get_path())
+	
 
 func show_arrows():
 	# Get the center position of the TextureButton

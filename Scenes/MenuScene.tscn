@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bciqsplam8e0t" path="res://SFX/SH Menu Blip 05.mp3" id="5_d5444"]
 [ext_resource type="AudioStream" uid="uid://c6dlfcntoexih" path="res://SFX/SH Menu Blip 03.mp3" id="6_n46as"]
 [ext_resource type="AudioStream" uid="uid://b5deufl3uil21" path="res://SFX/SH Menu Blip 04.mp3" id="7_udoxb"]
-[ext_resource type="Texture2D" uid="uid://rqfp5hlktmnf" path="res://GFX/ht-menu.png" id="8_17r64"]
+[ext_resource type="Texture2D" uid="uid://rjspf5a6bpt6" path="res://GFX/ht-menu-8bit.png" id="8_mxsee"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="9_xm7qk"]
 
 [node name="MenuScene" type="Control"]
@@ -35,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("8_17r64")
+texture = ExtResource("8_mxsee")
 
 [node name="title_container" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -68,22 +68,16 @@ alignment = 1
 
 [node name="btn_start" parent="menu_main" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_quit")
-focus_neighbor_bottom = NodePath("../btn_select_vol")
 text = "Start"
 arrow_margin_from_center = 35
 
 [node name="btn_select_vol" parent="menu_main" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_start")
-focus_neighbor_bottom = NodePath("../btn_quit")
 text = "Select Volume"
 arrow_margin_from_center = 65
 
 [node name="btn_quit" parent="menu_main" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_select_vol")
-focus_neighbor_bottom = NodePath("../btn_start")
 text = "Quit"
 arrow_margin_from_center = 30
 
