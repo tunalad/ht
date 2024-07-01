@@ -57,6 +57,7 @@ text = "Helen's Tapes"
 horizontal_alignment = 1
 
 [node name="menu_main" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,20 +67,26 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="btn_start" parent="menu_main" instance=ExtResource("9_xm7qk")]
-layout_mode = 2
-text = "Start"
-arrow_margin_from_center = 35
-
 [node name="btn_select_vol" parent="menu_main" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
 text = "Select Volume"
 arrow_margin_from_center = 65
+function_left = null
+function_right = null
+
+[node name="btn_opts" parent="menu_main" instance=ExtResource("9_xm7qk")]
+layout_mode = 2
+text = "Options"
+arrow_margin_from_center = 45
+function_left = null
+function_right = null
 
 [node name="btn_quit" parent="menu_main" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
 text = "Quit"
 arrow_margin_from_center = 30
+function_left = null
+function_right = null
 
 [node name="menu_select" type="VBoxContainer" parent="."]
 visible = false
@@ -94,48 +101,122 @@ alignment = 1
 
 [node name="btn_vol1" parent="menu_select" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_back")
-focus_neighbor_bottom = NodePath("../btn_vol2")
 text = "Volume 1: Hometown"
 arrow_margin_from_center = 92
+function_left = null
+function_right = null
 
 [node name="btn_vol2" parent="menu_select" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_vol1")
-focus_neighbor_bottom = NodePath("../btn_vol3")
 text = "LOCKED"
 arrow_margin_from_center = 47
+function_left = null
+function_right = null
 
 [node name="btn_vol3" parent="menu_select" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_vol2")
-focus_neighbor_bottom = NodePath("../btn_vol4")
 text = "LOCKED"
 arrow_margin_from_center = 47
+function_left = null
+function_right = null
 
 [node name="btn_vol4" parent="menu_select" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_vol3")
-focus_neighbor_bottom = NodePath("../btn_vol5")
 text = "LOCKED"
 arrow_margin_from_center = 47
+function_left = null
+function_right = null
 
 [node name="btn_vol5" parent="menu_select" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_vol4")
-focus_neighbor_bottom = NodePath("../btn_back")
 text = "LOCKED"
 arrow_margin_from_center = 47
+function_left = null
+function_right = null
 
 [node name="btn_back" parent="menu_select" instance=ExtResource("9_xm7qk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_vol5")
-focus_neighbor_bottom = NodePath("../btn_vol1")
 text = "Back"
 arrow_margin_from_center = 35
+function_left = null
+function_right = null
 
-[connection signal="pressed" from="menu_main/btn_start" to="." method="_on_btn_start_pressed"]
+[node name="menu_options" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu_options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu_options/VBoxContainer"]
+layout_mode = 2
+
+[node name="menu_options_left" type="VBoxContainer" parent="menu_options/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_direction = 2
+layout_mode = 2
+alignment = 1
+
+[node name="btn_opt_fullscreen" parent="menu_options/VBoxContainer/HBoxContainer/menu_options_left" instance=ExtResource("9_xm7qk")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../../btn_opt_back")
+text = "Fullscreen"
+arrow_margin_from_center = 55
+function_left = "_on_btn_opt_fullscreen_pressed"
+function_right = "_on_btn_opt_fullscreen_pressed"
+
+[node name="btn_opt_vol" parent="menu_options/VBoxContainer/HBoxContainer/menu_options_left" instance=ExtResource("9_xm7qk")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../../btn_opt_back")
+text = "Volume"
+arrow_margin_from_center = 45
+function_left = "volume_down"
+function_right = "volume_up"
+
+[node name="menu_options_right" type="VBoxContainer" parent="menu_options/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="fullscreen_indicator" type="Label" parent="menu_options/VBoxContainer/HBoxContainer/menu_options_right"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "OFF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="volume_indicator" type="Label" parent="menu_options/VBoxContainer/HBoxContainer/menu_options_right"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "█ █ █ █ █ ○ ○ ○ ○ ○ "
+horizontal_alignment = 1
+
+[node name="btn_opt_back" parent="menu_options/VBoxContainer" instance=ExtResource("9_xm7qk")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer/menu_options_left/btn_opt_vol")
+focus_neighbor_bottom = NodePath("../HBoxContainer/menu_options_left/btn_opt_fullscreen")
+text = "Back"
+arrow_margin_from_center = 35
+function_left = null
+function_right = null
+
 [connection signal="pressed" from="menu_main/btn_select_vol" to="." method="_on_btn_select_vol_pressed"]
+[connection signal="pressed" from="menu_main/btn_opts" to="." method="_on_btn_opts_pressed"]
 [connection signal="pressed" from="menu_main/btn_quit" to="." method="_on_btn_quit_pressed"]
 [connection signal="pressed" from="menu_select/btn_vol1" to="." method="_on_btn_vol_1_pressed"]
 [connection signal="pressed" from="menu_select/btn_vol2" to="." method="_on_locked_pressed"]
@@ -143,3 +224,9 @@ arrow_margin_from_center = 35
 [connection signal="pressed" from="menu_select/btn_vol4" to="." method="_on_locked_pressed"]
 [connection signal="pressed" from="menu_select/btn_vol5" to="." method="_on_locked_pressed"]
 [connection signal="pressed" from="menu_select/btn_back" to="." method="_on_btn_back_pressed"]
+[connection signal="left_key_pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen" to="." method="_on_btn_opt_fullscreen_pressed"]
+[connection signal="pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen" to="." method="_on_btn_opt_fullscreen_pressed"]
+[connection signal="right_key_pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen" to="." method="_on_btn_opt_fullscreen_pressed"]
+[connection signal="left_key_pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol" to="." method="_on_btn_opt_vol_left_key_pressed"]
+[connection signal="right_key_pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol" to="." method="_on_btn_opt_vol_right_key_pressed"]
+[connection signal="pressed" from="menu_options/VBoxContainer/btn_opt_back" to="." method="_on_btn_opt_back_pressed"]
