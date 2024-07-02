@@ -45,14 +45,15 @@ func setup_neighbours():
 	var my_pos = self.get_index()
 	var parent = $"..".get_children()
 	
-	if not focus_neighbor_top:
+	if not is_instance_valid(focus_neighbor_top):
 		self.set_focus_neighbor(SIDE_TOP, parent[my_pos - 1].get_path())
 	
-	if not focus_neighbor_bottom:
+	if not is_instance_valid(focus_neighbor_bottom):
 		if my_pos + 1 >= len(parent):
 			self.set_focus_neighbor(SIDE_BOTTOM, parent[0].get_path())
 		else:
 			self.set_focus_neighbor(SIDE_BOTTOM, parent[my_pos + 1].get_path())
+
 
 
 func show_arrows():

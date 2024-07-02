@@ -14,8 +14,6 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var btn_opt_fullscreen = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen
-	
 	# make sure the correct menu is active
 	$menu_main.show()
 	$menu_select.hide()
@@ -29,6 +27,8 @@ func _ready():
 	# activate the selecting sound
 	for btn in MENU_MAIN:
 		btn.skipped_sound = true
+	
+	manual_neighbours_fix()
 	
 	TransitionScreen.fade_to_normal()
 	await TransitionScreen.on_transition_finished
@@ -61,6 +61,17 @@ func draw_bar(percentage : int, bars : int = 20) -> String:
 	var empty = "○ "
 	var filled_bars = int((percentage / 100.0) * bars)
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
+
+func manual_neighbours_fix():
+	# manual neighbours setup intervention because I can't be bothered figuring it out the hard way
+	var btn_opt_back = $menu_options/VBoxContainer/btn_opt_back
+	var btn_opt_fullscreen = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen
+	var btn_opt_vol = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol
+	
+	btn_opt_back.set_focus_neighbor(SIDE_BOTTOM, btn_opt_fullscreen.get_path())
+	btn_opt_vol.set_focus_neighbor(SIDE_TOP, btn_opt_vol.get_path())
+	btn_opt_fullscreen.set_focus_neighbor(SIDE_TOP, btn_opt_back.get_path())
+	btn_opt_vol.set_focus_neighbor(SIDE_BOTTOM, btn_opt_back.get_path())
 
 # # # # # # # # # # # # #
 # # # # MENU MAIN # # # #
