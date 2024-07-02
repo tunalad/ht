@@ -210,3 +210,12 @@ func _on_btn_opt_vol_right_key_pressed():
 		audio_settings["master_volume"] = 0.0
 	ConfigHandler.save_audio_settings("master_volume", audio_settings["master_volume"])
 	load_settings()
+
+
+func _on_dev_console_console_closed():
+	if $menu_main.visible:
+		MENU_MAIN[0].grab_focus()
+	if $menu_select.visible:
+		MENU_SELECT[0].grab_focus()
+	if $menu_options.visible:
+		MENU_OPTS[0].grab_focus()
