@@ -69,7 +69,7 @@ func manual_neighbours_fix():
 	var btn_opt_vol = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol
 	
 	btn_opt_back.set_focus_neighbor(SIDE_BOTTOM, btn_opt_fullscreen.get_path())
-	btn_opt_vol.set_focus_neighbor(SIDE_TOP, btn_opt_vol.get_path())
+	btn_opt_back.set_focus_neighbor(SIDE_TOP, btn_opt_vol.get_path())
 	btn_opt_fullscreen.set_focus_neighbor(SIDE_TOP, btn_opt_back.get_path())
 	btn_opt_vol.set_focus_neighbor(SIDE_BOTTOM, btn_opt_back.get_path())
 
