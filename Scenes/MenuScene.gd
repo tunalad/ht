@@ -85,6 +85,12 @@ func _on_btn_select_vol_pressed():
 	$menu_main.hide()
 	$menu_select.show()
 
+	# locking vol1 if we can't find the scene file
+	if !(FileAccess.file_exists("res://Scenes/Levels/v1s1.tscn") or Global.loaded_vol1):
+		$menu_select/btn_vol1.text = "LOCKED"
+		$menu_select/btn_vol1.arrow_margin_from_center = 47
+		$menu_select/btn_vol1.setup_text()
+
 	# focus on the 1st button
 	MENU_SELECT[0].grab_focus()
 
@@ -149,6 +155,10 @@ func _on_locked_pressed():
 	Global.play_sound($AudioStreamPlayer, menu_locked)
 
 func _on_btn_vol_1_pressed():
+	if !(FileAccess.file_exists("res://Scenes/Levels/v1s1.tscn") or Global.loaded_vol1):
+		Global.play_sound($AudioStreamPlayer, menu_locked)
+		return
+	
 	Global.play_sound($AudioStreamPlayer, menu_quit)
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
