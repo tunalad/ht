@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var expression = Expression.new()
-var history = []
+var history_list = []
 var history_index = -1
 
 @onready var history_label = $MarginContainer/console/ScrollContainer/VBoxContainer/history
@@ -32,6 +32,9 @@ func _input(event):
 			input_label.text = cycler
 		else:
 			input_label.text = ""
+	if event.is_action_pressed("ui_text_completion_replace"):
+		var partial_command = input_label.text
+		input_label.text = tab_completion(partial_command)
 
 func commands():
 	var command_list = []
@@ -43,13 +46,17 @@ func commands():
 			"handle_scrollbar_changed", 
 			"_input",
 			"cycle_history",
+			"tab_completion"
 		]
 	
 	for method in methods:
 		if method.name not in excluded_methods:
 			command_list.append(method.name)
 	
-	return "Available commands:\n" + "\n- ".join(PackedStringArray(command_list))
+	return "Available commands:\n -" + "\n- ".join(PackedStringArray(command_list))
+
+func history():
+	return "Commands history: \n- " + "\n- ".join(PackedStringArray(history_list))
 
 func echo(value):
 	return value
@@ -123,20 +130,41 @@ func volume(value=null):
 func cycle_history(move_up):
 	# note that the array is reversed
 	# so the last command is on index 0
-	if history.size() == 0:
+	if history_list.size() == 0:
 		return null
 	
 	if move_up:
 		history_index += 1
-		if history_index >= history.size():
-			history_index = history.size() - 1
+		if history_index >= history_list.size():
+			history_index = history_list.size() - 1
 	else:
 		history_index -= 1
 		if history_index < 0:
 			history_index = -1
 			return ""
 	
-	return history[history_index]
+	return history_list[history_index]
+
+func tab_completion(partial_command):
+	if partial_command == "":
+		return ""
+	
+	var command_list = commands().split("\n- ")
+	command_list.remove_at(0) # trimming out the "avialable commands" part
+
+	var matches = []
+	for command in command_list:
+		if command.begins_with(partial_command):
+			matches.append(command)
+
+	if matches.size() == 1:
+		return matches[0]
+	elif matches.size() > 1:
+		history_label.text += "\n" + " ".join(matches)
+		return partial_command
+
+	return partial_command
+
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -150,13 +178,12 @@ func _on_line_edit_text_submitted(new_text):
 	
 	var full_command = new_text
 	
-	history.push_front(full_command)
+	history_list.push_front(full_command)
 	history_label.text += "\n> " + full_command
 	history_index = -1
 	
 	if not has_method(command):
 		var error_message = "\"" + command + "\" is not a valid command"
-		print(error_message)
 		history_label.text += "\nError: " + error_message
 		return
 	
