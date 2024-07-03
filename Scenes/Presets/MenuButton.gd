@@ -20,7 +20,7 @@ func _ready():
 	hide_arrows()
 	set_focus_mode(Control.FOCUS_ALL)
 
-func _process(delta):
+func _process(_delta):
 	# live engine updating
 	if Engine.is_editor_hint():
 		setup_text()

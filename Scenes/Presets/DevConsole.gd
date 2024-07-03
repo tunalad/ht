@@ -2,9 +2,8 @@ extends CanvasLayer
 
 var expression = Expression.new()
 var history = []
-var max_scroll_length = 0 
+var history_index = -1
 
-#@onready var history_label = $MarginContainer/console/history
 @onready var history_label = $MarginContainer/console/ScrollContainer/VBoxContainer/history
 @onready var input_label = $MarginContainer/console/input
 
@@ -13,17 +12,38 @@ signal on_terminal_closed
 func _ready():
 	self.visible = false
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_tilde"):
+func _input(event):
+	if event.is_action_pressed("ui_tilde"):
 		console()
 		
-	if Input.is_action_just_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel"):
 		console("close")
+	
+	if event.is_action_pressed("ui_up"):
+		var cycler = cycle_history(true)
+		if cycler != null:
+			input_label.text = cycler
+		else:
+			input_label.text = ""
+	
+	if event.is_action_pressed("ui_down"):
+		var cycler = cycle_history(false)
+		if cycler != null:
+			input_label.text = cycler
+		else:
+			input_label.text = ""
 
 func commands():
 	var command_list = []
 	var methods = self.get_script().get_script_method_list()
-	var excluded_methods = ["_ready", "_process", "_on_line_edit_text_submitted", "handle_scrollbar_changed"]
+	var excluded_methods = [
+			"_ready", 
+			"_process", 
+			"_on_line_edit_text_submitted", 
+			"handle_scrollbar_changed", 
+			"_input",
+			"cycle_history",
+		]
 	
 	for method in methods:
 		if method.name not in excluded_methods:
@@ -100,6 +120,23 @@ func volume(value=null):
 	
 	return audio_settings["master_volume"]
 
+func cycle_history(move_up):
+	# note that the array is reversed
+	# so the last command is on index 0
+	if history.size() == 0:
+		return null
+	
+	if move_up:
+		history_index += 1
+		if history_index >= history.size():
+			history_index = history.size() - 1
+	else:
+		history_index -= 1
+		if history_index < 0:
+			history_index = -1
+			return ""
+	
+	return history[history_index]
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -112,8 +149,10 @@ func _on_line_edit_text_submitted(new_text):
 		args = parts[1].split(" ")
 	
 	var full_command = new_text
-	history.append(full_command)
+	
+	history.push_front(full_command)
 	history_label.text += "\n> " + full_command
+	history_index = -1
 	
 	if not has_method(command):
 		var error_message = "\"" + command + "\" is not a valid command"
