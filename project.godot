@@ -25,6 +25,7 @@ boot_splash/minimum_display_time=2000
 TransitionScreen="*res://Scenes/Presets/TransitionScreen.tscn"
 Global="*res://Global.gd"
 ConfigHandler="*res://ConfigHandler.gd"
+DevConsole="*res://Scenes/Presets/DevConsole.tscn"
 
 [display]
 

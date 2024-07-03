@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1_7jpei"]
 [ext_resource type="Texture2D" uid="uid://bv5hq4aqf3bvu" path="res://GFX/Vol1/vkquake0019.png" id="2_fj831"]
-[ext_resource type="AudioStream" uid="uid://cwmq5mrrk52k7" path="res://Music/Vol1/18.01.2024. - soft piano strings sample.wav" id="3_mtnib"]
+[ext_resource type="AudioStream" uid="uid://cwmq5mrrk52k7" path="res://Music/Vol1/v1s6.wav" id="3_mtnib"]
 
 [node name="V1s6" type="Control"]
 layout_mode = 3

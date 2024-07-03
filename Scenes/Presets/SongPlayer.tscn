@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bigxa41wb7jpb"]
+[gd_scene load_steps=8 format=3 uid="uid://bigxa41wb7jpb"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_bn63o"]
 [ext_resource type="Script" path="res://SongPlayer.gd" id="1_n0888"]
-[ext_resource type="PackedScene" uid="uid://bukctlbqqwm2o" path="res://Scenes/Presets/DevConsole.tscn" id="3_3fm54"]
 
 [sub_resource type="Animation" id="Animation_ls7p8"]
 length = 0.001
@@ -289,8 +288,6 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i23tr")
 }
-
-[node name="DevConsole" parent="." instance=ExtResource("3_3fm54")]
 
 [connection signal="pressed" from="Controller/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="Controller/btn_skip" to="." method="_on_btn_skip_pressed"]

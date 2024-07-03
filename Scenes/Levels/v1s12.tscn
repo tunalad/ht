@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bnmere0vkjbge" path="res://GFX/Vol1/vkquake0028.png" id="2"]
-[ext_resource type="AudioStream" uid="uid://bvjuo205dpebw" path="res://Music/Vol1/20.05.2024. - nightmares (backpedal).wav" id="3"]
+[ext_resource type="AudioStream" uid="uid://bvjuo205dpebw" path="res://Music/Vol1/v1s12.wav" id="3"]
 
 [node name="v1s12" type="Control"]
 layout_mode = 3

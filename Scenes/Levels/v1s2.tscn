@@ -1,9 +1,8 @@
-
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/Presets/SongPlayer.tscn" id=1]
-[ext_resource type="Texture2D" path="res://GFX/Vol1/vkquake0022.png" id=2]
-[ext_resource type="AudioStream" path="res://Music/Vol1/17.01.2024. - sample pack moment.wav" id=3]
+[ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://cnv3a327a3pwk" path="res://GFX/Vol1/vkquake0022.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://dypn0v0imbioq" path="res://Music/Vol1/v1s2.wav" id="3"]
 
 [node name="v1s2" type="Control"]
 layout_mode = 3

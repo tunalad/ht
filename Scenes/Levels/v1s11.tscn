@@ -1,9 +1,8 @@
-
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/Presets/SongPlayer.tscn" id=1]
-[ext_resource type="Texture2D" path="res://GFX/Vol1/vkquake0015.png" id=2]
-[ext_resource type="AudioStream" path="res://Music/Vol1/19.05.2024. - bell-ish track.wav" id=3]
+[ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://byxi8r0u6ac7t" path="res://GFX/Vol1/vkquake0015.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://djm45pmho07oe" path="res://Music/Vol1/v1s11.wav" id="3"]
 
 [node name="v1s11" type="Control"]
 layout_mode = 3

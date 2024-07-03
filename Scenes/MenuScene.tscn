@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw8kwjf7crkko"]
+[gd_scene load_steps=10 format=3 uid="uid://cw8kwjf7crkko"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_6l133"]
 [ext_resource type="Script" path="res://Scenes/MenuScene.gd" id="2_3esvg"]
@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://bciqsplam8e0t" path="res://SFX/SH Menu Blip 05.mp3" id="5_d5444"]
 [ext_resource type="AudioStream" uid="uid://c6dlfcntoexih" path="res://SFX/SH Menu Blip 03.mp3" id="6_n46as"]
 [ext_resource type="AudioStream" uid="uid://b5deufl3uil21" path="res://SFX/SH Menu Blip 04.mp3" id="7_udoxb"]
-[ext_resource type="PackedScene" uid="uid://bukctlbqqwm2o" path="res://Scenes/Presets/DevConsole.tscn" id="8_hpka8"]
 [ext_resource type="Texture2D" uid="uid://rjspf5a6bpt6" path="res://GFX/ht-menu-8bit.png" id="8_mxsee"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="9_xm7qk"]
 
@@ -218,8 +217,6 @@ focus_neighbor_bottom = NodePath("/root/@EditorNode@17120/@Panel@13/@VBoxContain
 text = "Back"
 arrow_margin_from_center = 35
 
-[node name="DevConsole" parent="." instance=ExtResource("8_hpka8")]
-
 [connection signal="pressed" from="menu_main/btn_select_vol" to="." method="_on_btn_select_vol_pressed"]
 [connection signal="pressed" from="menu_main/btn_opts" to="." method="_on_btn_opts_pressed"]
 [connection signal="pressed" from="menu_main/btn_quit" to="." method="_on_btn_quit_pressed"]
@@ -235,4 +232,3 @@ arrow_margin_from_center = 35
 [connection signal="left_key_pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol" to="." method="_on_btn_opt_vol_left_key_pressed"]
 [connection signal="right_key_pressed" from="menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol" to="." method="_on_btn_opt_vol_right_key_pressed"]
 [connection signal="pressed" from="menu_options/VBoxContainer/btn_opt_back" to="." method="_on_btn_opt_back_pressed"]
-[connection signal="console_closed" from="DevConsole" to="." method="_on_dev_console_console_closed"]

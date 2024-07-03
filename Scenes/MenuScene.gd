@@ -19,6 +19,7 @@ func _ready():
 	$menu_select.hide()
 	$menu_options.hide()
 	
+	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	load_settings()
 	
 	# focus on the 1st button

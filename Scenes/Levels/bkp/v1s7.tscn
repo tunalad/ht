@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1_1wiqb"]
 [ext_resource type="Texture2D" uid="uid://7wrwsr0mah2i" path="res://GFX/Vol1/vkquake0023.png" id="2_lromv"]
-[ext_resource type="AudioStream" uid="uid://dc35c178nnqo4" path="res://Music/Vol1/25.03.2024. - chiefin that ambient.wav" id="3_ci0t6"]
+[ext_resource type="AudioStream" uid="uid://dc35c178nnqo4" path="res://Music/Vol1/v1s7.wav" id="3_ci0t6"]
 
 [node name="V1s7" type="Control"]
 layout_mode = 3

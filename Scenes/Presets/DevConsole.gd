@@ -8,7 +8,7 @@ var max_scroll_length = 0
 @onready var history_label = $MarginContainer/console/ScrollContainer/VBoxContainer/history
 @onready var input_label = $MarginContainer/console/input
 
-signal console_closed
+signal on_terminal_closed
 
 func _ready():
 	self.visible = false
@@ -38,15 +38,15 @@ func console(value=null):
 	if value == "close":
 		self.visible = true
 		input_label.grab_focus()
+		on_terminal_closed.emit()
 	elif value == "open":
 		self.visible = true
-		console_closed.emit()
 	else:
 		self.visible = !self.visible
 		if self.visible:
 			input_label.grab_focus()
 		else:
-			console_closed.emit()
+			on_terminal_closed.emit()
 
 func load_song(song=null):
 	var levels_path = "res://Scenes/Levels/"
@@ -64,11 +64,12 @@ func load_song(song=null):
 	else:
 		self.visible = false
 		get_tree().change_scene_to_file("res://Scenes/Levels/" + song + ".tscn")
-		return ""
+		return "loaded song: " + song
 
 func menu():
+	console("close")
 	get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
-	return ""
+	return "loaded menu"
 
 func quit():
 	get_tree().quit()
