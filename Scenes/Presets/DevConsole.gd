@@ -25,7 +25,9 @@ func _input(event):
 			input_label.text = cycler
 		else:
 			input_label.text = ""
-	
+			
+		input_label.set_caret_column(input_label.text.length())
+		
 	if event.is_action_pressed("ui_down"):
 		var cycler = cycle_history(false)
 		if cycler != null:
@@ -53,7 +55,7 @@ func commands():
 		if method.name not in excluded_methods:
 			command_list.append(method.name)
 	
-	return "Available commands:\n -" + "\n- ".join(PackedStringArray(command_list))
+	return "Available commands:\n- " + "\n- ".join(PackedStringArray(command_list))
 
 func history():
 	return "Commands history: \n- " + "\n- ".join(PackedStringArray(history_list))
@@ -63,10 +65,10 @@ func echo(value):
 
 func console(value=null):
 	if value == "close":
-		self.visible = true
-		input_label.grab_focus()
+		self.visible = false
 		on_terminal_closed.emit()
 	elif value == "open":
+		input_label.grab_focus()
 		self.visible = true
 	else:
 		self.visible = !self.visible
@@ -84,7 +86,7 @@ func load_song(song=null):
 		files = dir.get_files()
 		# remove '.tscn' or '.scn' from each filename
 		for i in range(files.size()):
-			var file_name = files[i].replace(".tscn", "").replace(".scn", "")
+			var file_name = files[i].replace(".tscn", "").replace(".scn", "").replace(".remap", "")
 			files[i] = file_name
 		
 		return "\n".join(files)

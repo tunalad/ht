@@ -42,6 +42,7 @@ vertical_alignment = 2
 [node name="input" type="LineEdit" parent="MarginContainer/console"]
 layout_mode = 2
 placeholder_text = "type `commands` for commands list"
+caret_blink = true
 
 [node name="background_invis" type="ColorRect" parent="."]
 anchors_preset = 15
