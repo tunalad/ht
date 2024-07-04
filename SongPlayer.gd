@@ -41,7 +41,7 @@ func _ready():
 	else:
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		print("going back to main menu")
 		$AnimationPlayer.play("fade_out")

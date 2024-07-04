@@ -1,11 +1,5 @@
 extends Control
 
-@export var menu_move : AudioStreamMP3
-@export var menu_select : AudioStreamMP3
-@export var menu_locked : AudioStreamMP3
-@export var menu_back : AudioStreamMP3
-@export var menu_quit : AudioStreamMP3
-
 @onready var AUDIO_PLAYER = get_tree().current_scene.get_node("AudioStreamPlayer")
 @onready var MENU_MAIN = $menu_main.get_children()
 @onready var MENU_SELECT = $menu_select.get_children()
@@ -79,7 +73,7 @@ func manual_neighbours_fix():
 # # # # # # # # # # # # #
 
 func _on_btn_select_vol_pressed():
-	Global.play_sound(AUDIO_PLAYER, menu_select)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 
 	# show the selection menu instead
 	$menu_main.hide()
@@ -103,7 +97,7 @@ func _on_btn_select_vol_pressed():
 		btn.skipped_sound = !true
 
 func _on_btn_opts_pressed():
-	Global.play_sound(AUDIO_PLAYER, menu_select)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	# show the options menu instead
 	$menu_main.hide()
@@ -122,7 +116,7 @@ func _on_btn_opts_pressed():
 		btn.skipped_sound = !true
 
 func _on_btn_quit_pressed():
-	Global.play_sound(AUDIO_PLAYER, menu_quit)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
@@ -134,7 +128,7 @@ func _on_btn_quit_pressed():
 # # # # # # # # # # # # # #
 
 func _on_btn_back_pressed():
-	Global.play_sound($AudioStreamPlayer, menu_back)
+	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_back"])
 
 	# show the selection menu instead
 	$menu_main.show()
@@ -152,14 +146,14 @@ func _on_btn_back_pressed():
 		btn.skipped_sound = true
 
 func _on_locked_pressed():
-	Global.play_sound($AudioStreamPlayer, menu_locked)
+	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 
 func _on_btn_vol_1_pressed():
 	if !(FileAccess.file_exists("res://Scenes/Levels/v1s1.tscn") or Global.loaded_vol1):
-		Global.play_sound($AudioStreamPlayer, menu_locked)
+		Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 		return
 	
-	Global.play_sound($AudioStreamPlayer, menu_quit)
+	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_quit"])
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file("res://Scenes/Levels/v1s1.tscn")
@@ -169,7 +163,7 @@ func _on_btn_vol_1_pressed():
 # # # # # # # # # # # # # #
 
 func _on_btn_opt_back_pressed():
-	Global.play_sound(AUDIO_PLAYER, menu_back)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_back"])
 	
 	# show the selection menu instead
 	$menu_main.show()
@@ -189,7 +183,7 @@ func _on_btn_opt_back_pressed():
 
 func _on_btn_opt_fullscreen_pressed():
 	var video_settings = ConfigHandler.load_video_settings()
-	Global.play_sound(AUDIO_PLAYER, menu_select)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	ConfigHandler.save_video_settings("fullscreen", !video_settings["fullscreen"])
 	load_settings()
@@ -197,7 +191,7 @@ func _on_btn_opt_fullscreen_pressed():
 
 func _on_btn_opt_vol_left_key_pressed():
 	var audio_settings = ConfigHandler.load_audio_settings()
-	Global.play_sound(AUDIO_PLAYER, menu_select)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	audio_settings["master_volume"] -= 0.1
 	
@@ -211,7 +205,7 @@ func _on_btn_opt_vol_left_key_pressed():
 
 func _on_btn_opt_vol_right_key_pressed():
 	var audio_settings = ConfigHandler.load_audio_settings()
-	Global.play_sound(AUDIO_PLAYER, menu_select)
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	audio_settings["master_volume"] += 0.1
 	
