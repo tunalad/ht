@@ -19,19 +19,31 @@ script = ExtResource("2_7hcso")
 stream = ExtResource("3_1aqjv")
 bus = &"sfx"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 1, 0, 1)
 
-[node name="background" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="diary" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="diary"]
+layout_mode = 2
+
+[node name="text" type="Label" parent="diary/CenterContainer"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate mauris at cursus pellentesque. Morbi gravida dui sit amet erat tristique mollis. Fusce consequat, velit vel pharetra dignissim, justo justo sagittis mauris, in efficitur purus lorem quis velit. Sed accumsan orci at diam varius, a sagittis lectus eleifend. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut vel tellus nunc. Nulla eu ornare ligula, id gravida felis. Curabitur lectus enim, luctus eu efficitur sit amet, maximus vel quam. "
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="menu_end" type="HBoxContainer" parent="."]
 layout_mode = 1

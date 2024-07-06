@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cofl5utaub1oq"]
+[gd_scene load_steps=3 format=3 uid="uid://cofl5utaub1oq"]
 
 [ext_resource type="PackedScene" uid="uid://c4sjc6jxl3m2i" path="res://Scenes/Presets/Endscreen.tscn" id="1_a14d7"]
+[ext_resource type="Texture2D" uid="uid://b1hgu00x2sx58" path="res://GFX/Vol1/ht-vol1end-v4.png" id="2_bi7ot"]
 
 [node name="V1End" type="Control"]
 layout_mode = 3
@@ -12,3 +13,11 @@ grow_vertical = 2
 
 [node name="Endscreen" parent="." instance=ExtResource("1_a14d7")]
 layout_mode = 1
+background = ExtResource("2_bi7ot")
+text = "July 4, 2024
+
+It's been a long day. 
+Packing up for the journey ahead...
+I hope the village brings some peace.
+
+- Helen"

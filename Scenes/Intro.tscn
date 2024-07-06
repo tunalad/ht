@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://2jrjhf1lodt2"]
+
+[ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_vk6yk"]
+[ext_resource type="Script" path="res://Scenes/Intro.gd" id="2_ckf8k"]
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vk6yk")
+script = ExtResource("2_ckf8k")
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="text" type="Label" parent="CenterContainer"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+text = "Disclaimer!
+
+\"Helen's Tapes\" is an immersive audio-visual experience. It is not a traditional game but a musical project designed to engage you through its atmosphere and visuals.
+
+Please enjoy the journey."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
