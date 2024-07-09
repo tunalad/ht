@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bigxa41wb7jpb"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_bn63o"]
-[ext_resource type="Script" path="res://SongPlayer.gd" id="1_n0888"]
+[ext_resource type="Script" path="res://Scenes/Presets/SongPlayer.gd" id="1_n0888"]
 
 [sub_resource type="Animation" id="Animation_ls7p8"]
 length = 0.001

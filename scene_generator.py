@@ -6,27 +6,52 @@ def make_scene(scene_struct):
     for i, scene in enumerate(scene_struct):
         scene_name = scene["scene_name"]
         background = scene["background"]
-        audio_file = scene["audio_file"]
-        song_name = scene.get("song_name", "")
-        text_fade = scene.get("text_fade", 0.0)
-        song_start_delay = scene.get("song_start_delay", 0.0)
+        is_ending = scene.get("is_ending", False)
 
-        # Determine next_scene and previous_scene dynamically
-        if i == 0:
-            previous_scene = ""
-            if len(scene_struct) > 1:
-                next_scene = scene_struct[i + 1]["scene_name"]
-            else:
-                next_scene = ""
-        elif i == len(scene_struct) - 1:
-            next_scene = ""
-            previous_scene = scene_struct[i - 1]["scene_name"]
+        if is_ending:
+            text = scene["text"]
+            # Create the content of the ending scene .tscn file
+            content = f"""
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/Presets/Endscreen.tscn" id="1_a14d7"]
+[ext_resource type="Texture2D" path="res://{background}" id="2_bi7ot"]
+
+[node name="{scene_name}" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Endscreen" parent="." instance=ExtResource("1_a14d7")]
+layout_mode = 1
+background = ExtResource("2_bi7ot")
+text = "{text}"
+            """
         else:
-            next_scene = scene_struct[i + 1]["scene_name"]
-            previous_scene = scene_struct[i - 1]["scene_name"]
+            audio_file = scene["audio_file"]
+            song_name = scene.get("song_name", "")
+            text_fade = scene.get("text_fade", 0.0)
+            song_start_delay = scene.get("song_start_delay", 0.0)
 
-        # Create the content of the .tscn file
-        content = f"""
+            # Determine next_scene and previous_scene dynamically
+            if i == 0:
+                previous_scene = ""
+                if len(scene_struct) > 1:
+                    next_scene = scene_struct[i + 1]["scene_name"]
+                else:
+                    next_scene = ""
+            elif i == len(scene_struct) - 1:
+                next_scene = ""
+                previous_scene = scene_struct[i - 1]["scene_name"]
+            else:
+                next_scene = scene_struct[i + 1]["scene_name"]
+                previous_scene = scene_struct[i - 1]["scene_name"]
+
+            # Create the content of the regular scene .tscn file
+            content = f"""
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="PackedScene" path="res://Scenes/Presets/SongPlayer.tscn" id=1]
@@ -47,14 +72,14 @@ game_background = ExtResource(2)
 song_name = "{song_name}"
 audio_file = ExtResource(3)
 """
-        if text_fade:
-            content += f"text_fade = {text_fade}\n"
-        if song_start_delay:
-            content += f"song_start_delay = {song_start_delay}\n"
-        if next_scene:
-            content += f'next_scene = "{next_scene}"\n'
-        if previous_scene:
-            content += f'previous_scene = "{previous_scene}"\n'
+            if text_fade:
+                content += f"text_fade = {text_fade}\n"
+            if song_start_delay:
+                content += f"song_start_delay = {song_start_delay}\n"
+            if next_scene:
+                content += f'next_scene = "{next_scene}"\n'
+            if previous_scene:
+                content += f'previous_scene = "{previous_scene}"\n'
 
         # Write the content to a .tscn file
         filename = f"{scene_name}.tscn"
@@ -137,6 +162,19 @@ def main():
             "background": "GFX/Vol1/vkquake0028.png",
             "song_name": "but I'm scared of dreaming",
             "audio_file": "Music/Vol1/v1s12.mp3",
+        },
+        {
+            "scene_name": "v1end",
+            "background": "GFX/Vol1/ht-vol1end-v4.png",
+            "is_ending": True,
+            "text": """July 4, 2024
+
+It's been a long day. 
+Packing up for the journey ahead...
+I hope the village brings some peace.
+
+- Helen
+            """
         },
     ]
     make_scene(scenes)

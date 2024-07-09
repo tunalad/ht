@@ -7,6 +7,7 @@ func _ready():
 	if !FileAccess.file_exists(SETTINGS):
 		config.set_value("video", "fullscreen", false)
 		config.set_value("audio", "master_volume", 1.0)
+		config.set_value("misc", "crt_shader", false)
 		
 		config.save(SETTINGS)
 	else:
@@ -35,3 +36,15 @@ func load_audio_settings():
 		audio_settings[key] = config.get_value("audio", key)
 	
 	return audio_settings
+
+func save_misc_settings(key : String, value):
+	config.set_value("misc", key, value)
+	config.save(SETTINGS)
+
+func load_misc_settings():
+	var misc_settings = {}
+	
+	for key in config.get_section_keys("misc"):
+		misc_settings[key] = config.get_value("misc", key)
+	
+	return misc_settings

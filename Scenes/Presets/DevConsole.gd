@@ -129,6 +129,15 @@ func volume(value=null):
 	
 	return audio_settings["master_volume"]
 
+func crt_shader():
+	var misc_settings = ConfigHandler.load_misc_settings()
+	
+	ConfigHandler.save_misc_settings("crt_shader", !misc_settings["crt_shader"])
+	
+	return misc_settings["crt_shader"]
+
+# # # # # # # # # # # # # # # # # # # # # # 
+
 func cycle_history(move_up):
 	# note that the array is reversed
 	# so the last command is on index 0

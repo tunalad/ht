@@ -28,6 +28,7 @@ func _ready():
 	await get_tree().create_timer(text_fade).timeout
 	
 	Global.play_sound($MusicPlayer, audio_file)
+	
 	await get_tree().create_timer(song_start_delay).timeout
 	$AnimationPlayer.play("fade_in") # fades into the "game" (4 seconds long animation)
 	
@@ -41,13 +42,14 @@ func _ready():
 	else:
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+func _input(event):
+	if event.is_action_pressed("ui_cancel") and DevConsole.visible == false:
 		print("going back to main menu")
-		$AnimationPlayer.play("fade_out")
-		await get_tree().create_timer(3).timeout
+		TransitionScreen.transition()
+		await TransitionScreen.on_transition_finished
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
-	
+
+func _process(_delta):
 	if $MusicPlayer.stream:
 		var playback_position = $MusicPlayer.get_playback_position()
 		var song_length = $MusicPlayer.stream.get_length()

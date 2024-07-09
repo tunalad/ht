@@ -26,7 +26,6 @@ func _ready():
 	manual_neighbours_fix()
 	
 	TransitionScreen.fade_to_normal()
-	await TransitionScreen.on_transition_finished
 
 func load_settings():
 	var video_settings = ConfigHandler.load_video_settings()

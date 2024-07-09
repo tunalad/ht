@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cofl5utaub1oq"]
+[gd_scene load_steps=3 format=3 uid="uid://hq4v0s6kmyhe"]
 
 [ext_resource type="PackedScene" uid="uid://c4sjc6jxl3m2i" path="res://Scenes/Presets/Endscreen.tscn" id="1_a14d7"]
 [ext_resource type="Texture2D" uid="uid://b1hgu00x2sx58" path="res://GFX/Vol1/ht-vol1end-v4.png" id="2_bi7ot"]
 
-[node name="V1End" type="Control"]
+[node name="v1end" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,4 +20,5 @@ It's been a long day.
 Packing up for the journey ahead...
 I hope the village brings some peace.
 
-- Helen"
+- Helen
+            "

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0teglm4yc4kp"]
+
+[ext_resource type="Texture2D" uid="uid://51gkgq2ijcl7" path="res://GFX/Vol1/vkquake0018.png" id="1_ht82n"]
+[ext_resource type="Shader" path="res://Scenes/Shaders/crt.gdshader" id="1_mjl6g"]
+[ext_resource type="Script" path="res://Scenes/Shaders/crt.gd" id="1_rniuh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdj7r"]
+shader = ExtResource("1_mjl6g")
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.15
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 1.0
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.3
+shader_parameter/vignette_intensity = 0.2
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -2.746
+shader_parameter/pixel_strength = 0.0
+
+[node name="CRT" type="CanvasLayer"]
+script = ExtResource("1_rniuh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ht82n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_qdj7r")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

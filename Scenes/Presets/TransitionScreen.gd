@@ -15,11 +15,15 @@ func _on_animation_finished(anim_name):
 		animation_player.play("Fade_to_normal")
 	elif anim_name == "Fade_to_normal":
 		color_rect.visible = false
+	
+	animation_player.speed_scale = 1
 
-func transition():
+func transition(speed_scale : float = 1):
 	color_rect.visible = true
+	animation_player.speed_scale = speed_scale
 	animation_player.play("Fade_to_black")
 
-func fade_to_normal():
+func fade_to_normal(speed_scale : float = 1):
 	color_rect.visible = true
+	animation_player.speed_scale = speed_scale
 	animation_player.play("Fade_to_normal")

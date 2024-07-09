@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://2jrjhf1lodt2"]
+[gd_scene load_steps=4 format=3 uid="uid://2jrjhf1lodt2"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_vk6yk"]
 [ext_resource type="Script" path="res://Scenes/Intro.gd" id="2_ckf8k"]
+[ext_resource type="PackedScene" uid="uid://cw8kwjf7crkko" path="res://Scenes/MenuScene.tscn" id="3_o0gsg"]
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_vk6yk")
 script = ExtResource("2_ckf8k")
+menu_scene = ExtResource("3_o0gsg")
 
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 1

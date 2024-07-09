@@ -18,4 +18,5 @@ layout_mode = 1
 game_background = ExtResource(2)
 song_name = "but I'm scared of dreaming"
 audio_file = ExtResource(3)
+next_scene = "v1end"
 previous_scene = "v1s11"
