@@ -4,14 +4,18 @@ var config = ConfigFile.new()
 const SETTINGS = "user://settings.ini"
 
 func _ready():
-	if !FileAccess.file_exists(SETTINGS):
-		config.set_value("video", "fullscreen", false)
-		config.set_value("audio", "master_volume", 1.0)
-		config.set_value("misc", "crt_shader", false)
-		
-		config.save(SETTINGS)
-	else:
+	if FileAccess.file_exists(SETTINGS):
 		config.load(SETTINGS)
+	
+	ensure_setting("video", "fullscreen", false)
+	ensure_setting("audio", "master_volume", 1.0)
+	ensure_setting("misc", "crt_shader", false)
+	
+	config.save(SETTINGS)
+
+func ensure_setting(section : String, key : String, value):
+	if not config.has_section_key(section, key):
+		config.set_value(section, key, value)
 
 func save_video_settings(key : String, value):
 	config.set_value("video", key, value)
