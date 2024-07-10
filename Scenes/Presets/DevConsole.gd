@@ -136,6 +136,16 @@ func crt_shader():
 	
 	return misc_settings["crt_shader"]
 
+func sh_sfx():
+	if Global.sounds == Global.sh_sounds:
+		Global.sounds = Global.homemade_sounds
+		AudioServer.set_bus_layout(load("res://SFX/homemade_sfx.tres"))
+		return "Disabled Silent Hill sounds"
+	else:
+		Global.sounds = Global.sh_sounds
+		AudioServer.set_bus_layout(load("res://SFX/sh_sfx.tres"))
+		return "Enabled Silent Hill sounds"
+
 # # # # # # # # # # # # # # # # # # # # # # 
 
 func cycle_history(move_up):
