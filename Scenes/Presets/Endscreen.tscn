@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_6kgio"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="1_oo6xs"]
 [ext_resource type="Script" path="res://Scenes/Presets/Endscreen.gd" id="2_7hcso"]
-[ext_resource type="AudioStream" uid="uid://cqs87sfvgtnf4" path="res://SFX/SH Menu Blip 01.mp3" id="3_1aqjv"]
+[ext_resource type="AudioStream" uid="uid://cqs87sfvgtnf4" path="res://SFX/sh/SH Menu Blip 01.mp3" id="3_1aqjv"]
 
 [node name="Endscreen" type="Control"]
 layout_mode = 3

@@ -27,3 +27,8 @@ func fade_to_normal(speed_scale : float = 1):
 	color_rect.visible = true
 	animation_player.speed_scale = speed_scale
 	animation_player.play("Fade_to_normal")
+	
+func fade_to_black(speed_scale : float = 1):
+	color_rect.visible = true
+	animation_player.speed_scale = speed_scale
+	animation_player.play("Fade_to_black")

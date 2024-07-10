@@ -273,7 +273,6 @@ text = "[center]Song name goes here or sth idk[/center]"
 fit_content = true
 
 [node name="Exit" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

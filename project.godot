@@ -20,6 +20,10 @@ boot_splash/use_filter=false
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=2000
 
+[audio]
+
+buses/default_bus_layout="res://SFX/homemade_sfx.tres"
+
 [autoload]
 
 TransitionScreen="*res://Scenes/Presets/TransitionScreen.tscn"
