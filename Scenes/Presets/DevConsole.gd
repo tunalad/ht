@@ -58,7 +58,7 @@ func commands():
 	return "Available commands:\n- " + "\n- ".join(PackedStringArray(command_list))
 
 func history():
-	return "Commands history: \n- " + "\n- ".join(PackedStringArray(history_list))
+	return "Commands history: \n- " + "\n- ".join(PackedStringArray(history_list.invert()))
 
 func echo(value):
 	return value
@@ -146,6 +146,13 @@ func sh_sfx():
 		AudioServer.set_bus_layout(load("res://SFX/sh_sfx.tres"))
 		return "Enabled Silent Hill sounds"
 
+func pc_humm():
+	var misc_settings = ConfigHandler.load_misc_settings()
+	
+	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
+	
+	return !misc_settings["pc_humm"]
+
 # # # # # # # # # # # # # # # # # # # # # # 
 
 func cycle_history(move_up):
@@ -185,7 +192,6 @@ func tab_completion(partial_command):
 		return partial_command
 
 	return partial_command
-
 
 # # # # # # # # # # # # # # # # # # # # # # 
 

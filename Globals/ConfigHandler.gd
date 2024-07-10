@@ -9,7 +9,8 @@ func _ready():
 	
 	ensure_setting("video", "fullscreen", false)
 	ensure_setting("audio", "master_volume", 1.0)
-	ensure_setting("misc", "crt_shader", false)
+	ensure_setting("misc", 	"crt_shader", false)
+	ensure_setting("misc", 	"pc_humm", false)
 	
 	config.save(SETTINGS)
 

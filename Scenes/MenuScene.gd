@@ -16,8 +16,9 @@ func _ready():
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	load_settings()
 	
-	# focus on the 1st button
-	MENU_MAIN[0].grab_focus()
+	# focus on the 1st button (if console's closed)
+	if !DevConsole.visible:
+		MENU_MAIN[0].grab_focus()
 	
 	# activate the selecting sound
 	for btn in MENU_MAIN:
@@ -117,7 +118,7 @@ func _on_btn_opts_pressed():
 func _on_btn_quit_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 
-	TransitionScreen.transition()
+	TransitionScreen.transition(0.5)
 	await TransitionScreen.on_transition_finished
 
 	get_tree().quit()

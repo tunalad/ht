@@ -13,7 +13,7 @@ var homemade_sounds = {
 	"menu_select": 	load("res://SFX/homemade/select02.wav"),
 	"menu_locked": 	load("res://SFX/homemade/lock02.wav"),
 	"menu_back": 	load("res://SFX/homemade/back02.wav"),
-	"menu_quit": 	load("res://SFX/homemade/quit03.wav"),
+	"menu_quit": 	load("res://SFX/homemade/quit04.wav"),
 	
 }
 

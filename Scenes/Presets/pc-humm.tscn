@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c152a51l0n2rd"]
+
+[ext_resource type="AudioStream" uid="uid://cmymlr55wh6po" path="res://SFX/pc-humm-short.wav" id="1_osx86"]
+[ext_resource type="Script" path="res://Scenes/Presets/pc-humm.gd" id="2_ufo42"]
+
+[node name="Pc-humm" type="AudioStreamPlayer"]
+stream = ExtResource("1_osx86")
+autoplay = true
+bus = &"pc-humm"
+script = ExtResource("2_ufo42")

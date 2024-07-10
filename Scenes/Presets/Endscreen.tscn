@@ -41,6 +41,7 @@ layout_mode = 2
 [node name="text" type="Label" parent="diary/CenterContainer"]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate mauris at cursus pellentesque. Morbi gravida dui sit amet erat tristique mollis. Fusce consequat, velit vel pharetra dignissim, justo justo sagittis mauris, in efficitur purus lorem quis velit. Sed accumsan orci at diam varius, a sagittis lectus eleifend. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut vel tellus nunc. Nulla eu ornare ligula, id gravida felis. Curabitur lectus enim, luctus eu efficitur sit amet, maximus vel quam. "
 vertical_alignment = 1
 autowrap_mode = 3
@@ -56,7 +57,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="btn_menu" parent="menu_end" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("1_oo6xs")]
-custom_minimum_size = Vector2(113, 20)
+custom_minimum_size = Vector2(54, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17120/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/Endscreen/menu_end/btn_gallery")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17120/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/Endscreen/menu_end/btn_gallery")
@@ -65,7 +66,7 @@ arrow_margin = 37
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_gallery" parent="menu_end" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("1_oo6xs")]
-custom_minimum_size = Vector2(118, 20)
+custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17120/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/Endscreen/menu_end/btn_menu")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17120/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/Endscreen/menu_end/btn_menu")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bukctlbqqwm2o"]
+[gd_scene load_steps=4 format=3 uid="uid://bukctlbqqwm2o"]
 
 [ext_resource type="Script" path="res://Scenes/Presets/DevConsole.gd" id="1_qirmb"]
 [ext_resource type="Script" path="res://Scenes/Presets/ScrollContainer.gd" id="2_ikxte"]
+[ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="2_x6gjr"]
 
 [node name="DevConsole" type="CanvasLayer"]
 script = ExtResource("1_qirmb")
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_x6gjr")
 
 [node name="background" type="ColorRect" parent="MarginContainer"]
 layout_mode = 2

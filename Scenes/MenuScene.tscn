@@ -27,6 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_mxsee")
+metadata/_edit_lock_ = true
 
 [node name="title_container" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -36,6 +37,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 size_flags_vertical = 0
 alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="TITLE" type="Label" parent="title_container"]
 layout_mode = 2
@@ -150,6 +152,7 @@ arrow_margin = 37
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="menu_options" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,7 +232,7 @@ text = "Back"
 arrow_margin = 37
 AUDIO_PLAYER = NodePath("../../../AudioStreamPlayer")
 
-[node name="copyright thing" type="Label" parent="."]
+[node name="copyright" type="Label" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15

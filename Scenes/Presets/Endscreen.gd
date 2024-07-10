@@ -37,7 +37,7 @@ func set_text_background():
 
 func _on_btn_menu_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
-	TransitionScreen.transition()
+	TransitionScreen.transition(0.5)
 	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 

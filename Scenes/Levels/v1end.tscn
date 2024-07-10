@@ -14,11 +14,8 @@ grow_vertical = 2
 [node name="Endscreen" parent="." instance=ExtResource("1_a14d7")]
 layout_mode = 1
 background = ExtResource("2_bi7ot")
-text = "July 4, 2024
+text = "
+\"Today felt endless... Walking home was more unsettling than usual and my apartment doesn't feel like home anymore.
+Sleep is the only escape, but even that scares me.\"
 
-It's been a long day. 
-Packing up for the journey ahead...
-I hope the village brings some peace.
-
-- Helen
-            "
+- Helen"

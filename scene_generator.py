@@ -106,7 +106,7 @@ def main():
         {
             "scene_name": "v1s3",
             "background": "GFX/Vol1/vkquake0025.png",
-            "song_name": "the street we played on",
+            "song_name": "street around the corner",
             "audio_file": "Music/Vol1/v1s3.mp3",
         },
         {
@@ -142,7 +142,7 @@ def main():
         {
             "scene_name": "v1s9",
             "background": "GFX/Vol1/vkquake0014.png",
-            "song_name": "my empty appartment...",
+            "song_name": "my lonely appartment",
             "audio_file": "Music/Vol1/v1s9.mp3",
         },
         {
@@ -167,14 +167,11 @@ def main():
             "scene_name": "v1end",
             "background": "GFX/Vol1/ht-vol1end-v4.png",
             "is_ending": True,
-            "text": """July 4, 2024
+            "text": """
+Today felt endless... Walking home was more unsettling than usual and my apartment doesn't feel like home anymore.
+Sleep is the only escape, but even that scares me.
 
-It's been a long day. 
-Packing up for the journey ahead...
-I hope the village brings some peace.
-
-- Helen
-            """
+- Helen""",
         },
     ]
     make_scene(scenes)
