@@ -14,7 +14,6 @@ var homemade_sounds = {
 	"menu_locked": 	load("res://SFX/homemade/lock02.wav"),
 	"menu_back": 	load("res://SFX/homemade/back02.wav"),
 	"menu_quit": 	load("res://SFX/homemade/quit04.wav"),
-	
 }
 
 var loaded_vol1 = false

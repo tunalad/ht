@@ -13,6 +13,12 @@ func _process(_delta):
 	if Engine.is_editor_hint():
 		set_text_background()
 
+func _input(event):
+	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")) and DevConsole.visible == false:
+		TransitionScreen.transition(0.5)
+		await TransitionScreen.on_transition_finished
+		DevConsole.menu()
+
 func _ready():
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	TransitionScreen.fade_to_normal()
@@ -32,14 +38,12 @@ func set_text_background():
 		diary_text.text = text
 	else:
 		diary_text.visible = false
-	pass
-
 
 func _on_btn_menu_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 	TransitionScreen.transition(0.5)
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
+	DevConsole.menu()
 
 func _on_dev_console_console_closed():
 	MENU_END[0].grab_focus()
