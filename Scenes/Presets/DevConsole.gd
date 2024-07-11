@@ -25,18 +25,21 @@ func _input(event):
 			input_label.text = cycler
 		else:
 			input_label.text = ""
-			
-		input_label.set_caret_column(input_label.text.length())
 		
+		await get_tree().create_timer(0.001).timeout
+		input_label.caret_column = 100000
+	
 	if event.is_action_pressed("ui_down"):
 		var cycler = cycle_history(false)
 		if cycler != null:
 			input_label.text = cycler
 		else:
 			input_label.text = ""
+		
 	if event.is_action_pressed("ui_text_completion_replace"):
 		var partial_command = input_label.text
 		input_label.text = tab_completion(partial_command)
+		input_label.caret_column = 100000
 
 func commands():
 	var command_list = []
