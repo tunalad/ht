@@ -25,7 +25,6 @@ shader_type canvas_item;
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 
 uniform vec2 resolution = vec2(320.0, 180.0);
-
 uniform float scan_line_amount :hint_range(0.0, 1.0) = 1.0;
 uniform float warp_amount :hint_range(0.0, 5.0) = 0.1;
 uniform float noise_amount :hint_range(0.0, 0.3) = 0.03;
@@ -39,6 +38,7 @@ uniform float roll_line_amount :hint_range(0.0, 1.0) = 0.3;
 uniform float roll_speed :hint_range(-8.0, 8.0) = 1.0;
 uniform float scan_line_strength :hint_range(-12.0, -1.0) = -8.0;
 uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
+uniform float zoom_factor : hint_range(0.5, 2.0) = 1.0; // Added zoom factor
 
 float random(vec2 uv){
     return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
@@ -150,7 +150,10 @@ float roll_line(vec2 uv){
 
 void fragment(){
 	vec2 pix = FRAGCOORD.xy;
-	vec2 pos = warp(SCREEN_UV);
+
+    // Adjust UV for zoom
+	vec2 pos = (SCREEN_UV - 0.5) / zoom_factor + 0.5;
+	pos = warp(pos);
 	
 	float line = 0.0;
 	if(roll_line_amount > 0.0){
@@ -174,9 +177,9 @@ void fragment(){
 		clr = vec3(r,g,b);
 	}
 	
-	if(grille_amount > 0.0)clr *= grille(pix);
+	if(grille_amount > 0.0) clr *= grille(pix);
 	clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
-	if(vignette_amount > 0.0)clr *= vignette(pos);
+	if(vignette_amount > 0.0) clr *= vignette(pos);
 	
 	COLOR.rgb = clr;
 	COLOR.a = 1.0;

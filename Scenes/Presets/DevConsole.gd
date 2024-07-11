@@ -58,7 +58,9 @@ func commands():
 	return "Available commands:\n- " + "\n- ".join(PackedStringArray(command_list))
 
 func history():
-	return "Commands history: \n- " + "\n- ".join(PackedStringArray(history_list.invert()))
+	var temp_list = history_list
+	temp_list.reverse()
+	return "Commands history: \n- " + "\n- ".join(PackedStringArray(temp_list))
 
 func echo(value):
 	return value
