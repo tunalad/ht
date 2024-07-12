@@ -46,6 +46,11 @@ func load_settings():
 	# misc settings setup
 	Crt.toggle_crt()
 	AudioServer.set_bus_mute(2, !misc_settings["pc_humm"])
+	
+	if !misc_settings["hide_mouse"]:
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+	else:
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 
 func _ready():
 	if ProjectSettings.load_resource_pack("res://vol1.pck"):

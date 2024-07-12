@@ -19,3 +19,4 @@ game_background = ExtResource(2)
 song_name = "the bakery I work at"
 audio_file = ExtResource(3)
 next_scene = "v1s2"
+fade_out = "4.0"

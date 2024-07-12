@@ -20,3 +20,4 @@ song_name = "but it feels a little bit too quiet"
 audio_file = ExtResource(3)
 next_scene = "v1s9"
 previous_scene = "v1s7"
+fade_out = "4.0"

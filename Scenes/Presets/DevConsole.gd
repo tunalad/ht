@@ -161,6 +161,15 @@ func host_framerate(frames):
 	
 	return Engine.time_scale
 
+func mouse_hidden():
+	var misc_settings = ConfigHandler.load_misc_settings()
+	
+	ConfigHandler.save_misc_settings("hide_mouse", !misc_settings["hide_mouse"])
+	
+	Global.load_settings()
+	
+	return misc_settings["hide_mouse"]
+
 # # # # # # # # # # # # # # # # # # # # # # 
 
 func cycle_history(move_up):

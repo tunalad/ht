@@ -16,6 +16,6 @@ func _input(event):
 		load_menu()
 
 func load_menu():
-	TransitionScreen.transition(2, 2)
+	TransitionScreen.transition(2, 1)
 	await TransitionScreen.on_transition_finished
 	DevConsole.menu()

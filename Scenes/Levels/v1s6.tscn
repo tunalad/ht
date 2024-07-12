@@ -20,3 +20,4 @@ song_name = "park next to my appartment"
 audio_file = ExtResource(3)
 next_scene = "v1s7"
 previous_scene = "v1s5"
+fade_out = "4.0"

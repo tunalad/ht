@@ -20,3 +20,4 @@ song_name = "closing for tonight"
 audio_file = ExtResource(3)
 next_scene = "v1s3"
 previous_scene = "v1s1"
+fade_out = "4.0"

@@ -20,3 +20,4 @@ song_name = "but I'm scared of dreaming"
 audio_file = ExtResource(3)
 next_scene = "v1end"
 previous_scene = "v1s11"
+fade_out = "4.0"
