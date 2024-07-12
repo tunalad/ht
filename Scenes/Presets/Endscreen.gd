@@ -15,7 +15,7 @@ func _process(_delta):
 
 func _input(event):
 	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")) and DevConsole.visible == false:
-		TransitionScreen.transition(0.5)
+		TransitionScreen.transition(2)
 		await TransitionScreen.on_transition_finished
 		DevConsole.menu()
 
@@ -41,7 +41,7 @@ func set_text_background():
 
 func _on_btn_menu_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
-	TransitionScreen.transition(0.5)
+	TransitionScreen.transition(2)
 	await TransitionScreen.on_transition_finished
 	DevConsole.menu()
 

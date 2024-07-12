@@ -29,11 +29,12 @@ grow_vertical = 2
 layout_mode = 1
 background = ExtResource("2_bi7ot")
 text = "{text}"
-            """
+			"""
         else:
             audio_file = scene["audio_file"]
             song_name = scene.get("song_name", "")
-            text_fade = scene.get("text_fade", 0.0)
+            text_fade_in = scene.get("text_fade_in", 0.0)
+            fade_out = scene.get("fade_out", 4.0)
             song_start_delay = scene.get("song_start_delay", 0.0)
 
             # Determine next_scene and previous_scene dynamically
@@ -72,14 +73,16 @@ game_background = ExtResource(2)
 song_name = "{song_name}"
 audio_file = ExtResource(3)
 """
-            if text_fade:
-                content += f"text_fade = {text_fade}\n"
+            if text_fade_in:
+                content += f"text_fade_in = {text_fade_in}\n"
             if song_start_delay:
                 content += f"song_start_delay = {song_start_delay}\n"
             if next_scene:
                 content += f'next_scene = "{next_scene}"\n'
             if previous_scene:
                 content += f'previous_scene = "{previous_scene}"\n'
+            if fade_out:
+                content += f'fade_out = "{fade_out}"\n'
 
         # Write the content to a .tscn file
         filename = f"{scene_name}.tscn"

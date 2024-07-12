@@ -3,8 +3,9 @@ extends Control
 @export var game_background : CompressedTexture2D # main background image
 @export var song_name : String = "Song name" # track title that fades in and out
 @export var audio_file : AudioStream # the song file
-@export var text_fade: float = 2 # seconds that the text (and background) stays on the screen for
+@export var text_fade_in: float = 2 # seconds that the text (and background) stays on the screen for
 @export var song_start_delay : float = 2 # delay before the fadeout
+@export var fade_out : float = 4
 @export var next_scene : String
 @export var previous_scene : String
 
@@ -25,16 +26,16 @@ func _ready():
 	
 	# fade the text in and stay for like 2 seconds
 	$AnimationPlayer.play("text_fade_in") # fades the track name in
-	await get_tree().create_timer(text_fade).timeout
+	await get_tree().create_timer(text_fade_in).timeout
 	
 	Global.play_sound($MusicPlayer, audio_file)
 	
 	await get_tree().create_timer(song_start_delay).timeout
 	$AnimationPlayer.play("fade_in") # fades into the "game" (4 seconds long animation)
 	
-	await get_tree().create_timer($MusicPlayer.stream.get_length() - 6.0).timeout
+	await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
 	
-	TransitionScreen.transition(4, 2)
+	TransitionScreen.transition(fade_out, fade_out / 2.0)
 	await TransitionScreen.on_transition_finished
 	
 	if (next_scene):
