@@ -4,8 +4,11 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	TransitionScreen.fade_to_normal(0.5)
+	Global.load_settings()
+	
+	TransitionScreen.fade_to_normal(2)
 	await get_tree().create_timer(5.0).timeout
+	
 	load_menu()
 
 func _input(event):
@@ -13,6 +16,6 @@ func _input(event):
 		load_menu()
 
 func load_menu():
-	TransitionScreen.transition(0.5)
+	TransitionScreen.transition(2, 2)
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_packed(menu_scene)
+	DevConsole.menu()

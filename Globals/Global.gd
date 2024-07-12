@@ -26,6 +26,27 @@ func play_sound(node : AudioStreamPlayer, sound : AudioStream):
 	node.set_stream(sound)
 	node.play()
 
+func load_settings():
+	var video_settings = ConfigHandler.load_video_settings()
+	var audio_settings = ConfigHandler.load_audio_settings()
+	var misc_settings = ConfigHandler.load_misc_settings()
+	
+	# video settings setup
+	if video_settings["fullscreen"]:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
+	# audio settings setup
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"),
+		linear_to_db(audio_settings["master_volume"])
+	)
+	
+	# misc settings setup
+	Crt.toggle_crt()
+	AudioServer.set_bus_mute(2, !misc_settings["pc_humm"])
+
 func _ready():
 	if ProjectSettings.load_resource_pack("res://vol1.pck"):
 		loaded_vol1 = true

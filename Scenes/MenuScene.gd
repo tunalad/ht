@@ -35,21 +35,16 @@ func load_settings():
 	var fullscreen_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/fullscreen_indicator
 	var volume_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator
 	
+	Global.load_settings()
+	
 	# video settings setup
 	if video_settings["fullscreen"]:
 		fullscreen_label.text = "ON"
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		fullscreen_label.text = "OFF"
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	
 	# audio settings setup
-	AudioServer.set_bus_volume_db(
-		AudioServer.get_bus_index("Master"),
-		linear_to_db(audio_settings["master_volume"])
-	)
 	volume_label.text = draw_bar(audio_settings["master_volume"]*100, 10)
-	print(audio_settings["master_volume"]*100)
 
 func draw_bar(percentage : int, bars : int = 20) -> String:
 	var filled = "█ "
@@ -118,7 +113,7 @@ func _on_btn_opts_pressed():
 func _on_btn_quit_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 
-	TransitionScreen.transition(0.5)
+	TransitionScreen.transition(2, 0.5)
 	await TransitionScreen.on_transition_finished
 
 	get_tree().quit()
@@ -154,7 +149,7 @@ func _on_btn_vol_1_pressed():
 		return
 	
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_quit"])
-	TransitionScreen.transition(0.4)
+	TransitionScreen.transition(2.2, 1)
 	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file("res://Scenes/Levels/v1s1.tscn")
 
@@ -184,7 +179,6 @@ func _on_btn_opt_back_pressed():
 func _on_btn_opt_fullscreen_pressed():
 	var video_settings = ConfigHandler.load_video_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
-	
 	ConfigHandler.save_video_settings("fullscreen", !video_settings["fullscreen"])
 	load_settings()
 

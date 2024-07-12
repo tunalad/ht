@@ -32,10 +32,10 @@ func _ready():
 	await get_tree().create_timer(song_start_delay).timeout
 	$AnimationPlayer.play("fade_in") # fades into the "game" (4 seconds long animation)
 	
-	await get_tree().create_timer($MusicPlayer.stream.get_length() - 1.0).timeout
+	await get_tree().create_timer($MusicPlayer.stream.get_length() - 6.0).timeout
 	
-	#TransitionScreen.transition()
-	#await TransitionScreen.on_transition_finished
+	TransitionScreen.transition(4, 2)
+	await TransitionScreen.on_transition_finished
 	
 	if (next_scene):
 		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % next_scene)
@@ -45,7 +45,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_cancel") and DevConsole.visible == false:
 		print("going back to main menu")
-		TransitionScreen.transition()
+		TransitionScreen.transition(1, 0.5)
 		await TransitionScreen.on_transition_finished
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 

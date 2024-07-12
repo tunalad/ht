@@ -108,7 +108,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_u4fyb"]
 resource_name = "fade_out"
-length = 3.0
+length = 2.9835
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

@@ -126,11 +126,7 @@ func volume(value=null):
 	
 	audio_settings["master_volume"] = value
 	ConfigHandler.save_audio_settings("master_volume", audio_settings["master_volume"])
-	
-	AudioServer.set_bus_volume_db(
-		AudioServer.get_bus_index("Master"),
-		linear_to_db(audio_settings["master_volume"])
-	)
+	Global.load_settings()
 	
 	return audio_settings["master_volume"]
 
@@ -138,8 +134,9 @@ func crt_shader():
 	var misc_settings = ConfigHandler.load_misc_settings()
 	
 	ConfigHandler.save_misc_settings("crt_shader", !misc_settings["crt_shader"])
+	Crt.toggle_crt()
 	
-	return misc_settings["crt_shader"]
+	return !misc_settings["crt_shader"]
 
 func sh_sfx():
 	if Global.sounds == Global.sh_sounds:
@@ -157,6 +154,12 @@ func pc_humm():
 	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
 	
 	return !misc_settings["pc_humm"]
+
+func host_framerate(frames):
+	if frames:
+		Engine.time_scale = float(frames)
+	
+	return Engine.time_scale
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
