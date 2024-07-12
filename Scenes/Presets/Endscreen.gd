@@ -35,6 +35,7 @@ func _ready():
 		
 	Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-open-fx.wav"))
 	await get_tree().create_timer(0.25).timeout
+	
 	Global.play_sound($"tape-hiss", load("res://SFX/green-tape-hiss-fx.wav"))
 
 func set_text_background():
