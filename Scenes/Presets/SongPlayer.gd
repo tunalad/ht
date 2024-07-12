@@ -49,6 +49,12 @@ func _input(event):
 		TransitionScreen.transition(1, 0.5)
 		await TransitionScreen.on_transition_finished
 		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
+	
+	if event.is_action_pressed("song_back") and !DevConsole.visible:
+		_on_btn_back_pressed()
+	
+	if event.is_action_pressed("song_skip") and !DevConsole.visible:
+		_on_btn_skip_pressed()
 
 func _process(_delta):
 	if $MusicPlayer.stream:
