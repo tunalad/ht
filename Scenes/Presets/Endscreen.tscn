@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4sjc6jxl3m2i"]
+[gd_scene load_steps=6 format=3 uid="uid://c4sjc6jxl3m2i"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_6kgio"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="1_oo6xs"]
 [ext_resource type="Script" path="res://Scenes/Presets/Endscreen.gd" id="2_7hcso"]
 [ext_resource type="AudioStream" uid="uid://cqs87sfvgtnf4" path="res://SFX/sh/SH Menu Blip 01.mp3" id="3_1aqjv"]
+[ext_resource type="AudioStream" uid="uid://d0opmqyol1toq" path="res://SFX/green tape hiss.wav" id="4_fmu4n"]
 
 [node name="Endscreen" type="Control"]
 layout_mode = 3
@@ -17,6 +18,11 @@ script = ExtResource("2_7hcso")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1aqjv")
+bus = &"sfx"
+
+[node name="tape-hiss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fmu4n")
+volume_db = -10.0
 bus = &"sfx"
 
 [node name="background" type="TextureRect" parent="."]

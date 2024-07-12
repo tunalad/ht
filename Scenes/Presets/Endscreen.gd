@@ -15,7 +15,10 @@ func _process(_delta):
 
 func _input(event):
 	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")) and DevConsole.visible == false:
-		TransitionScreen.transition(2)
+		Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-close-fx.wav"))
+		$"tape-hiss".stop()
+		#TransitionScreen.transition(2)
+		TransitionScreen.transition(0.1, 3)
 		await TransitionScreen.on_transition_finished
 		DevConsole.menu()
 
@@ -29,6 +32,10 @@ func _ready():
 	
 	for btn in MENU_END:
 		btn.skipped_sound = true
+		
+	Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-open-fx.wav"))
+	await get_tree().create_timer(0.25).timeout
+	Global.play_sound($"tape-hiss", load("res://SFX/green-tape-hiss-fx.wav"))
 
 func set_text_background():
 	if background:
