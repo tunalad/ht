@@ -31,11 +31,17 @@ func _ready():
 func load_settings():
 	var video_settings = ConfigHandler.load_video_settings()
 	var audio_settings = ConfigHandler.load_audio_settings()
+	var misc_settings = ConfigHandler.load_misc_settings()
 	
 	var fullscreen_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/fullscreen_indicator
 	var volume_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator
+	var crt_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/crt_indicator
+	var humm_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/humm_indicator
 	
 	Global.load_settings()
+	
+	# audio settings setup
+	volume_label.text = draw_bar(audio_settings["master_volume"]*100, 10)
 	
 	# video settings setup
 	if video_settings["fullscreen"]:
@@ -43,8 +49,15 @@ func load_settings():
 	else:
 		fullscreen_label.text = "OFF"
 	
-	# audio settings setup
-	volume_label.text = draw_bar(audio_settings["master_volume"]*100, 10)
+	if misc_settings["crt_shader"]:
+		crt_label.text = "ON"
+	else:
+		crt_label.text = "OFF"
+		
+	if misc_settings["pc_humm"]:
+		humm_label.text = "ON"
+	else:
+		humm_label.text = "OFF"
 
 func draw_bar(percentage : int, bars : int = 20) -> String:
 	var filled = "█ "
@@ -56,12 +69,12 @@ func manual_neighbours_fix():
 	# manual neighbours setup intervention because I can't be bothered figuring it out the hard way
 	var btn_opt_back = $menu_options/VBoxContainer/btn_opt_back
 	var btn_opt_fullscreen = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen
-	var btn_opt_vol = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol
+	var btn_opt_humm = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_humm
 	
 	btn_opt_back.set_focus_neighbor(SIDE_BOTTOM, btn_opt_fullscreen.get_path())
-	btn_opt_back.set_focus_neighbor(SIDE_TOP, btn_opt_vol.get_path())
+	btn_opt_back.set_focus_neighbor(SIDE_TOP, btn_opt_humm.get_path())
 	btn_opt_fullscreen.set_focus_neighbor(SIDE_TOP, btn_opt_back.get_path())
-	btn_opt_vol.set_focus_neighbor(SIDE_BOTTOM, btn_opt_back.get_path())
+	btn_opt_humm.set_focus_neighbor(SIDE_BOTTOM, btn_opt_back.get_path())
 
 # # # # # # # # # # # # #
 # # # # MENU MAIN # # # #
@@ -218,3 +231,17 @@ func _on_dev_console_console_closed():
 		MENU_SELECT[0].grab_focus()
 	if $menu_options.visible:
 		MENU_OPTS[0].grab_focus()
+
+
+func _on_btn_opt_crt_pressed():
+	var misc_settings = ConfigHandler.load_misc_settings()
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
+	ConfigHandler.save_misc_settings("crt_shader", !misc_settings["crt_shader"])
+	load_settings()
+
+
+func _on_btn_opt_humm_pressed():
+	var misc_settings = ConfigHandler.load_misc_settings()
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
+	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
+	load_settings()
