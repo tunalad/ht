@@ -8,11 +8,6 @@ extends Control
 @onready var diary_text = $diary/CenterContainer/text
 
 
-func _process(_delta):
-	# live engine updating
-	if Engine.is_editor_hint():
-		set_text_background()
-
 func _input(event):
 	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")) and DevConsole.visible == false:
 		Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-close-fx.wav"))
@@ -22,11 +17,13 @@ func _input(event):
 		await TransitionScreen.on_transition_finished
 		DevConsole.menu()
 
+
 func _ready():
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	TransitionScreen.fade_to_normal()
 	
 	set_text_background()
+	Global.setup_neighbours(MENU_END, true)
 	
 	MENU_END[0].grab_focus()
 	
@@ -38,6 +35,7 @@ func _ready():
 	
 	Global.play_sound($"tape-hiss", load("res://SFX/green-tape-hiss-fx.wav"))
 
+
 func set_text_background():
 	if background:
 		$background.texture = background
@@ -47,11 +45,13 @@ func set_text_background():
 	else:
 		diary_text.visible = false
 
+
 func _on_btn_menu_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 	TransitionScreen.transition(2)
 	await TransitionScreen.on_transition_finished
 	DevConsole.menu()
+
 
 func _on_dev_console_console_closed():
 	MENU_END[0].grab_focus()

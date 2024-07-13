@@ -16,7 +16,6 @@ var skipped_sound = false
 
 func _ready():
 	setup_text()
-	setup_neighbours()
 	hide_arrows()
 	set_focus_mode(Control.FOCUS_ALL)
 
@@ -44,25 +43,6 @@ func setup_text():
 	$RichTextLabel.text = text
 	# right arrow position is pretty much the size of the whole button
 	custom_minimum_size.x = $ArrowRight.position.x
-
-func setup_neighbours():
-	var my_pos = self.get_index()
-	var parent = $"..".get_children()
-	var top = SIDE_TOP
-	var bottom = SIDE_BOTTOM
-	
-	if parent is HBoxContainer:
-		top = SIDE_LEFT
-		bottom = SIDE_RIGHT
-	
-	if not is_instance_valid(focus_neighbor_top):
-		self.set_focus_neighbor(top, parent[my_pos - 1].get_path())
-	
-	if not is_instance_valid(focus_neighbor_bottom):
-		if my_pos + 1 >= len(parent):
-			self.set_focus_neighbor(bottom, parent[0].get_path())
-		else:
-			self.set_focus_neighbor(bottom, parent[my_pos + 1].get_path())
 
 
 func show_arrows():

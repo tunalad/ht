@@ -73,3 +73,24 @@ func draw_bar(percentage : int, bars : int = 20) -> String:
 	var empty = "○ "
 	var filled_bars = int((percentage / 100.0) * bars)
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
+
+
+func setup_neighbours(buttons : Array, is_horizontal : bool = false):
+	var top = SIDE_TOP
+	var bottom = SIDE_BOTTOM
+	
+	if is_horizontal:
+		top = SIDE_LEFT
+		bottom = SIDE_RIGHT
+	
+	for b in buttons:
+		var my_pos = buttons.find(b, 0)
+		
+		if not is_instance_valid(b.focus_neighbor_top):
+			b.set_focus_neighbor(top, buttons[my_pos - 1].get_path())
+		
+		if not is_instance_valid(b.focus_neighbor_bottom):
+			if my_pos + 1 >= len(buttons):
+				b.set_focus_neighbor(bottom, buttons[0].get_path())
+			else:
+				b.set_focus_neighbor(bottom, buttons[my_pos + 1].get_path())

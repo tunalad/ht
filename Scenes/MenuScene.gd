@@ -4,7 +4,6 @@ extends Control
 @onready var MENU_MAIN = $menu_main.get_children()
 @onready var MENU_SELECT = $menu_select.get_children()
 @onready var MENU_OPTS = $menu_options/VBoxContainer/HBoxContainer/menu_options_left.get_children()
-@onready var MENU_OPTS_BACK = $menu_options/VBoxContainer/btn_opt_back
 
 
 func _ready():
@@ -12,6 +11,8 @@ func _ready():
 	$menu_main.show()
 	$menu_select.hide()
 	$menu_options.hide()
+	
+	MENU_OPTS.append($menu_options/VBoxContainer/btn_opt_back)
 	
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	load_settings()
@@ -22,7 +23,11 @@ func _ready():
 	
 	# activate the selecting sound
 	set_skipped_sound(MENU_MAIN, true)
-	manual_neighbours_fix()
+	
+	Global.setup_neighbours(MENU_MAIN)
+	Global.setup_neighbours(MENU_SELECT)
+	Global.setup_neighbours(MENU_OPTS)
+	
 	TransitionScreen.fade_to_normal(4)
 
 
@@ -49,19 +54,7 @@ func load_settings():
 	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
 
 
-func manual_neighbours_fix():
-	# manual neighbours setup intervention because I can't be bothered figuring it out the hard way
-	var btn_opt_back = $menu_options/VBoxContainer/btn_opt_back
-	var btn_opt_fullscreen = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen
-	var btn_opt_humm = $menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_humm
-	
-	btn_opt_back.set_focus_neighbor(SIDE_BOTTOM, btn_opt_fullscreen.get_path())
-	btn_opt_back.set_focus_neighbor(SIDE_TOP, btn_opt_humm.get_path())
-	btn_opt_fullscreen.set_focus_neighbor(SIDE_TOP, btn_opt_back.get_path())
-	btn_opt_humm.set_focus_neighbor(SIDE_BOTTOM, btn_opt_back.get_path())
-
-
-func set_skipped_sound(buttons, state):
+func set_skipped_sound(buttons : Array, state : bool):
 	for btn in buttons:
 		btn.skipped_sound = state
 
@@ -105,7 +98,6 @@ func _on_btn_opts_pressed():
 	MENU_OPTS[0].grab_focus()
 	
 	set_skipped_sound(MENU_OPTS, true)
-	MENU_OPTS_BACK.skipped_sound = true
 	set_skipped_sound(MENU_MAIN, !true)
 
 
@@ -168,7 +160,6 @@ func _on_btn_opt_back_pressed():
 	
 	# disable the sounds in menu_select
 	set_skipped_sound(MENU_OPTS, !true)
-	MENU_OPTS_BACK.skipped_sound = !true
 	MENU_MAIN[0].grab_focus()
 	set_skipped_sound(MENU_MAIN, true)
 
