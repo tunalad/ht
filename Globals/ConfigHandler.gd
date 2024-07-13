@@ -9,9 +9,9 @@ func _ready():
 	
 	ensure_setting("video", "fullscreen", false)
 	ensure_setting("audio", "master_volume", 1.0)
-	ensure_setting("misc", 	"crt_shader", false)
-	ensure_setting("misc", 	"pc_humm", false)
-	ensure_setting("misc", 	"hide_mouse", false)
+	ensure_setting("misc", 	"crt_shader", true)
+	ensure_setting("misc", 	"pc_humm", true)
+	ensure_setting("misc", 	"hide_mouse", true)
 	
 	config.save(SETTINGS)
 

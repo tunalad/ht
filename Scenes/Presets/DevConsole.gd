@@ -66,7 +66,8 @@ func history():
 	return "Commands history: \n- " + "\n- ".join(PackedStringArray(temp_list))
 
 func echo(value):
-	return value
+	history_label.text += "\n" + str(value)
+	return
 
 func console(value=null):
 	if value == "close":
@@ -228,17 +229,17 @@ func _on_line_edit_text_submitted(new_text):
 	
 	if not has_method(command):
 		var error_message = "\"" + command + "\" is not a valid command"
-		history_label.text += "\nError: " + error_message
+		echo("Error: " + error_message)
 		return
 	
 	var result = callv(command, args)
 	
 	if result != null:
-		if typeof(result) == TYPE_STRING:
-			history_label.text += ("\n" + result)
-		else:
-			history_label.text += ("\n" + str(result))
+		echo(result)
 	else:
-		history_label.text += ("\n" + command + " executed")
+		pass
+		#echo(command + " executed")
 	
 	input_label.text = ""
+
+

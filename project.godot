@@ -27,9 +27,9 @@ buses/default_bus_layout="res://SFX/homemade_sfx.tres"
 [autoload]
 
 TransitionScreen="*res://Scenes/Presets/TransitionScreen.tscn"
+DevConsole="*res://Scenes/Presets/DevConsole.tscn"
 Global="*res://Globals/Global.gd"
 ConfigHandler="*res://Globals/ConfigHandler.gd"
-DevConsole="*res://Scenes/Presets/DevConsole.tscn"
 Crt="*res://Scenes/Shaders/crt.tscn"
 pc_humm="*res://Scenes/Presets/pc-humm.tscn"
 

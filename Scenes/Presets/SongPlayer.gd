@@ -61,7 +61,7 @@ func _process(_delta):
 		var playback_position = $MusicPlayer.get_playback_position()
 		var song_length = $MusicPlayer.stream.get_length()
 		
-		$Controller/Timeline.text = "| %s |" % draw_bar(track_percentage())
+		$Controller/Timeline.text = "| %s |" % Global.draw_bar(track_percentage())
 		$Controller/TimeLeft.text = format_timer(playback_position)
 		$Controller/TimeRight.text = format_timer(song_length)
 
@@ -77,13 +77,6 @@ func format_timer(time_seconds: float) -> String:
 	var minutes = int(time_seconds) / 60
 	var seconds = int(time_seconds) % 60
 	return "%02d:%02d" % [minutes, seconds]
-
-
-func draw_bar(percentage : int, bars : int = 20) -> String:
-	var filled = "█ "
-	var empty = "○ "
-	var filled_bars = int((percentage / 100.0) * bars)
-	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
 
 
 func _on_btn_back_pressed():

@@ -1,5 +1,7 @@
 extends Node
 
+var sounds = null
+
 var sh_sounds = {
 	"menu_move": 	load("res://SFX/sh/SH Menu Blip 01.mp3"),
 	"menu_select": 	load("res://SFX/sh/SH Menu Blip 02.mp3"),
@@ -16,15 +18,28 @@ var homemade_sounds = {
 	"menu_quit": 	load("res://SFX/homemade/quit04.wav"),
 }
 
-var loaded_vol1 = false
-var sounds = homemade_sounds
+func _ready():
+	sounds = homemade_sounds
+	
+	print(DevConsole)
+	
+	if ProjectSettings.load_resource_pack("res://vol1.pck"):
+		print("vol1.pck found")
+		DevConsole.echo("vol1.pck found.")
+	
+	if DevConsole.load_song().split("\n").has("v1s1"):
+		print("Volume 1 loaded.")
+		DevConsole.echo("Volume 1 loaded.")
+
 
 func john():
 	print("johning around")
 
+
 func play_sound(node : AudioStreamPlayer, sound : AudioStream):
 	node.set_stream(sound)
 	node.play()
+
 
 func load_settings():
 	var video_settings = ConfigHandler.load_video_settings()
@@ -52,6 +67,9 @@ func load_settings():
 	else:
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 
-func _ready():
-	if ProjectSettings.load_resource_pack("res://vol1.pck"):
-		loaded_vol1 = true
+
+func draw_bar(percentage : int, bars : int = 20) -> String:
+	var filled = "█ "
+	var empty = "○ "
+	var filled_bars = int((percentage / 100.0) * bars)
+	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)

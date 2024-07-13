@@ -61,7 +61,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="btn_select_vol" parent="menu_main" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(124.875, 20)
+custom_minimum_size = Vector2(120.014, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_main/btn_quit")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_main/btn_opts")
@@ -70,7 +70,7 @@ arrow_margin = 70
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_opts" parent="menu_main" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(79.5625, 20)
+custom_minimum_size = Vector2(70.0272, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_main/btn_select_vol")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_main/btn_quit")
@@ -79,7 +79,7 @@ arrow_margin = 45
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_quit" parent="menu_main" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(61.4375, 20)
+custom_minimum_size = Vector2(50.0326, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_main/btn_opts")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_main/btn_select_vol")
@@ -107,7 +107,7 @@ text = "Volume 1: Hometown"
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_vol2" parent="menu_select" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(92.25, 20)
+custom_minimum_size = Vector2(84.0235, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol1")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol3")
@@ -116,7 +116,7 @@ arrow_margin = 52
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_vol3" parent="menu_select" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(92.25, 20)
+custom_minimum_size = Vector2(84.0235, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol2")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol4")
@@ -125,7 +125,7 @@ arrow_margin = 52
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_vol4" parent="menu_select" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(92.25, 20)
+custom_minimum_size = Vector2(84.0235, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol3")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol5")
@@ -134,7 +134,7 @@ arrow_margin = 52
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_vol5" parent="menu_select" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(92.25, 20)
+custom_minimum_size = Vector2(84.0235, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol4")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_back")
@@ -143,7 +143,7 @@ arrow_margin = 52
 AUDIO_PLAYER = NodePath("../../AudioStreamPlayer")
 
 [node name="btn_back" parent="menu_select" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
-custom_minimum_size = Vector2(65.0625, 20)
+custom_minimum_size = Vector2(54.0315, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol5")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_select/btn_vol1")
@@ -181,7 +181,7 @@ alignment = 1
 [node name="btn_opt_fullscreen" parent="menu_options/VBoxContainer/HBoxContainer/menu_options_left" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
 custom_minimum_size = Vector2(132, 20)
 layout_mode = 2
-focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_crt")
+focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_humm")
 focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol")
 text = "Fullscreen"
 arrow_margin = 55
@@ -193,7 +193,7 @@ AUDIO_PLAYER = NodePath("../../../../../AudioStreamPlayer")
 custom_minimum_size = Vector2(122, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen")
-focus_neighbor_bottom = NodePath("../btn_opt_crt")
+focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_crt")
 text = "Volume"
 arrow_margin = 45
 function_left = "volume_down"
@@ -204,7 +204,7 @@ AUDIO_PLAYER = NodePath("../../../../../AudioStreamPlayer")
 custom_minimum_size = Vector2(132, 20)
 layout_mode = 2
 focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_vol")
-focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen")
+focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_humm")
 text = "CRT Filter"
 arrow_margin = 55
 function_left = "volume_down"
@@ -214,8 +214,8 @@ AUDIO_PLAYER = NodePath("../../../../../AudioStreamPlayer")
 [node name="btn_opt_humm" parent="menu_options/VBoxContainer/HBoxContainer/menu_options_left" node_paths=PackedStringArray("AUDIO_PLAYER") instance=ExtResource("9_xm7qk")]
 custom_minimum_size = Vector2(132, 20)
 layout_mode = 2
-focus_neighbor_top = NodePath("../btn_opt_crt2/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_crt")
-focus_neighbor_bottom = NodePath("../btn_opt_crt2/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen")
+focus_neighbor_top = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_crt")
+focus_neighbor_bottom = NodePath("/root/@EditorNode@17147/@Panel@13/@VBoxContainer@14/@HSplitContainer@17/@HSplitContainer@25/@HSplitContainer@33/@VBoxContainer@34/@VSplitContainer@36/@VSplitContainer@62/@VBoxContainer@63/@PanelContainer@110/MainScreen/@CanvasItemEditor@9462/@VSplitContainer@9281/@HSplitContainer@9283/@HSplitContainer@9285/@Control@9286/@SubViewportContainer@9287/@SubViewport@9288/MenuScene/menu_options/VBoxContainer/HBoxContainer/menu_options_left/btn_opt_fullscreen")
 text = "PC Humm"
 arrow_margin = 55
 function_left = "volume_down"

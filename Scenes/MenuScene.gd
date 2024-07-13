@@ -6,7 +6,7 @@ extends Control
 @onready var MENU_OPTS = $menu_options/VBoxContainer/HBoxContainer/menu_options_left.get_children()
 @onready var MENU_OPTS_BACK = $menu_options/VBoxContainer/btn_opt_back
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	# make sure the correct menu is active
 	$menu_main.show()
@@ -17,53 +17,37 @@ func _ready():
 	load_settings()
 	
 	# focus on the 1st button (if console's closed)
-	if !DevConsole.visible:
+	if !DevConsole.visible: 
 		MENU_MAIN[0].grab_focus()
 	
 	# activate the selecting sound
-	for btn in MENU_MAIN:
-		btn.skipped_sound = true
-	
+	set_skipped_sound(MENU_MAIN, true)
 	manual_neighbours_fix()
-	
 	TransitionScreen.fade_to_normal(4)
+
 
 func load_settings():
 	var video_settings = ConfigHandler.load_video_settings()
 	var audio_settings = ConfigHandler.load_audio_settings()
 	var misc_settings = ConfigHandler.load_misc_settings()
 	
-	var fullscreen_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/fullscreen_indicator
-	var volume_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator
-	var crt_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/crt_indicator
-	var humm_label = $menu_options/VBoxContainer/HBoxContainer/menu_options_right/humm_indicator
+	var labels = {
+		"fullscreen_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/fullscreen_indicator,
+		"volume_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator,
+		"crt_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/crt_indicator,
+		"humm_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/humm_indicator
+	}
 	
 	Global.load_settings()
 	
 	# audio settings setup
-	volume_label.text = draw_bar(audio_settings["master_volume"]*100, 10)
+	labels["volume_label"].text = Global.draw_bar(audio_settings["master_volume"] * 100, 10)
 	
 	# video settings setup
-	if video_settings["fullscreen"]:
-		fullscreen_label.text = "ON"
-	else:
-		fullscreen_label.text = "OFF"
-	
-	if misc_settings["crt_shader"]:
-		crt_label.text = "ON"
-	else:
-		crt_label.text = "OFF"
-		
-	if misc_settings["pc_humm"]:
-		humm_label.text = "ON"
-	else:
-		humm_label.text = "OFF"
+	labels["fullscreen_label"].text = "ON" if video_settings["fullscreen"] else "OFF"
+	labels["crt_label"].text = "ON" if misc_settings["crt_shader"] else "OFF"
+	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
 
-func draw_bar(percentage : int, bars : int = 20) -> String:
-	var filled = "█ "
-	var empty = "○ "
-	var filled_bars = int((percentage / 100.0) * bars)
-	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
 
 func manual_neighbours_fix():
 	# manual neighbours setup intervention because I can't be bothered figuring it out the hard way
@@ -76,33 +60,39 @@ func manual_neighbours_fix():
 	btn_opt_fullscreen.set_focus_neighbor(SIDE_TOP, btn_opt_back.get_path())
 	btn_opt_humm.set_focus_neighbor(SIDE_BOTTOM, btn_opt_back.get_path())
 
+
+func set_skipped_sound(buttons, state):
+	for btn in buttons:
+		btn.skipped_sound = state
+
+
 # # # # # # # # # # # # #
 # # # # MENU MAIN # # # #
 # # # # # # # # # # # # #
 
-func _on_btn_select_vol_pressed():
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 
+func _on_btn_select_vol_pressed():
+	var songs = DevConsole.load_song().split("\n")
+	
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
+	
 	# show the selection menu instead
 	$menu_main.hide()
 	$menu_select.show()
-
+	
 	# locking vol1 if we can't find the scene file
-	if !(FileAccess.file_exists("res://Scenes/Levels/v1s1.tscn") or Global.loaded_vol1):
+	if !songs.has("v1s1"):
 		$menu_select/btn_vol1.text = "LOCKED"
-		$menu_select/btn_vol1.arrow_margin_from_center = 47
+		$menu_select/btn_vol1.arrow_margin = 47
 		$menu_select/btn_vol1.setup_text()
-
+	
 	# focus on the 1st button
 	MENU_SELECT[0].grab_focus()
-
+	
 	# activate sounds for menu_select items
-	for btn in MENU_SELECT:
-		btn.skipped_sound = true
+	set_skipped_sound(MENU_SELECT, true)
+	set_skipped_sound(MENU_MAIN, !true)
 
-	# but disable the sound on the other ones
-	for btn in MENU_MAIN:
-		btn.skipped_sound = !true
 
 func _on_btn_opts_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
@@ -110,18 +100,14 @@ func _on_btn_opts_pressed():
 	# show the options menu instead
 	$menu_main.hide()
 	$menu_options.show()
-
+	
 	# focus on the 1st button
 	MENU_OPTS[0].grab_focus()
-
-	# activate sounds for menu_options items
-	for btn in MENU_OPTS:
-		btn.skipped_sound = true
+	
+	set_skipped_sound(MENU_OPTS, true)
 	MENU_OPTS_BACK.skipped_sound = true
+	set_skipped_sound(MENU_MAIN, !true)
 
-	# but disable the sound on the other ones
-	for btn in MENU_MAIN:
-		btn.skipped_sound = !true
 
 func _on_btn_quit_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
@@ -131,44 +117,47 @@ func _on_btn_quit_pressed():
 
 	get_tree().quit()
 
+
 # # # # # # # # # # # # # #
 # # # # SELECT MENU # # # #
 # # # # # # # # # # # # # #
 
+
 func _on_btn_back_pressed():
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_back"])
-
+	
 	# show the selection menu instead
 	$menu_main.show()
 	$menu_select.hide()
-
+	
 	# disable the sounds in menu_select
-	for btn in MENU_SELECT:
-		btn.skipped_sound = !true
-
-	# focus the 1st button
+	set_skipped_sound(MENU_SELECT, !true)
 	MENU_MAIN[0].grab_focus()
+	set_skipped_sound(MENU_MAIN, true)
 
-	# and activate on the main
-	for btn in MENU_MAIN:
-		btn.skipped_sound = true
 
 func _on_locked_pressed():
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 
+
 func _on_btn_vol_1_pressed():
-	if !(FileAccess.file_exists("res://Scenes/Levels/v1s1.tscn") or Global.loaded_vol1):
+	var songs = DevConsole.load_song().split("\n")
+	
+	if !songs.has("v1s1"):
 		Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 		return
 	
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_quit"])
 	TransitionScreen.transition(2.2, 1)
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://Scenes/Levels/v1s1.tscn")
+	
+	DevConsole.load_song("v1s1")
+
 
 # # # # # # # # # # # # # #
 # # #  OPTIONS MENU # # # #
 # # # # # # # # # # # # # #
+
 
 func _on_btn_opt_back_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_back"])
@@ -178,16 +167,11 @@ func _on_btn_opt_back_pressed():
 	$menu_options.hide()
 	
 	# disable the sounds in menu_select
-	for btn in MENU_OPTS:
-		btn.skipped_sound = !true
+	set_skipped_sound(MENU_OPTS, !true)
 	MENU_OPTS_BACK.skipped_sound = !true
-	
-	# focus the 1st button
 	MENU_MAIN[0].grab_focus()
-	
-	# and activate on the main
-	for btn in MENU_MAIN:
-		btn.skipped_sound = true
+	set_skipped_sound(MENU_MAIN, true)
+
 
 func _on_btn_opt_fullscreen_pressed():
 	var video_settings = ConfigHandler.load_video_settings()
@@ -224,15 +208,6 @@ func _on_btn_opt_vol_right_key_pressed():
 	load_settings()
 
 
-func _on_dev_console_console_closed():
-	if $menu_main.visible:
-		MENU_MAIN[0].grab_focus()
-	if $menu_select.visible:
-		MENU_SELECT[0].grab_focus()
-	if $menu_options.visible:
-		MENU_OPTS[0].grab_focus()
-
-
 func _on_btn_opt_crt_pressed():
 	var misc_settings = ConfigHandler.load_misc_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
@@ -245,3 +220,17 @@ func _on_btn_opt_humm_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
 	load_settings()
+
+
+# # # # # # # # # # # # # #
+# # # OTHER SIGNALS # # # #
+# # # # # # # # # # # # # #
+
+
+func _on_dev_console_console_closed():
+	if $menu_main.visible:
+		MENU_MAIN[0].grab_focus()
+	if $menu_select.visible:
+		MENU_SELECT[0].grab_focus()
+	if $menu_options.visible:
+		MENU_OPTS[0].grab_focus()
