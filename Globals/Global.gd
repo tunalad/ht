@@ -23,11 +23,7 @@ func _ready():
 	
 	print(DevConsole)
 	
-	if ProjectSettings.load_resource_pack("res://vol1.pck"):
-		print("vol1.pck found")
-		DevConsole.echo("vol1.pck found.")
-	
-	if DevConsole.load_song().split("\n").has("v1s1"):
+	if ProjectSettings.load_resource_pack("res://vol1.pck") or DevConsole.load_song().split("\n").has("v1s1"):
 		print("Volume 1 loaded.")
 		DevConsole.echo("Volume 1 loaded.")
 

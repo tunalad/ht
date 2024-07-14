@@ -97,7 +97,8 @@ def main():
 		{
 			"scene_name": "v1s1",
 			"background": "GFX/Vol1/vkquake0018.png",
-			"song_name": "the bakery I work at",
+			#"song_name": "the bakery I work at",
+			"song_name": "helen's bakery",
 			"audio_file": "Music/Vol1/v1s1.mp3",
 		},
 		{
