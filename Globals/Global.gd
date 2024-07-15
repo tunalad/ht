@@ -21,11 +21,12 @@ var homemade_sounds = {
 func _ready():
 	sounds = homemade_sounds
 	
-	print(DevConsole)
 	
 	if ProjectSettings.load_resource_pack("res://vol1.pck") or DevConsole.load_song().split("\n").has("v1s1"):
 		print("Volume 1 loaded.")
 		DevConsole.echo("Volume 1 loaded.")
+		
+	load_customs()
 
 
 func john():
@@ -90,3 +91,30 @@ func setup_neighbours(buttons : Array, is_horizontal : bool = false):
 				b.set_focus_neighbor(bottom, buttons[0].get_path())
 			else:
 				b.set_focus_neighbor(bottom, buttons[my_pos + 1].get_path())
+
+
+func load_customs():
+	var exec_path = OS.get_executable_path()
+	var custom_folder_path = exec_path.get_base_dir().replace(exec_path, "") + "/custom" # Adjusted to ensure the path is correct
+	
+	if DirAccess.dir_exists_absolute(custom_folder_path):
+		var dir = DirAccess.open(custom_folder_path)
+		if dir != null:
+			dir.list_dir_begin()
+			var file_count = 0
+			while true:
+				var filename = dir.get_next()
+				if filename == "":
+					break
+				file_count += 1
+				print(filename)
+				if filename.ends_with(".pck"):
+					print("Loaded ", filename)
+					
+					var full_path = custom_folder_path + "/" + filename
+					ProjectSettings.load_resource_pack(full_path)
+		else:
+			print("Failed to open custom folder.")
+	else:
+		print("Custom folder not found.")
+
