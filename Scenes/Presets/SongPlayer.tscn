@@ -200,7 +200,6 @@ theme_override_font_sizes/font_size = 20
 text = "⏮"
 flat = true
 icon_alignment = 1
-metadata/_edit_group_ = true
 
 [node name="TimeLeft" type="Label" parent="Controller"]
 custom_minimum_size = Vector2(64, 48)
@@ -242,10 +241,8 @@ theme_override_font_sizes/font_size = 20
 text = "⏭"
 flat = true
 icon_alignment = 1
-metadata/_edit_group_ = true
 
 [node name="Intro" type="ColorRect" parent="."]
-visible = false
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -275,7 +272,6 @@ text = "[center]Song name goes here or sth idk[/center]"
 fit_content = true
 
 [node name="Exit" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

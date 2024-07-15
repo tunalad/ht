@@ -159,8 +159,10 @@ func pc_humm():
 func host_framerate(frames):
 	if frames:
 		Engine.time_scale = float(frames)
-	
+		AudioServer.playback_speed_scale = float(frames)
+		
 	return Engine.time_scale
+
 
 func mouse_hidden():
 	var misc_settings = ConfigHandler.load_misc_settings()
