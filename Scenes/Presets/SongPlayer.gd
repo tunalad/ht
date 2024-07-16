@@ -25,13 +25,14 @@ func _ready():
 		$Controller/btn_back.set_disabled(true)
 	
 	# fade the text in and stay for like 2 seconds
+	$AnimationPlayer.speed_scale = $AnimationPlayer.get_animation("text_fade_in").length / text_fade_in
 	$AnimationPlayer.play("text_fade_in") # fades the track name in
-	await get_tree().create_timer(text_fade_in).timeout
-	
-	Global.play_sound($MusicPlayer, audio_file)
 	
 	await get_tree().create_timer(song_start_delay).timeout
-	$AnimationPlayer.play("fade_in") # fades into the "game" (4 seconds long animation)
+	Global.play_sound($MusicPlayer, audio_file)
+	
+	await get_tree().create_timer(4).timeout # holding for 4 sec
+	$AnimationPlayer.play("fade_in") # fade in
 	
 	await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
 	
