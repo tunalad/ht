@@ -20,9 +20,11 @@ func _ready():
 	
 	if !next_scene:
 		$Controller/btn_skip.set_disabled(true)
+		$Controller/btn_back/ButtonText.visible = false
 	
 	if !previous_scene:
 		$Controller/btn_back.set_disabled(true)
+		$Controller/btn_back/ButtonText.visible = false
 	
 	# fade the text in and stay for like 2 seconds
 	$AnimationPlayer.speed_scale = $AnimationPlayer.get_animation("text_fade_in").length / text_fade_in
@@ -62,7 +64,7 @@ func _process(_delta):
 		var playback_position = $MusicPlayer.get_playback_position()
 		var song_length = $MusicPlayer.stream.get_length()
 		
-		$Controller/Timeline.text = "| %s |" % Global.draw_bar(track_percentage())
+		$Controller/Timeline.text = "| %s|" % Global.draw_bar(track_percentage())
 		$Controller/TimeLeft.text = format_timer(playback_position)
 		$Controller/TimeRight.text = format_timer(song_length)
 

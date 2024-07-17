@@ -179,7 +179,6 @@ func mouse_hidden():
 	var misc_settings = ConfigHandler.load_misc_settings()
 	
 	ConfigHandler.save_misc_settings("hide_mouse", !misc_settings["hide_mouse"])
-	
 	Global.load_settings()
 	
 	return misc_settings["hide_mouse"]
@@ -210,18 +209,18 @@ func tab_completion(partial_command):
 	
 	var command_list = commands().split("\n- ")
 	command_list.remove_at(0) # trimming out the "avialable commands" part
-
+	
 	var matches = []
 	for command in command_list:
 		if command.begins_with(partial_command):
 			matches.append(command)
-
+	
 	if matches.size() == 1:
 		return matches[0]
 	elif matches.size() > 1:
 		history_label.text += "\n" + str(matches.size()) + " possible options:\n " + "\n ".join(matches)
 		return partial_command
-
+	
 	return partial_command
 
 # # # # # # # # # # # # # # # # # # # # # # 

@@ -67,7 +67,8 @@ func load_settings():
 
 func draw_bar(percentage : int, bars : int = 20) -> String:
 	var filled = "█ "
-	var empty = "○ "
+	#var empty = "○ "
+	var empty = "- "
 	var filled_bars = int((percentage / 100.0) * bars)
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
 
