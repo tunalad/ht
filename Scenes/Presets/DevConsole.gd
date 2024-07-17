@@ -158,8 +158,15 @@ func pc_humm():
 	var misc_settings = ConfigHandler.load_misc_settings()
 	
 	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
-	
+	Global.load_settings()
 	return !misc_settings["pc_humm"]
+
+func fullscreen():
+	var video_settings = ConfigHandler.load_video_settings()
+	
+	ConfigHandler.save_video_settings("fullscreen", !video_settings["fullscreen"])
+	Global.load_settings()
+	return !video_settings["fullscreen"]
 
 func host_framerate(frames=null):
 	if frames:
@@ -212,7 +219,7 @@ func tab_completion(partial_command):
 	if matches.size() == 1:
 		return matches[0]
 	elif matches.size() > 1:
-		history_label.text += "\n" + " ".join(matches)
+		history_label.text += "\n" + str(matches.size()) + " possible options:\n " + "\n ".join(matches)
 		return partial_command
 
 	return partial_command
