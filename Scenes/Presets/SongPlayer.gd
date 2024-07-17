@@ -40,16 +40,16 @@ func _ready():
 	await TransitionScreen.on_transition_finished
 	
 	if (next_scene):
-		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % next_scene)
+		DevConsole.load_song(next_scene)
 	else:
-		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
+		DevConsole.menu()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel") and DevConsole.visible == false:
 		print("going back to main menu")
 		TransitionScreen.transition(1, 0.5)
 		await TransitionScreen.on_transition_finished
-		get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
+		DevConsole.menu()
 	
 	if event.is_action_pressed("song_back") and !DevConsole.visible:
 		_on_btn_back_pressed()
@@ -81,12 +81,10 @@ func format_timer(time_seconds: float) -> String:
 
 
 func _on_btn_back_pressed():
-	print("button back")
 	if previous_scene:
-		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % previous_scene)
+		DevConsole.load_song(previous_scene)
 
 
 func _on_btn_skip_pressed():
-	print("button skip")
 	if next_scene:
-		get_tree().change_scene_to_file("res://Scenes/Levels/%s.tscn" % next_scene)
+		DevConsole.load_song(next_scene)

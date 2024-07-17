@@ -101,18 +101,14 @@ func load_customs():
 		var dir = DirAccess.open(custom_folder_path)
 		if dir != null:
 			dir.list_dir_begin()
-			var file_count = 0
+			
 			while true:
 				var filename = dir.get_next()
-				if filename == "":
-					break
-				file_count += 1
-				print(filename)
+				if filename == "": break
+				
 				if filename.ends_with(".pck"):
-					print("Loaded ", filename)
-					
-					var full_path = custom_folder_path + "/" + filename
-					ProjectSettings.load_resource_pack(full_path)
+					DevConsole.echo("Loaded %s" % filename)
+					ProjectSettings.load_resource_pack(custom_folder_path + "/" + filename)
 		else:
 			print("Failed to open custom folder.")
 	else:

@@ -65,7 +65,7 @@ func history():
 	temp_list.reverse()
 	return "Commands history: \n- " + "\n- ".join(PackedStringArray(temp_list))
 
-func echo(value):
+func echo(value=" "):
 	history_label.text += "\n" + str(value)
 	return
 
@@ -97,12 +97,17 @@ func load_song(song=null):
 		
 		return "\n".join(files)
 	else:
+		var song_path = "res://Scenes/Levels/" + song + ".tscn"
+		
+		if !FileAccess.file_exists(song_path):
+			return "song '%s' not found." % song
+		
 		self.visible = false
-		get_tree().change_scene_to_file("res://Scenes/Levels/" + song + ".tscn")
+		get_tree().change_scene_to_file(song_path)
 		return "loaded song: " + song
 
 func menu():
-	console("close")
+	#console("close")
 	get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 	return "loaded menu"
 
@@ -156,13 +161,12 @@ func pc_humm():
 	
 	return !misc_settings["pc_humm"]
 
-func host_framerate(frames):
+func host_framerate(frames=null):
 	if frames:
 		Engine.time_scale = float(frames)
 		AudioServer.playback_speed_scale = float(frames)
 		
 	return Engine.time_scale
-
 
 func mouse_hidden():
 	var misc_settings = ConfigHandler.load_misc_settings()
@@ -216,6 +220,12 @@ func tab_completion(partial_command):
 # # # # # # # # # # # # # # # # # # # # # # 
 
 func _on_line_edit_text_submitted(new_text):
+	input_label.text = ""
+	
+	if new_text.strip_edges() == "":
+		echo(">")
+		return
+	
 	var parts = new_text.split(" ", false, 2)
 	var command = parts[0]
 	var args = []
@@ -241,7 +251,3 @@ func _on_line_edit_text_submitted(new_text):
 	else:
 		pass
 		#echo(command + " executed")
-	
-	input_label.text = ""
-
-
