@@ -30,6 +30,8 @@ func _ready():
 	$AnimationPlayer.speed_scale = $AnimationPlayer.get_animation("text_fade_in").length / text_fade_in
 	$AnimationPlayer.play("text_fade_in") # fades the track name in
 	
+	$MusicPlayer.stream = audio_file
+	
 	await get_tree().create_timer(song_start_delay).timeout
 	Global.play_sound($MusicPlayer, audio_file)
 	
@@ -46,6 +48,7 @@ func _ready():
 	else:
 		DevConsole.menu()
 
+
 func _input(event):
 	if event.is_action_pressed("ui_cancel") and DevConsole.visible == false:
 		print("going back to main menu")
@@ -59,6 +62,7 @@ func _input(event):
 	if event.is_action_pressed("song_skip") and !DevConsole.visible:
 		_on_btn_skip_pressed()
 
+
 func _process(_delta):
 	if $MusicPlayer.stream:
 		var playback_position = $MusicPlayer.get_playback_position()
@@ -68,6 +72,7 @@ func _process(_delta):
 		$Controller/TimeLeft.text = format_timer(playback_position)
 		$Controller/TimeRight.text = format_timer(song_length)
 
+
 func track_percentage():
 	if $MusicPlayer.stream:
 		var song_length = $MusicPlayer.stream.get_length()
@@ -75,6 +80,7 @@ func track_percentage():
 		return int((playback_position / song_length) * 100)
 	else:
 		return 0
+
 
 func format_timer(time_seconds: float) -> String:
 	var minutes = int(time_seconds) / 60

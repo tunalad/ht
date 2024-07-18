@@ -90,21 +90,29 @@ func load_song(song=null):
 	
 	if !song:
 		files = dir.get_files()
+		
+		print(files)
 		# remove '.tscn' or '.scn' from each filename
 		for i in range(files.size()):
 			var file_name = files[i].replace(".tscn", "").replace(".scn", "").replace(".remap", "")
 			files[i] = file_name
-		
 		return "\n".join(files)
 	else:
 		var song_path = "res://Scenes/Levels/" + song + ".tscn"
-		
-		if !FileAccess.file_exists(song_path):
-			return "song '%s' not found." % song
+		var song_path_remap = "res://Scenes/Levels/" + song + ".tscn.remap"
 		
 		self.visible = false
-		get_tree().change_scene_to_file(song_path)
-		return "loaded song: " + song
+		
+		var err = get_tree().change_scene_to_file(song_path)
+		
+		if err == OK:
+			return "loaded song: " + song
+		elif err == ERR_FILE_NOT_FOUND:
+			return "song '%s' not found." % song
+		elif err == ERR_CANT_OPEN :
+			return "can't open %s." % song
+		else:
+			return "unknown error."
 
 func menu():
 	#console("close")

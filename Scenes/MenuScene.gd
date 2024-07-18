@@ -65,7 +65,7 @@ func set_skipped_sound(buttons : Array, state : bool):
 
 
 func _on_btn_select_vol_pressed():
-	var songs = DevConsole.load_song().split("\n")
+	var songs = DevConsole.load_song()
 	
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
@@ -74,7 +74,7 @@ func _on_btn_select_vol_pressed():
 	$menu_select.show()
 	
 	# locking vol1 if we can't find the scene file
-	if !songs.has("v1s1"):
+	if songs == "" or !songs.split("\n").has("v1s1"):
 		$menu_select/btn_vol1.text = "LOCKED"
 		$menu_select/btn_vol1.arrow_margin = 47
 		$menu_select/btn_vol1.setup_text()
@@ -142,7 +142,7 @@ func _on_btn_vol_1_pressed():
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_quit"])
 	TransitionScreen.transition(2.2, 1)
 	await TransitionScreen.on_transition_finished
-	
+	print("load v1s1")
 	DevConsole.load_song("v1s1")
 
 
