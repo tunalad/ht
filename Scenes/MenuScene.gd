@@ -142,7 +142,6 @@ func _on_btn_vol_1_pressed():
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_quit"])
 	TransitionScreen.transition(2.2, 1)
 	await TransitionScreen.on_transition_finished
-	print("load v1s1")
 	DevConsole.load_song("v1s1")
 
 
