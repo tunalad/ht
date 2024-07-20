@@ -67,11 +67,18 @@ func load_settings():
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 
 
-func draw_bar(percentage : int, bars : int = 20) -> String:
+func draw_bar(percentage : int, bars : int = 20, extra_bar : bool = false) -> String:
 	var filled = "█ "
 	#var empty = "○ "
 	var empty = "- "
 	var filled_bars = int((percentage / 100.0) * bars)
+	
+	if extra_bar:
+		filled_bars += 1
+	
+	if filled_bars > bars:
+		filled_bars = bars
+	
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
 
 

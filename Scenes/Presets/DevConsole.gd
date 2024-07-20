@@ -8,6 +8,7 @@ var history_index = -1
 @onready var input_label = $MarginContainer/console/input
 
 signal on_terminal_closed
+signal console_pause
 
 func _ready():
 	self.visible = false
@@ -98,7 +99,6 @@ func load_song(song=null):
 		return "\n".join(files)
 	else:
 		var song_path = "res://Scenes/Levels/" + song + ".tscn"
-		var song_path_remap = "res://Scenes/Levels/" + song + ".tscn.remap"
 		
 		var err = get_tree().change_scene_to_file(song_path)
 		
@@ -186,6 +186,10 @@ func mouse_hidden():
 	Global.load_settings()
 	
 	return misc_settings["hide_mouse"]
+
+func pause():
+	console_pause.emit()
+	return 
 
 # # # # # # # # # # # # # # # # # # # # # # 
 

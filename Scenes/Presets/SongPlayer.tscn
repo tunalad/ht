@@ -169,6 +169,8 @@ size_flags_horizontal = 0
 theme = ExtResource("1_bn63o")
 script = ExtResource("1_n0888")
 
+[node name="SongTimer" type="Timer" parent="."]
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="GameBackground" type="TextureRect" parent="."]
@@ -313,6 +315,28 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i23tr")
 }
+
+[node name="Pause" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.372549)
+
+[node name="Label" type="Label" parent="Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "⏸"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Controller/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="Controller/btn_skip" to="." method="_on_btn_skip_pressed"]

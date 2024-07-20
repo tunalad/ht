@@ -10,6 +10,8 @@ extends Control
 @export var previous_scene : String
 
 func _ready():
+	DevConsole.connect("console_pause", pause_song)
+	
 	# setup
 	$GameBackground.texture = game_background
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
@@ -32,13 +34,18 @@ func _ready():
 	
 	$MusicPlayer.stream = audio_file
 	
-	await get_tree().create_timer(song_start_delay).timeout
+	$SongTimer.start(song_start_delay)
+	await $SongTimer.timeout
+	
 	Global.play_sound($MusicPlayer, audio_file)
 	
-	await get_tree().create_timer(4).timeout # holding for 4 sec
+	$SongTimer.start(4)
+	await $SongTimer.timeout
 	$AnimationPlayer.play("fade_in") # fade in
 	
-	await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
+	#await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
+	$SongTimer.start($MusicPlayer.stream.get_length() - fade_out * 2.0)
+	await $SongTimer.timeout
 	
 	TransitionScreen.transition(fade_out, fade_out / 2.0)
 	await TransitionScreen.on_transition_finished
@@ -50,17 +57,22 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel") and DevConsole.visible == false:
-		print("going back to main menu")
+	if DevConsole.visible:
+		return
+	
+	if event.is_action_pressed("ui_cancel"):
 		TransitionScreen.transition(1, 0.5)
 		await TransitionScreen.on_transition_finished
 		DevConsole.menu()
 	
-	if event.is_action_pressed("song_back") and !DevConsole.visible:
+	if event.is_action_pressed("song_back"):
 		_on_btn_back_pressed()
 	
-	if event.is_action_pressed("song_skip") and !DevConsole.visible:
+	if event.is_action_pressed("song_skip"):
 		_on_btn_skip_pressed()
+	
+	if event.is_action_pressed("ui_pause"):
+		pause_song()
 
 
 func _process(_delta):
@@ -68,7 +80,7 @@ func _process(_delta):
 		var playback_position = $MusicPlayer.get_playback_position()
 		var song_length = $MusicPlayer.stream.get_length()
 		
-		$Controller/Timeline.text = "| %s|" % Global.draw_bar(track_percentage())
+		$Controller/Timeline.text = "| %s|" % Global.draw_bar(track_percentage(), 20, true)
 		$Controller/TimeLeft.text = format_timer(playback_position)
 		$Controller/TimeRight.text = format_timer(song_length)
 
@@ -87,6 +99,11 @@ func format_timer(time_seconds: float) -> String:
 	var seconds = int(time_seconds) % 60
 	return "%02d:%02d" % [minutes, seconds]
 
+
+func pause_song():
+	$Pause.visible = !$Pause.visible
+	$MusicPlayer.stream_paused = $Pause.visible
+	$SongTimer.paused = $Pause.visible
 
 func _on_btn_back_pressed():
 	if previous_scene:
