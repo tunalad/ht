@@ -338,5 +338,6 @@ text = "⏸"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
 [connection signal="pressed" from="Controller/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="Controller/btn_skip" to="." method="_on_btn_skip_pressed"]
