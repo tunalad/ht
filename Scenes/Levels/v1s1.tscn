@@ -18,5 +18,5 @@ game_background = ExtResource("2")
 song_name = "helen's bakery"
 audio_file = ExtResource("3")
 song_start_delay = 1.0
-fade_out = 6.0
+fade_out = 10.0
 next_scene = "v1s2"

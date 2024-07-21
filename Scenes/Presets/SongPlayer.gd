@@ -47,7 +47,7 @@ func _ready():
 	$AnimationPlayer.play("fade_in") # fade in
 	
 	#await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
-	$SongTimer.start(song_length - fade_out * 2.0)
+	$SongTimer.start(song_length - (fade_out * 2.0))
 	await $SongTimer.timeout
 	
 	TransitionScreen.transition(fade_out, fade_out / 2.0)
@@ -89,7 +89,7 @@ func _process(_delta):
 
 func track_percentage():
 	if $MusicPlayer.stream:
-		var song_length = $MusicPlayer.stream.get_length()
+		#`var song_length = $MusicPlayer.stream.get_length()
 		var playback_position = $MusicPlayer.get_playback_position()
 		return int((playback_position / song_length) * 100)
 	else:
@@ -106,6 +106,12 @@ func pause_song():
 	$Pause.visible = !$Pause.visible
 	$MusicPlayer.stream_paused = $Pause.visible
 	$SongTimer.paused = $Pause.visible
+	
+	if $Pause.visible:
+		TransitionScreen.animation_player.speed_scale = 0
+	else:
+		TransitionScreen.transition(fade_out, fade_out / 2.0)
+
 
 func _on_btn_back_pressed():
 	if previous_scene:
@@ -119,6 +125,6 @@ func _on_btn_skip_pressed():
 
 func _on_music_player_finished():
 	$MusicPlayer.stream = null
-	$Controller/Timeline.text = "| %s|" % Global.draw_bar(100)
+	$Controller/Timeline.text = "| %s|" % Global.draw_bar(100, 20, true)
 	$Controller/TimeLeft.text = format_timer(song_length)
 	$Controller/TimeRight.text = format_timer(song_length)

@@ -1,9 +1,8 @@
+[gd_scene load_steps=4 format=3 uid="uid://b77vuotqr2v3x"]
 
-[gd_scene load_steps=4 format=3]
-
-[ext_resource type="PackedScene" path="res://Scenes/Presets/SongPlayer.tscn" id=1]
-[ext_resource type="Texture2D" path="res://GFX/Vol1/vkquake0022.png" id=2]
-[ext_resource type="AudioStream" path="res://Music/Vol1/v1s2.mp3" id=3]
+[ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://cnv3a327a3pwk" path="res://GFX/Vol1/vkquake0022.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://tei6uhmuhnju" path="res://Music/Vol1/v1s2.mp3" id="3"]
 
 [node name="v1s2" type="Control"]
 layout_mode = 3
@@ -13,12 +12,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SongPlayer" parent="." instance=ExtResource(1)]
+[node name="SongPlayer" parent="." instance=ExtResource("1")]
 layout_mode = 1
-game_background = ExtResource(2)
+game_background = ExtResource("2")
 song_name = "closing for tonight"
-audio_file = ExtResource(3)
+audio_file = ExtResource("3")
 song_start_delay = 1.0
+fade_out = 5.0
 next_scene = "v1s3"
 previous_scene = "v1s1"
-fade_out = "4.0"

@@ -18,5 +18,6 @@ game_background = ExtResource("2_ro7l8")
 song_name = "street around the corner"
 audio_file = ExtResource("3")
 song_start_delay = 1.0
+fade_out = 8.0
 next_scene = "v1s4"
 previous_scene = "v1s2"
