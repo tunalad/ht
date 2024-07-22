@@ -85,8 +85,14 @@ func console(value=null):
 			on_terminal_closed.emit()
 
 func load_song(song=null):
-	var levels_path = "res://Scenes/Levels/"
-	var dir = DirAccess.open(levels_path)
+	const levels_path := "user://Scenes/Levels/"
+	var dir := DirAccess.open(levels_path)
+	
+	if dir == null:
+		var err = DirAccess.make_dir_recursive_absolute(levels_path)
+		print(err)
+	
+	dir = DirAccess.open(levels_path)
 	var files = []
 	
 	if !song:
@@ -98,7 +104,7 @@ func load_song(song=null):
 			files[i] = file_name
 		return "\n".join(files)
 	else:
-		var song_path = "res://Scenes/Levels/" + song + ".tscn"
+		var song_path = "user://Scenes/Levels/" + song + ".tscn"
 		
 		var err = get_tree().change_scene_to_file(song_path)
 		
@@ -116,7 +122,6 @@ func menu():
 	return "loaded menu"
 
 func quit():
-	SceneGenerator.delete_levels(SceneGenerator.generated_scenes)
 	get_tree().quit()
 	return ""
 

@@ -20,9 +20,11 @@ var homemade_sounds = {
 
 func _ready():
 	sounds = homemade_sounds
-	var songs = DevConsole.load_song()
 	
 	ProjectSettings.load_resource_pack("res://vol1.pck")
+	SceneGenerator.volumes_generator()
+	
+	var songs = DevConsole.load_song()
 	
 	if songs and songs.split("\n").has("v1s1"):
 		print("Volume 1 loaded.")

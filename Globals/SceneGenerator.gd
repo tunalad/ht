@@ -1,14 +1,14 @@
 extends Node
 
-var vol1_json := FileAccess.get_file_as_string("res://vol1.json")
+const vol1_json := "res://vol1.json"
 var generated_scenes = []
 
-func _ready():
+func volumes_generator():
 	var song_scenes = []
-	var json_data = json_to_dict(vol1_json)
+	var json_data = json_to_dict(FileAccess.get_file_as_string(vol1_json))
 	
 	for song in json_data:
-		var scene_paths = create_scene(song["scene_name"], song, "res://Scenes/Levels/%s.tscn" % song["scene_name"])
+		var scene_paths = create_scene(song["scene_name"], song, "user://Scenes/Levels/%s.tscn" % song["scene_name"])
 		if scene_paths.size() > 0:
 			generated_scenes.append(scene_paths[0])
 		song_scenes.append(song["scene_name"])
@@ -24,7 +24,7 @@ func json_to_dict(json_string : String):
 
 
 func delete_levels(levels: Array):
-	var levels_path = "res://Scenes/Levels/"
+	var levels_path = "user://Scenes/Levels/"
 	var dir = DirAccess.open(levels_path)
 	
 	if dir:
@@ -82,6 +82,9 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 	# pack the scene up into the file
 	var scene = PackedScene.new()
 	var result = scene.pack(main)
+	
+	song_player.queue_free()
+	
 	if result == OK:
 		var error = ResourceSaver.save(scene, res_path)
 		if error != OK:
@@ -94,6 +97,6 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 
 
 func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+	if what == NOTIFICATION_EXIT_TREE:
 		delete_levels(generated_scenes)
 		get_tree().quit() # default behavior
