@@ -103,11 +103,11 @@ func _on_btn_opts_pressed():
 
 func _on_btn_quit_pressed():
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
-
+	
 	TransitionScreen.transition(2, 0.5)
 	await TransitionScreen.on_transition_finished
-
-	get_tree().quit()
+	
+	DevConsole.quit()
 
 
 # # # # # # # # # # # # # #

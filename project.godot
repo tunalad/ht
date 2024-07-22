@@ -26,6 +26,7 @@ buses/default_bus_layout="res://SFX/homemade_sfx.tres"
 
 [autoload]
 
+SceneGenerator="*res://Globals/SceneGenerator.gd"
 TransitionScreen="*res://Scenes/Presets/TransitionScreen.tscn"
 DevConsole="*res://Scenes/Presets/DevConsole.tscn"
 Global="*res://Globals/Global.gd"

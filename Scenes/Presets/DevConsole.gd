@@ -116,6 +116,7 @@ func menu():
 	return "loaded menu"
 
 func quit():
+	SceneGenerator.delete_levels(SceneGenerator.generated_scenes)
 	get_tree().quit()
 	return ""
 
