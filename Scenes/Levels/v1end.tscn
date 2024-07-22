@@ -1,8 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxb31h5tvpv1h"]
 
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="PackedScene" path="res://Scenes/Presets/Endscreen.tscn" id="1_a14d7"]
-[ext_resource type="Texture2D" path="res://GFX/Vol1/ht-vol1end-v4.png" id="2_bi7ot"]
+[ext_resource type="PackedScene" uid="uid://c4sjc6jxl3m2i" path="res://Scenes/Presets/Endscreen.tscn" id="1_a14d7"]
+[ext_resource type="Texture2D" uid="uid://b1hgu00x2sx58" path="res://GFX/Vol1/ht-vol1end-v4.png" id="2_bi7ot"]
 
 [node name="v1end" type="Control"]
 layout_mode = 3
@@ -15,7 +14,10 @@ grow_vertical = 2
 [node name="Endscreen" parent="." instance=ExtResource("1_a14d7")]
 layout_mode = 1
 background = ExtResource("2_bi7ot")
-text = " Today felt endless... Walking home was more unsettling than usual and my apartment doesn't feel like home anymore.
-Sleep is the only escape, but even that scares me.
+text = "Octuber 12th, 2007
+
+Today dragged on... The walk back was more unsettling than usual; I didn't see anyone, not even in the windows. Felt like I was the only person outside. It did creep me out a bit, but it also felt kind of nice...
+I'm starting to feel like I'm not welcome in my own apartment anymore. Even when sleeping, I feel like my dreams are telling me to get out.
+I think I'll go to Grandma's tomorrow, I miss her.
 
 - Helen"
