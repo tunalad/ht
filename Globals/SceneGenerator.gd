@@ -7,7 +7,24 @@ func volumes_generator():
 	var song_scenes = []
 	var json_data = json_to_dict(FileAccess.get_file_as_string(vol1_json))
 	
-	for song in json_data:
+	for i in range(len(json_data)):
+		var song = json_data[i]
+		
+		if i == 0:
+			song["previous_scene"] = null
+			if len(json_data) > 1:
+				song["next_scene"] = json_data[i + 1]["scene_name"]
+			else:
+				song["next_scene"] = null
+		elif i == len(json_data) - 1:
+			song["previous_scene"] = json_data[i - 1]["scene_name"]
+			song["next_scene"] = null
+		else:
+			song["previous_scene"] = json_data[i - 1]["scene_name"]
+			song["next_scene"] = json_data[i + 1]["scene_name"]
+		
+		#print("%s: {%s | %s}" % [song["scene_name"], song["previous_scene"], song["next_scene"]])
+		
 		var scene_paths = create_scene(song["scene_name"], song, "user://Scenes/Levels/%s.tscn" % song["scene_name"])
 		if scene_paths.size() > 0:
 			generated_scenes.append(scene_paths[0])
@@ -52,38 +69,65 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 		return []
 	
 	var main = Control.new()
-	
 	main.name = node_name
 	main.set_anchors_preset(Control.PRESET_FULL_RECT)
 	
-	var song_player = load("res://Scenes/Presets/SongPlayer.tscn").instantiate()
-	
-	for key in song_data.keys():
-		# manual intervention for some fields xdd
-		if key == "background":
-			var texture = load(song_data[key])
-			if texture and texture is CompressedTexture2D:
-				song_player.set("game_background", texture)
+	if song_data.has("is_ending") and song_data["is_ending"]:
+		return create_end_scene(main, song_data, res_path)
+	else:
+		var song_player = load("res://Scenes/Presets/SongPlayer.tscn").instantiate()
+		
+		for key in song_data.keys():
+			# manual intervention for some fields xdd
+			if key == "background":
+				var texture = load(song_data[key])
+				if texture and texture is CompressedTexture2D:
+					song_player.set("game_background", texture)
+				else:
+					print("Failed to load texture for key: ", key)
+			elif key == "audio_file":
+				var audio_stream = load(song_data[key])
+				if audio_stream and audio_stream is AudioStream:
+					song_player.set(key, audio_stream)
+				else:
+					print("Failed to load audio stream for key: ", key)
 			else:
-				print("Failed to load texture for key: ", key)
-		elif key == "audio_file":
-			var audio_stream = load(song_data[key])
-			if audio_stream and audio_stream is AudioStream:
-				song_player.set(key, audio_stream)
-			else:
-				print("Failed to load audio stream for key: ", key)
-		else:
-			song_player.set(key, song_data[key])
-	
-	# add the scene as child and set the main node as owner
-	main.add_child(song_player)
-	song_player.set_owner(main)
+				song_player.set(key, song_data[key])
+		
+		# add the scene as child and set the main node as owner
+		main.add_child(song_player)
+		song_player.set_owner(main)
+		song_player.queue_free()
 	
 	# pack the scene up into the file
 	var scene = PackedScene.new()
 	var result = scene.pack(main)
 	
-	song_player.queue_free()
+	if result == OK:
+		var error = ResourceSaver.save(scene, res_path)
+		if error != OK:
+			push_error("An error occurred while saving the scene to disk.")
+			return []
+		else:
+			return [res_path]
+	
+	return []
+
+
+func create_end_scene(node : Node, song_data : Dictionary, res_path : String) -> Array:
+	var endscreen = load("res://Scenes/Presets/Endscreen.tscn").instantiate()
+	
+	endscreen.set("background", load(song_data["background"]))
+	endscreen.set("text", song_data["text"])
+	
+	node.add_child(endscreen)
+	endscreen.set_owner(node)
+	
+	# pack the scene up into the file
+	var scene = PackedScene.new()
+	var result = scene.pack(node)  # pack the node with endscreen
+	
+	endscreen.queue_free()
 	
 	if result == OK:
 		var error = ResourceSaver.save(scene, res_path)
@@ -97,6 +141,6 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 
 
 func _notification(what):
-	if what == NOTIFICATION_EXIT_TREE:
+	if what == NOTIFICATION_EXIT_TREE or what == NOTIFICATION_CRASH:
 		delete_levels(generated_scenes)
 		get_tree().quit() # default behavior
