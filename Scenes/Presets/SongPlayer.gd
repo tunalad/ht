@@ -10,6 +10,7 @@ extends Control
 @export var previous_scene : String
 
 var song_length : float = 0.0
+var song_position : float = 0.0
 
 func _ready():
 	DevConsole.connect("console_pause", pause_song)
@@ -76,6 +77,17 @@ func _input(event):
 	
 	if event.is_action_pressed("ui_pause"):
 		pause_song()
+	
+	if $Pause.visible:
+		if event.is_action_pressed("rewind_back"):
+			$Rewind.play()
+		
+		if event.is_action_pressed("rewind_forth"):
+			$Rewind.play()
+		
+		if event.is_action_released("rewind_back") or event.is_action_released("rewind_forth"):
+			rewind_song(true)
+			$Rewind.stop()
 
 
 func _process(_delta):
@@ -85,6 +97,11 @@ func _process(_delta):
 		$Controller/Timeline.text = "| %s|" % Global.draw_bar(track_percentage(), 20, true)
 		$Controller/TimeLeft.text = format_timer(playback_position)
 		$Controller/TimeRight.text = format_timer(song_length)
+	
+	if Input.is_action_pressed("rewind_back"):
+		rewind_song(false, false)
+	elif Input.is_action_pressed("rewind_forth"):
+		rewind_song(false, true)
 
 
 func track_percentage():
@@ -112,6 +129,28 @@ func pause_song():
 	else:
 		TransitionScreen.transition(fade_out, fade_out / 2.0)
 
+
+func rewind_song(stop : bool = false, forwards : bool = false):
+	if stop:
+		$Pause/Label.text = "||"
+		return
+	
+	song_position = $MusicPlayer.get_playback_position()
+	
+	if forwards:
+		$Pause/Label.text = ">> REWINDING >>"
+		song_position += .25
+		if song_length > song_length:
+			song_position = song_length
+	elif !forwards:
+		$Pause/Label.text = "<< REWINDING <<"
+		song_position -= .25
+		if song_position < 0.0:
+			song_position = 0.0
+		
+	$SongTimer.wait_time = song_length - (fade_out * 2.0)
+	$MusicPlayer.play(song_position)
+	$MusicPlayer.stream_paused = true
 
 func _on_btn_back_pressed():
 	if previous_scene:

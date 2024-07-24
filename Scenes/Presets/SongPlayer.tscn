@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bigxa41wb7jpb"]
+[gd_scene load_steps=9 format=3 uid="uid://bigxa41wb7jpb"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_bn63o"]
 [ext_resource type="Script" path="res://Scenes/Presets/SongPlayer.gd" id="1_n0888"]
+[ext_resource type="AudioStream" uid="uid://ctv23234d8x1s" path="res://SFX/tapedeck-rewind.wav" id="3_4wmuc"]
 
 [sub_resource type="Animation" id="Animation_ls7p8"]
 length = 0.001
@@ -171,6 +172,9 @@ script = ExtResource("1_n0888")
 
 [node name="SongTimer" type="Timer" parent="."]
 
+[node name="Rewind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4wmuc")
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="GameBackground" type="TextureRect" parent="."]
@@ -333,8 +337,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 150
-text = "⏸"
+theme_override_font_sizes/font_size = 50
+text = "||"
 horizontal_alignment = 1
 vertical_alignment = 1
 
