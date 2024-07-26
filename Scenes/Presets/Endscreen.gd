@@ -1,11 +1,17 @@
+@tool
 extends Control
 
 @export var background : CompressedTexture2D
 @export_multiline var text : String
+@export var subtract_white : bool = false
 
-@onready var MENU_END = $menu_end.get_children()
 @onready var AUDIO_PLAYER = $AudioStreamPlayer
 @onready var diary_text = $diary/CenterContainer/text
+
+
+func _process(delta):
+	if Engine.is_editor_hint():
+		set_text_background()
 
 
 func _input(event):
@@ -19,17 +25,10 @@ func _input(event):
 
 
 func _ready():
-	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	TransitionScreen.fade_to_normal()
 	
 	set_text_background()
-	Global.setup_neighbours(MENU_END, true)
 	
-	MENU_END[0].grab_focus()
-	
-	for btn in MENU_END:
-		btn.skipped_sound = true
-		
 	Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-open-fx.wav"))
 	await get_tree().create_timer(0.25).timeout
 	
@@ -37,8 +36,13 @@ func _ready():
 
 
 func set_text_background():
+	if !subtract_white:
+		$diary.material = null
+	
 	if background:
 		$background.texture = background
+	else:
+		$background.visible = false
 	
 	if text:
 		diary_text.text = text
@@ -52,6 +56,3 @@ func _on_btn_menu_pressed():
 	await TransitionScreen.on_transition_finished
 	DevConsole.menu()
 
-
-func _on_dev_console_console_closed():
-	MENU_END[0].grab_focus()

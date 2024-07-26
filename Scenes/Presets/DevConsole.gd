@@ -85,36 +85,42 @@ func console(value=null):
 			on_terminal_closed.emit()
 
 func load_song(song=null):
-	const levels_path := "user://Scenes/Levels/"
-	var dir := DirAccess.open(levels_path)
+	const all_paths := ["user://Scenes/Levels/", "res://Scenes/Levels/"]
+	var all_files = []
 	
-	if dir == null:
-		var err = DirAccess.make_dir_recursive_absolute(levels_path)
-		print(err)
-	
-	dir = DirAccess.open(levels_path)
-	var files = []
+	for levels_path in all_paths:
+		var dir := DirAccess.open(levels_path)
+		
+		if dir == null:
+			if levels_path == all_paths[0]:
+				var err = DirAccess.make_dir_recursive_absolute(levels_path)
+				print(err)
+			dir = DirAccess.open(levels_path)
+		
+		if dir != null:
+			if !song:
+				var files = dir.get_files()
+				for file in files:
+					if file.ends_with(".tscn") or file.ends_with(".scn"):
+						var file_name = file.replace(".tscn", "").replace(".scn", "").replace(".remap", "")
+						all_files.append(file_name)
+			else:
+				var song_path = levels_path + song + ".tscn"
+				var err = get_tree().change_scene_to_file(song_path)
+				
+				if err == OK:
+					self.visible = false
+					return "loaded song: " + song
+				elif err == ERR_FILE_NOT_FOUND or err == ERR_CANT_OPEN:
+					continue
+				else:
+					return "unknown error."
 	
 	if !song:
-		files = dir.get_files()
-		
-		# remove '.tscn' or '.scn' from each filename
-		for i in range(files.size()):
-			var file_name = files[i].replace(".tscn", "").replace(".scn", "").replace(".remap", "")
-			files[i] = file_name
-		return "\n".join(files)
+		all_files.sort()
+		return "\n".join(all_files)
 	else:
-		var song_path = "user://Scenes/Levels/" + song + ".tscn"
-		
-		var err = get_tree().change_scene_to_file(song_path)
-		
-		if err == OK:
-			self.visible = false
-			return "loaded song: " + song
-		elif err == ERR_FILE_NOT_FOUND or err == ERR_CANT_OPEN:
-			return "song '%s' not found." % song
-		else:
-			return "unknown error."
+		return "song '%s' not found." % song
 
 func menu():
 	#console("close")

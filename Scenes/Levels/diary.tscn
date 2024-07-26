@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt5msooptg6mi"]
+
+[ext_resource type="PackedScene" uid="uid://c4sjc6jxl3m2i" path="res://Scenes/Presets/Endscreen.tscn" id="1_y1lw6"]
+
+[node name="Diary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Endscreen" parent="." instance=ExtResource("1_y1lw6")]
+layout_mode = 1
+text = "Sepetember XX, 2007
+
+So I've been recording myself lately with this old tape recorder. Not because I need to or something, but because it's a way to pass the time and keep track of things. It’s kind of comforting, just hitting record and letting my thoughts spill out to it, even if no one ever hears them.
+
+I don't know why I started doing this, maybe it's just nice to have something constant, a way to capture these quiet moments. It's like creating a little archive of my days, even if they're mostly the same. Who knows, maybe one day I'll look back and find something meaningful in all these tapes.
+
+- Helen"
+subtract_white = true
