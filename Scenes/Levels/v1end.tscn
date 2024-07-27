@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/Presets/Endscreen.tscn" id="1_yiqp0"]
+[ext_resource type="Theme" path="res://GFX/Theme.tres" id="2_uwg2a"]
+[ext_resource type="Script" path="res://Scenes/Presets/Endscreen.gd" id="3_hg048"]
+[ext_resource type="Texture2D" path="res://GFX/Vol1/ht-vol1end-v4.png" id="4_wi48b"]
+
+[node name="v1end" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Endscreen" type="Control" parent="." instance=ExtResource("1_yiqp0")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_uwg2a")
+script = ExtResource("3_hg048")
+background = ExtResource("4_wi48b")
+text = "October 12th, 2007
+
+Today dragged on... The walk back was more unsettling than usual; I didn't see anyone, not even in the windows. Felt like I was the only person outside. It did creep me out a bit, but it also felt kind of nice...
+I'm starting to feel like I'm not welcome in my own apartment anymore. Even when sleeping, I feel like my dreams are telling me to get out.
+I think I'll go to Grandma's tomorrow, I miss her.
+
+- Helen"
+subtract_white = false

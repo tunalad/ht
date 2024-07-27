@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/Presets/SongPlayer.tscn" id="1_qfhui"]
+[ext_resource type="Theme" path="res://GFX/Theme.tres" id="2_h0wbn"]
+[ext_resource type="Script" path="res://Scenes/Presets/SongPlayer.gd" id="3_eurex"]
+[ext_resource type="Texture2D" path="res://GFX/Vol1/vkquake0042.png" id="4_g1323"]
+[ext_resource type="AudioStream" path="res://Music/Vol1/v1s3.mp3" id="5_reycb"]
+
+[node name="v1s3" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SongPlayer" type="Control" parent="." instance=ExtResource("1_qfhui")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_h0wbn")
+script = ExtResource("3_eurex")
+game_background = ExtResource("4_g1323")
+song_name = "street around the corner"
+audio_file = ExtResource("5_reycb")
+text_fade_in = 2.0
+song_start_delay = 1.0
+fade_out = 8.0
+next_scene = "v1s4"
+previous_scene = "v1s2"

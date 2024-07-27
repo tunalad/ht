@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/Presets/SongPlayer.tscn" id="1_bl4ly"]
+[ext_resource type="Theme" path="res://GFX/Theme.tres" id="2_pq6s0"]
+[ext_resource type="Script" path="res://Scenes/Presets/SongPlayer.gd" id="3_40xmq"]
+[ext_resource type="Texture2D" path="res://GFX/Vol1/vkquake0026.png" id="4_hxdrd"]
+[ext_resource type="AudioStream" path="res://Music/Vol1/v1s5.mp3" id="5_lmhp0"]
+
+[node name="v1s5" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SongPlayer" type="Control" parent="." instance=ExtResource("1_bl4ly")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_pq6s0")
+script = ExtResource("3_40xmq")
+game_background = ExtResource("4_hxdrd")
+song_name = "neighbourhood dogs"
+audio_file = ExtResource("5_lmhp0")
+text_fade_in = 2.0
+song_start_delay = 1.0
+fade_out = 6.0
+next_scene = "v1s6"
+previous_scene = "v1s4"

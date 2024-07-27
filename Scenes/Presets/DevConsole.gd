@@ -94,16 +94,16 @@ func load_song(song=null):
 		if dir == null:
 			if levels_path == all_paths[0]:
 				var err = DirAccess.make_dir_recursive_absolute(levels_path)
-				print(err)
 			dir = DirAccess.open(levels_path)
 		
 		if dir != null:
 			if !song:
 				var files = dir.get_files()
 				for file in files:
-					if file.ends_with(".tscn") or file.ends_with(".scn"):
+					if file.ends_with(".tscn") or file.ends_with(".scn") or file.ends_with(".tscn.remap") or file.ends_with(".scn.remap"):
 						var file_name = file.replace(".tscn", "").replace(".scn", "").replace(".remap", "")
-						all_files.append(file_name)
+						if !all_files.has(file_name):
+							all_files.append(file_name)
 			else:
 				var song_path = levels_path + song + ".tscn"
 				var err = get_tree().change_scene_to_file(song_path)
@@ -121,6 +121,7 @@ func load_song(song=null):
 		return "\n".join(all_files)
 	else:
 		return "song '%s' not found." % song
+
 
 func menu():
 	#console("close")
