@@ -40,6 +40,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 vertical_alignment = 2
+autowrap_mode = 3
 
 [node name="input" type="LineEdit" parent="MarginContainer/console"]
 layout_mode = 2

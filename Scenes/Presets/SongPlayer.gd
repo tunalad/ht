@@ -1,6 +1,6 @@
 extends Control
 
-@export var game_background : CompressedTexture2D # main background image
+@export var game_background : Texture2D # main background image
 @export var song_name : String = "Song name" # track title that fades in and out
 @export var audio_file : AudioStream # the song file
 @export var text_fade_in: float = 2 # seconds that the text (and background) stays on the screen for
@@ -151,6 +151,7 @@ func rewind_song(stop : bool = false, forwards : bool = false):
 	$SongTimer.wait_time = song_length - (fade_out * 2.0)
 	$MusicPlayer.play(song_position)
 	$MusicPlayer.stream_paused = true
+
 
 func _on_btn_back_pressed():
 	if previous_scene:

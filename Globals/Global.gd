@@ -31,7 +31,7 @@ func _ready():
 		
 		DevConsole.echo("Volume 1 loaded.")
 		
-	#load_customs()
+	load_customs()
 
 
 func john():
@@ -122,6 +122,8 @@ func load_customs():
 				if filename.ends_with(".pck"):
 					DevConsole.echo("Loaded %s" % filename)
 					ProjectSettings.load_resource_pack(custom_folder_path + "/" + filename)
+			
+			SceneGenerator.customs_generator()
 		else:
 			print("Failed to open `custom` folder.")
 

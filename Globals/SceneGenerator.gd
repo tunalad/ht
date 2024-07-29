@@ -80,13 +80,14 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 		for key in song_data.keys():
 			# manual intervention for some fields xdd
 			if key == "background":
-				var texture = load(song_data[key])
-				if texture and texture is CompressedTexture2D:
+				var texture = ensure_texture(song_data[key])
+				#if texture and texture is CompressedTexture2D:
+				if texture and texture is Texture2D:
 					song_player.set("game_background", texture)
 				else:
 					print("Failed to load texture for key: ", key)
 			elif key == "audio_file":
-				var audio_stream = load(song_data[key])
+				var audio_stream = ensure_mp3(song_data[key])
 				if audio_stream and audio_stream is AudioStream:
 					song_player.set(key, audio_stream)
 				else:
@@ -144,3 +145,108 @@ func _notification(what):
 	if what == NOTIFICATION_EXIT_TREE or what == NOTIFICATION_CRASH:
 		delete_levels(generated_scenes)
 		get_tree().quit() # default behavior
+
+
+func customs_generator():
+	# Define the base path for custom scenes
+	var custom_scenes_path = "user://Scenes/Levels/"
+	var custom_base_path = "res://customs/"
+	
+	# Open the custom directory
+	var dir = DirAccess.open(custom_base_path)
+	if dir == null:
+		DevConsole.echo("Failed to open custom directory: %s" % custom_base_path)
+		return
+	
+	# Begin listing the custom directories
+	dir.list_dir_begin()
+	while true:
+		var folder = dir.get_next()
+		if folder == "": break
+		if !dir.current_is_dir() or folder.begins_with("."): continue
+		
+		# Construct the path to the tracklist.json file
+		var json_path = custom_base_path + folder + "/tracklist.json"
+		
+		# Check if the tracklist.json file exists
+		if !FileAccess.file_exists(json_path):
+			DevConsole.echo("No tracklist.json found in %s" % folder)
+			continue
+		
+		# Read the JSON data from the file
+		var json_data = json_to_dict(FileAccess.get_file_as_string(json_path))
+		if json_data.size() == 0:
+			DevConsole.echo("No data found in %s" % json_path)
+			continue
+		
+		# Iterate through the JSON data and generate scenes
+		for i in range(len(json_data)):
+			var song = json_data[i]
+			
+			if i == 0:
+				song["previous_scene"] = null
+				if len(json_data) > 1:
+					song["next_scene"] = json_data[i + 1]["scene_name"]
+				else:
+					song["next_scene"] = null
+			elif i == len(json_data) - 1:
+				song["previous_scene"] = json_data[i - 1]["scene_name"]
+				song["next_scene"] = null
+			else:
+				song["previous_scene"] = json_data[i - 1]["scene_name"]
+				song["next_scene"] = json_data[i + 1]["scene_name"]
+			
+			# Generate the scene and add it to the list of custom scenes
+			var scene_paths = create_scene(song["scene_name"], song, custom_scenes_path + "%s.tscn" % song["scene_name"])
+			if scene_paths.size() > 0:
+				generated_scenes.append(scene_paths[0])
+
+# TODO: OPTIMIZE THESE TWO BELOW AAAA
+
+func ensure_mp3(path: String) -> AudioStreamMP3:
+	# check if already an AudioStreamMP3
+	var existing_resource = ResourceLoader.load(path)
+	if existing_resource and existing_resource is AudioStreamMP3:
+		return existing_resource as AudioStreamMP3
+	
+	path = "res://" + path
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file:
+		var data = file.get_buffer(file.get_length())
+		file.close()
+		
+		var audio_stream = AudioStreamMP3.new()
+		audio_stream.data = data
+		
+		return audio_stream
+	else:
+		print("Failed to open file: %s" % path)
+		return null
+
+
+func ensure_texture(path: String) -> Texture2D:
+	# check if already CompressedTexture2D
+	var existing_resource = ResourceLoader.load(path)
+	if existing_resource and existing_resource is CompressedTexture2D:
+		return existing_resource as CompressedTexture2D
+	
+	path = "res://" + path
+	
+	# Create and load the image
+	var image = Image.new()
+	var error = image.load(path)
+	if error != OK:
+		print("Failed to load image from file: %s, Error: %s" % [path, error])
+		return null
+	
+	# Verify the image has valid dimensions
+	if image.get_width() <= 0 or image.get_height() <= 0:
+		print("Image has invalid dimensions: %s" % path)
+		return null
+	
+	# Create an ImageTexture from the image
+	var image_texture = ImageTexture.create_from_image(image)
+	
+	return image_texture
+
