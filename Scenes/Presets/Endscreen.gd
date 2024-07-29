@@ -9,7 +9,7 @@ extends Control
 @onready var diary_text = $diary/CenterContainer/text
 
 
-func _process(delta):
+func _process(_delta):
 	if Engine.is_editor_hint():
 		set_text_background()
 

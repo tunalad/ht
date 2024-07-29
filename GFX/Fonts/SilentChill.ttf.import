@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://hsr7ljgfvbdj"
-path="res://.godot/imported/OpenSans-SemiBold.ttf-68183d4bb8bb998d895a684703f4808b.fontdata"
+uid="uid://bftdyaqa3ort6"
+path="res://.godot/imported/SilentChill.ttf-dc68a83657f30bd5def78db75c710ecb.fontdata"
 
 [deps]
 
-source_file="res://GFX/OpenSans-SemiBold.ttf"
-dest_files=["res://.godot/imported/OpenSans-SemiBold.ttf-68183d4bb8bb998d895a684703f4808b.fontdata"]
+source_file="res://GFX/Fonts/SilentChill.ttf"
+dest_files=["res://.godot/imported/SilentChill.ttf-dc68a83657f30bd5def78db75c710ecb.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
@@ -24,7 +24,7 @@ hinting=1
 subpixel_positioning=1
 oversampling=0.0
 Fallbacks=null
-fallbacks=[]
+fallbacks=[Resource("res://GFX/Fonts/Font Awesome 6 Free-Solid-900.otf"), Resource("res://GFX/Fonts/CozetteVector.otf")]
 Compress=null
 compress=true
 preload=[]

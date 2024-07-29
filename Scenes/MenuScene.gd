@@ -73,8 +73,6 @@ func _on_btn_select_vol_pressed():
 	$menu_main.hide()
 	$menu_select.show()
 	
-	print(songs.split("\n").has("v1s1"))
-	
 	# locking vol1 if we can't find the scene file
 	if songs == "" or !songs.split("\n").has("v1s1"):
 		$menu_select/btn_vol1.text = "LOCKED"

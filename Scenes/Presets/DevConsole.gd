@@ -94,6 +94,7 @@ func load_song(song=null):
 		if dir == null:
 			if levels_path == all_paths[0]:
 				var err = DirAccess.make_dir_recursive_absolute(levels_path)
+				print(err)
 			dir = DirAccess.open(levels_path)
 		
 		if dir != null:

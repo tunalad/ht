@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://phckjkeryl6u"]
 
-[ext_resource type="FontFile" uid="uid://n0y2dmqq37wp" path="res://GFX/SilentChill.ttf" id="1_nwc2c"]
+[ext_resource type="FontFile" uid="uid://bftdyaqa3ort6" path="res://GFX/Fonts/SilentChill.ttf" id="1_ilj81"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6safo"]
 
@@ -9,7 +9,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jen36"]
 
 [resource]
-default_font = ExtResource("1_nwc2c")
+default_font = ExtResource("1_ilj81")
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/styles/focus = SubResource("StyleBoxEmpty_6safo")
 Label/colors/font_color = Color(1, 1, 1, 1)

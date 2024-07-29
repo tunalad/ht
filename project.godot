@@ -43,6 +43,10 @@ window/size/resizable=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
+[gui]
+
+theme/custom_font="res://GFX/Fonts/SilentChill.ttf"
+
 [input]
 
 mouse_left={

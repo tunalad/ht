@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cecv27j68svma"
-path="res://.godot/imported/SilentChillMono.ttf-0c28d25e4c7394c4a8baf1e9635c9728.fontdata"
+uid="uid://qnkk8jh0u42k"
+path="res://.godot/imported/Font Awesome 6 Free-Solid-900.otf-74d1b1480c3bf7a36fb1388a46c59bc5.fontdata"
 
 [deps]
 
-source_file="res://GFX/SilentChillMono.ttf"
-dest_files=["res://.godot/imported/SilentChillMono.ttf-0c28d25e4c7394c4a8baf1e9635c9728.fontdata"]
+source_file="res://GFX/Fonts/Font Awesome 6 Free-Solid-900.otf"
+dest_files=["res://.godot/imported/Font Awesome 6 Free-Solid-900.otf-74d1b1480c3bf7a36fb1388a46c59bc5.fontdata"]
 
 [params]
 
