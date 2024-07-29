@@ -125,7 +125,6 @@ func load_song(song=null):
 
 
 func menu():
-	#console("close")
 	get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 	return "loaded menu"
 
@@ -278,4 +277,3 @@ func _on_line_edit_text_submitted(new_text):
 		echo(result)
 	else:
 		pass
-		#echo(command + " executed")

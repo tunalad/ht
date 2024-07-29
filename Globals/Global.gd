@@ -1,6 +1,7 @@
 extends Node
 
 var sounds = null
+var found_vol1 = false
 
 var sh_sounds = {
 	"menu_move": 	load("res://SFX/sh/SH Menu Blip 01.mp3"),
@@ -21,16 +22,16 @@ var homemade_sounds = {
 func _ready():
 	sounds = homemade_sounds
 	
-	ProjectSettings.load_resource_pack("res://vol1.pck")
-	SceneGenerator.volumes_generator()
+	var success = ProjectSettings.load_resource_pack("res://vol1.pck")
 	
-	var songs = DevConsole.load_song()
-	
-	if songs and songs.split("\n").has("v1s1"):
-		print("Volume 1 loaded.")
+	if success or DevConsole.load_song().split("\n").has("v1s1"):
+		found_vol1 = true
+		
+		SceneGenerator.volumes_generator()
+		
 		DevConsole.echo("Volume 1 loaded.")
 		
-	load_customs()
+	#load_customs()
 
 
 func john():
@@ -122,7 +123,5 @@ func load_customs():
 					DevConsole.echo("Loaded %s" % filename)
 					ProjectSettings.load_resource_pack(custom_folder_path + "/" + filename)
 		else:
-			print("Failed to open custom folder.")
-	else:
-		print("Custom folder not found.")
+			print("Failed to open `custom` folder.")
 

@@ -17,6 +17,9 @@ func _ready():
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	load_settings()
 	
+	if !Global.found_vol1:
+		vol_missing_warn()
+	
 	# focus on the 1st button (if console's closed)
 	if !DevConsole.visible: 
 		MENU_MAIN[0].grab_focus()
@@ -54,6 +57,12 @@ func load_settings():
 	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
 
 
+func vol_missing_warn():
+	DevConsole.echo("vol1.pck not found next to the executable.")
+	DevConsole.echo("You can find it at https://tunalad.itch.io/helens-tapes")
+	DevConsole.console("open")
+
+
 func set_skipped_sound(buttons : Array, state : bool):
 	for btn in buttons:
 		btn.skipped_sound = state
@@ -65,8 +74,6 @@ func set_skipped_sound(buttons : Array, state : bool):
 
 
 func _on_btn_select_vol_pressed():
-	var songs = DevConsole.load_song()
-	
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	# show the selection menu instead
@@ -74,7 +81,7 @@ func _on_btn_select_vol_pressed():
 	$menu_select.show()
 	
 	# locking vol1 if we can't find the scene file
-	if songs == "" or !songs.split("\n").has("v1s1"):
+	if !Global.found_vol1:
 		$menu_select/btn_vol1.text = "LOCKED"
 		$menu_select/btn_vol1.arrow_margin = 47
 		$menu_select/btn_vol1.setup_text()
