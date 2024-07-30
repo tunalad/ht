@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-var expression = Expression.new()
-var history_list = []
-var history_index = -1
+var expression := Expression.new()
+var history_list := []
+var history_index := -1
 
 @onready var history_label = $MarginContainer/console/ScrollContainer/VBoxContainer/history
 @onready var input_label = $MarginContainer/console/input
@@ -43,9 +43,9 @@ func _input(event):
 		input_label.caret_column = 100000
 
 func commands():
-	var command_list = []
+	var command_list := []
 	var methods = self.get_script().get_script_method_list()
-	var excluded_methods = [
+	var excluded_methods := [
 			"_ready", 
 			"_process", 
 			"_on_line_edit_text_submitted", 
@@ -62,11 +62,11 @@ func commands():
 	return "Available commands:\n- " + "\n- ".join(PackedStringArray(command_list))
 
 func history():
-	var temp_list = history_list
+	var temp_list := history_list
 	temp_list.reverse()
 	return "Commands history: \n- " + "\n- ".join(PackedStringArray(temp_list))
 
-func echo(value=" "):
+func echo(value := " "):
 	history_label.text += "\n" + str(value)
 	return
 
@@ -86,28 +86,28 @@ func console(value=null):
 
 func load_song(song=null):
 	const all_paths := ["user://Scenes/Levels/", "res://Scenes/Levels/"]
-	var all_files = []
+	var all_files := []
 	
 	for levels_path in all_paths:
 		var dir := DirAccess.open(levels_path)
 		
 		if dir == null:
 			if levels_path == all_paths[0]:
-				var err = DirAccess.make_dir_recursive_absolute(levels_path)
+				var err := DirAccess.make_dir_recursive_absolute(levels_path)
 				print(err)
 			dir = DirAccess.open(levels_path)
 		
 		if dir != null:
 			if !song:
-				var files = dir.get_files()
+				var files := dir.get_files()
 				for file in files:
 					if file.ends_with(".tscn") or file.ends_with(".scn") or file.ends_with(".tscn.remap") or file.ends_with(".scn.remap"):
-						var file_name = file.replace(".tscn", "").replace(".scn", "").replace(".remap", "")
+						var file_name := file.replace(".tscn", "").replace(".scn", "").replace(".remap", "")
 						if !all_files.has(file_name):
 							all_files.append(file_name)
 			else:
-				var song_path = levels_path + song + ".tscn"
-				var err = get_tree().change_scene_to_file(song_path)
+				var song_path : String = levels_path + song + ".tscn"
+				var err := get_tree().change_scene_to_file(song_path)
 				
 				if err == OK:
 					self.visible = false
@@ -228,10 +228,10 @@ func tab_completion(partial_command):
 	if partial_command == "":
 		return ""
 	
-	var command_list = commands().split("\n- ")
+	var command_list := commands().split("\n- ")
 	command_list.remove_at(0) # trimming out the "avialable commands" part
 	
-	var matches = []
+	var matches := []
 	for command in command_list:
 		if command.begins_with(partial_command):
 			matches.append(command)
@@ -255,7 +255,7 @@ func _on_line_edit_text_submitted(new_text):
 	
 	var parts = new_text.split(" ", false, 2)
 	var command = parts[0]
-	var args = []
+	var args := []
 	
 	if parts.size() > 1:
 		args = parts[1].split(" ")
@@ -267,7 +267,7 @@ func _on_line_edit_text_submitted(new_text):
 	history_index = -1
 	
 	if not has_method(command):
-		var error_message = "\"" + command + "\" is not a valid command"
+		var error_message : String = "\"" + command + "\" is not a valid command"
 		echo("Error: " + error_message)
 		return
 	

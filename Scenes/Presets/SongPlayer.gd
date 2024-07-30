@@ -18,8 +18,6 @@ func _ready():
 	# setup
 	$GameBackground.texture = game_background
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
-	
-	# making sure visibility for fades is on because I keep forgetting to turn it back on
 	$Intro.visible = true
 	$Exit.visible = true
 	
@@ -114,8 +112,8 @@ func track_percentage():
 
 
 func format_timer(time_seconds: float) -> String:
-	var minutes = int(time_seconds) / 60
-	var seconds = int(time_seconds) % 60
+	var minutes := int(time_seconds) / 60
+	var seconds := int(time_seconds) % 60
 	return "%02d:%02d" % [minutes, seconds]
 
 
