@@ -1,9 +1,9 @@
 extends Node
 
-var sounds = null
-var found_vol1 = false
+var sounds := {}
+var found_vol1 := false
 
-var sh_sounds = {
+var sh_sounds := {
 	"menu_move": 	load("res://SFX/sh/SH Menu Blip 01.mp3"),
 	"menu_select": 	load("res://SFX/sh/SH Menu Blip 02.mp3"),
 	"menu_locked": 	load("res://SFX/sh/SH Menu Blip 05.mp3"),
@@ -11,7 +11,7 @@ var sh_sounds = {
 	"menu_quit": 	load("res://SFX/sh/SH Menu Blip 04.mp3"),
 }
 
-var homemade_sounds = {
+var homemade_sounds := {
 	"menu_move": 	load("res://SFX/homemade/select_fr03.wav"),
 	"menu_select": 	load("res://SFX/homemade/select02.wav"),
 	"menu_locked": 	load("res://SFX/homemade/lock02.wav"),
@@ -19,10 +19,10 @@ var homemade_sounds = {
 	"menu_quit": 	load("res://SFX/homemade/quit04.wav"),
 }
 
-func _ready():
+func _ready() -> void:
 	sounds = homemade_sounds
 	
-	var success = ProjectSettings.load_resource_pack("res://vol1.pck")
+	var success := ProjectSettings.load_resource_pack("res://vol1.pck")
 	
 	if success or DevConsole.load_song().split("\n").has("v1s1"):
 		found_vol1 = true
@@ -34,19 +34,15 @@ func _ready():
 	load_customs()
 
 
-func john():
-	print("johning around")
-
-
-func play_sound(node : AudioStreamPlayer, sound : AudioStream):
+func play_sound(node : AudioStreamPlayer, sound : AudioStream) -> void:
 	node.set_stream(sound)
 	node.play()
 
 
-func load_settings():
-	var video_settings = ConfigHandler.load_video_settings()
-	var audio_settings = ConfigHandler.load_audio_settings()
-	var misc_settings = ConfigHandler.load_misc_settings()
+func load_settings() -> void:
+	var video_settings := ConfigHandler.load_video_settings()
+	var audio_settings := ConfigHandler.load_audio_settings()
+	var misc_settings := ConfigHandler.load_misc_settings()
 	
 	# video settings setup
 	if video_settings["fullscreen"]:
@@ -71,10 +67,10 @@ func load_settings():
 
 
 func draw_bar(percentage : int, bars : int = 20, extra_bar : bool = false) -> String:
-	var filled = "█ "
-	#var empty = "○ "
-	var empty = "- "
-	var filled_bars = int((percentage / 100.0) * bars)
+	var filled := "█ "
+	#var empty := "○ "
+	var empty := "- "
+	var filled_bars := int((percentage / 100.0) * bars)
 	
 	if extra_bar:
 		filled_bars += 1
@@ -85,16 +81,16 @@ func draw_bar(percentage : int, bars : int = 20, extra_bar : bool = false) -> St
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
 
 
-func setup_neighbours(buttons : Array, is_horizontal : bool = false):
-	var top = SIDE_TOP
-	var bottom = SIDE_BOTTOM
+func setup_neighbours(buttons : Array, is_horizontal : bool = false) -> void:
+	var top := SIDE_TOP
+	var bottom := SIDE_BOTTOM
 	
 	if is_horizontal:
 		top = SIDE_LEFT
 		bottom = SIDE_RIGHT
 	
-	for b in buttons:
-		var my_pos = buttons.find(b, 0)
+	for b : TextureButton in buttons:
+		var my_pos := buttons.find(b, 0)
 		
 		if not is_instance_valid(b.focus_neighbor_top):
 			b.set_focus_neighbor(top, buttons[my_pos - 1].get_path())
@@ -106,17 +102,18 @@ func setup_neighbours(buttons : Array, is_horizontal : bool = false):
 				b.set_focus_neighbor(bottom, buttons[my_pos + 1].get_path())
 
 
-func load_customs():
-	var exec_path = OS.get_executable_path()
-	var custom_folder_path = exec_path.get_base_dir().replace(exec_path, "") + "/custom" # Adjusted to ensure the path is correct
+func load_customs() -> void:
+	var exec_path := OS.get_executable_path()
+	var custom_folder_path := exec_path.get_base_dir().replace(exec_path, "") + "/customs"
 	
 	if DirAccess.dir_exists_absolute(custom_folder_path):
-		var dir = DirAccess.open(custom_folder_path)
+		var dir := DirAccess.open(custom_folder_path)
+		
 		if dir != null:
 			dir.list_dir_begin()
 			
 			while true:
-				var filename = dir.get_next()
+				var filename := dir.get_next()
 				if filename == "": break
 				
 				if filename.ends_with(".pck"):

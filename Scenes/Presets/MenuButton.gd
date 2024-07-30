@@ -12,15 +12,15 @@ signal right_key_pressed
 
 @export var AUDIO_PLAYER : AudioStreamPlayer
 
-var skipped_sound = false
+var skipped_sound := false
 
-func _ready():
+func _ready() -> void:
 	setup_text()
 	hide_arrows()
 	set_focus_mode(Control.FOCUS_ALL)
 
 
-func _process(_delta):
+func _process(_delta : float) -> void:
 	# live engine updating
 	if Engine.is_editor_hint():
 		setup_text()
@@ -39,18 +39,18 @@ func _process(_delta):
 				Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 
 
-func setup_text():
+func setup_text() -> void:
 	$RichTextLabel.text = text
 	# right arrow position is pretty much the size of the whole button
 	custom_minimum_size.x = $ArrowRight.position.x
 
 
-func show_arrows():
+func show_arrows() -> void:
 	# Get the center position of the TextureButton
-	var center_x = size.x / 2
-	var center_y = size.y / 2
+	var center_x := size.x / 2
+	var center_y := size.y / 2
 	
-	for arrow in [$ArrowLeft, $ArrowRight]:
+	for arrow : Label in [$ArrowLeft, $ArrowRight]:
 		arrow.visible = true
 		arrow.position.y = center_y - arrow.size.y / 2
 	
@@ -61,18 +61,18 @@ func show_arrows():
 		Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_move"])
 
 
-func hide_arrows():
-	for arrow in [$ArrowLeft, $ArrowRight]:
+func hide_arrows() -> void:
+	for arrow : Label in [$ArrowLeft, $ArrowRight]:
 		arrow.visible = false
 
 
-func _on_focus_entered():
+func _on_focus_entered() -> void:
 	show_arrows()
 
 
-func _on_focus_exited():
+func _on_focus_exited() -> void:
 	hide_arrows()
 
 
-func _on_mouse_entered():
+func _on_mouse_entered() -> void:
 	grab_focus()

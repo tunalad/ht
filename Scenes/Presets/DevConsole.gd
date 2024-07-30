@@ -4,16 +4,16 @@ var expression := Expression.new()
 var history_list := []
 var history_index := -1
 
-@onready var history_label = $MarginContainer/console/ScrollContainer/VBoxContainer/history
-@onready var input_label = $MarginContainer/console/input
+@onready var history_label := $MarginContainer/console/ScrollContainer/VBoxContainer/history
+@onready var input_label := $MarginContainer/console/input
 
 signal on_terminal_closed
 signal console_pause
 
-func _ready():
+func _ready() -> void:
 	self.visible = false
 
-func _input(event):
+func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("ui_tilde"):
 		console()
 		
@@ -21,7 +21,7 @@ func _input(event):
 		console("close")
 	
 	if event.is_action_pressed("ui_up"):
-		var cycler = cycle_history(true)
+		var cycler := cycle_history(true)
 		if cycler != null:
 			input_label.text = cycler
 		else:
@@ -31,20 +31,20 @@ func _input(event):
 		input_label.caret_column = 100000
 	
 	if event.is_action_pressed("ui_down"):
-		var cycler = cycle_history(false)
+		var cycler := cycle_history(false)
 		if cycler != null:
 			input_label.text = cycler
 		else:
 			input_label.text = ""
 		
 	if event.is_action_pressed("ui_text_completion_replace"):
-		var partial_command = input_label.text
+		var partial_command : String = input_label.text
 		input_label.text = tab_completion(partial_command)
 		input_label.caret_column = 100000
 
-func commands():
+func commands() -> String:
 	var command_list := []
-	var methods = self.get_script().get_script_method_list()
+	var methods : Array = self.get_script().get_script_method_list()
 	var excluded_methods := [
 			"_ready", 
 			"_process", 
@@ -52,25 +52,25 @@ func commands():
 			"handle_scrollbar_changed", 
 			"_input",
 			"cycle_history",
-			"tab_completion"
+			"tab_completion",
+			"convert_args"
 		]
 	
-	for method in methods:
+	for method : Dictionary in methods:
 		if method.name not in excluded_methods:
 			command_list.append(method.name)
 	
 	return "Available commands:\n- " + "\n- ".join(PackedStringArray(command_list))
 
-func history():
+func history() -> String:
 	var temp_list := history_list
 	temp_list.reverse()
 	return "Commands history: \n- " + "\n- ".join(PackedStringArray(temp_list))
 
-func echo(value := " "):
+func echo(value := " ") -> void:
 	history_label.text += "\n" + str(value)
-	return
 
-func console(value=null):
+func console(value : String = "") -> void:
 	if value == "close":
 		self.visible = false
 		on_terminal_closed.emit()
@@ -84,11 +84,11 @@ func console(value=null):
 		else:
 			on_terminal_closed.emit()
 
-func load_song(song=null):
+func load_song(song : String = "") -> String:
 	const all_paths := ["user://Scenes/Levels/", "res://Scenes/Levels/"]
 	var all_files := []
 	
-	for levels_path in all_paths:
+	for levels_path : String in all_paths:
 		var dir := DirAccess.open(levels_path)
 		
 		if dir == null:
@@ -123,23 +123,20 @@ func load_song(song=null):
 	else:
 		return "song '%s' not found." % song
 
-
-func menu():
+func menu() -> String:
 	get_tree().change_scene_to_file("res://Scenes/MenuScene.tscn")
 	return "loaded menu"
 
-func quit():
+func quit() -> void:
 	get_tree().quit()
-	return ""
 
-func clear():
+func clear() -> void:
 	history_label.text = ""
-	return ""
 
-func volume(value=null):
-	var audio_settings = ConfigHandler.load_audio_settings()
+func volume(value : float = -1) -> String:
+	var audio_settings := ConfigHandler.load_audio_settings()
 	
-	if value == null:
+	if value < 0:
 		return "Volume is: " + str(audio_settings["master_volume"])
 	
 	value = float(value)
@@ -151,17 +148,17 @@ func volume(value=null):
 	ConfigHandler.save_audio_settings("master_volume", audio_settings["master_volume"])
 	Global.load_settings()
 	
-	return audio_settings["master_volume"]
+	return str(audio_settings["master_volume"])
 
-func crt_shader():
-	var misc_settings = ConfigHandler.load_misc_settings()
+func crt_shader() -> String:
+	var misc_settings := ConfigHandler.load_misc_settings()
 	
 	ConfigHandler.save_misc_settings("crt_shader", !misc_settings["crt_shader"])
 	Crt.toggle_crt()
 	
-	return !misc_settings["crt_shader"]
+	return str(!misc_settings["crt_shader"])
 
-func sh_sfx():
+func sh_sfx() -> String:
 	if Global.sounds == Global.sh_sounds:
 		Global.sounds = Global.homemade_sounds
 		AudioServer.set_bus_layout(load("res://SFX/homemade_sfx.tres"))
@@ -171,46 +168,45 @@ func sh_sfx():
 		AudioServer.set_bus_layout(load("res://SFX/sh_sfx.tres"))
 		return "Enabled Silent Hill sounds"
 
-func pc_humm():
-	var misc_settings = ConfigHandler.load_misc_settings()
+func pc_humm() -> String:
+	var misc_settings := ConfigHandler.load_misc_settings()
 	
 	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
 	Global.load_settings()
-	return !misc_settings["pc_humm"]
+	return str(!misc_settings["pc_humm"])
 
-func fullscreen():
-	var video_settings = ConfigHandler.load_video_settings()
+func fullscreen() -> String:
+	var video_settings := ConfigHandler.load_video_settings()
 	
 	ConfigHandler.save_video_settings("fullscreen", !video_settings["fullscreen"])
 	Global.load_settings()
-	return !video_settings["fullscreen"]
+	return str(!video_settings["fullscreen"])
 
-func host_framerate(frames=null):
-	if frames:
+func host_framerate(frames : float = 1) -> float:
+	if frames > 0:
 		Engine.time_scale = float(frames)
 		AudioServer.playback_speed_scale = float(frames)
 		
 	return Engine.time_scale
 
-func mouse_hidden():
-	var misc_settings = ConfigHandler.load_misc_settings()
+func mouse_hidden() -> String:
+	var misc_settings := ConfigHandler.load_misc_settings()
 	
 	ConfigHandler.save_misc_settings("hide_mouse", !misc_settings["hide_mouse"])
 	Global.load_settings()
 	
-	return misc_settings["hide_mouse"]
+	return str(misc_settings["hide_mouse"])
 
-func pause():
+func pause() -> void:
 	console_pause.emit()
-	return 
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
-func cycle_history(move_up):
+func cycle_history(move_up : bool) -> String:
 	# note that the array is reversed
 	# so the last command is on index 0
 	if history_list.size() == 0:
-		return null
+		return ""
 	
 	if move_up:
 		history_index += 1
@@ -224,7 +220,7 @@ func cycle_history(move_up):
 	
 	return history_list[history_index]
 
-func tab_completion(partial_command):
+func tab_completion(partial_command : String) -> String:
 	if partial_command == "":
 		return ""
 	
@@ -246,21 +242,22 @@ func tab_completion(partial_command):
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
-func _on_line_edit_text_submitted(new_text):
+
+func _on_line_edit_text_submitted(new_text : String) -> void:
 	input_label.text = ""
 	
 	if new_text.strip_edges() == "":
 		echo(">")
 		return
 	
-	var parts = new_text.split(" ", false, 2)
-	var command = parts[0]
+	var parts : Array = new_text.split(" ", false, 2)
+	var command : String = parts[0]
 	var args := []
 	
 	if parts.size() > 1:
 		args = parts[1].split(" ")
 	
-	var full_command = new_text
+	var full_command : String = new_text
 	
 	history_list.push_front(full_command)
 	history_label.text += "\n> " + full_command
@@ -271,9 +268,30 @@ func _on_line_edit_text_submitted(new_text):
 		echo("Error: " + error_message)
 		return
 	
-	var result = callv(command, args)
+	args = convert_args(command, args)
+	
+	var result : Variant = callv(command, args)
 	
 	if result != null:
-		echo(result)
-	else:
-		pass
+		echo(str(result))
+
+
+# because of static typing, I need to implement a function for converting arguments...
+func convert_args(command : String, args : Array) -> Array:
+	var expected_arg_types := {
+		"volume": [TYPE_FLOAT],
+		"host_framerate": [TYPE_FLOAT],
+	}
+	
+	if expected_arg_types.has(command):
+		for i in range(args.size()):
+			var arg_type : int = expected_arg_types[command][i]
+			match arg_type:
+				TYPE_INT:
+					args[i] = int(args[i])
+				TYPE_FLOAT:
+					args[i] = float(args[i])
+				TYPE_BOOL:
+					args[i] = args[i].to_lower() in ["true", "1", "yes"]
+				
+	return args

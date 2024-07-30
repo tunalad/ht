@@ -12,7 +12,7 @@ extends Control
 var song_length : float = 0.0
 var song_position : float = 0.0
 
-func _ready():
+func _ready() -> void:
 	DevConsole.connect("console_pause", pause_song)
 	
 	# setup
@@ -58,7 +58,7 @@ func _ready():
 		DevConsole.menu()
 
 
-func _input(event):
+func _input(event : InputEvent) -> void:
 	if DevConsole.visible:
 		return
 	
@@ -88,9 +88,9 @@ func _input(event):
 			$Rewind.stop()
 
 
-func _process(_delta):
+func _process(_delta : float) -> void:
 	if $MusicPlayer.stream:
-		var playback_position = $MusicPlayer.get_playback_position()
+		var playback_position : float = $MusicPlayer.get_playback_position()
 		
 		$Controller/Timeline.text = "| %s|" % Global.draw_bar(track_percentage(), 20, true)
 		$Controller/TimeLeft.text = format_timer(playback_position)
@@ -102,22 +102,22 @@ func _process(_delta):
 		rewind_song(false, true)
 
 
-func track_percentage():
+func track_percentage() -> int:
 	if $MusicPlayer.stream:
 		#`var song_length = $MusicPlayer.stream.get_length()
-		var playback_position = $MusicPlayer.get_playback_position()
+		var playback_position : float = $MusicPlayer.get_playback_position()
 		return int((playback_position / song_length) * 100)
 	else:
 		return 0
 
 
 func format_timer(time_seconds: float) -> String:
-	var minutes := int(time_seconds) / 60
+	var minutes := time_seconds / 60
 	var seconds := int(time_seconds) % 60
 	return "%02d:%02d" % [minutes, seconds]
 
 
-func pause_song():
+func pause_song() -> void:
 	$Pause.visible = !$Pause.visible
 	$MusicPlayer.stream_paused = $Pause.visible
 	$SongTimer.paused = $Pause.visible
@@ -128,7 +128,7 @@ func pause_song():
 		TransitionScreen.transition(fade_out, fade_out / 2.0)
 
 
-func rewind_song(stop : bool = false, forwards : bool = false):
+func rewind_song(stop : bool = false, forwards : bool = false) -> void:
 	if stop:
 		$Pause/Label.text = "||"
 		return
@@ -151,17 +151,17 @@ func rewind_song(stop : bool = false, forwards : bool = false):
 	$MusicPlayer.stream_paused = true
 
 
-func _on_btn_back_pressed():
+func _on_btn_back_pressed() -> void:
 	if previous_scene:
 		DevConsole.load_song(previous_scene)
 
 
-func _on_btn_skip_pressed():
+func _on_btn_skip_pressed() -> void:
 	if next_scene:
 		DevConsole.load_song(next_scene)
 
 
-func _on_music_player_finished():
+func _on_music_player_finished() -> void:
 	$MusicPlayer.stream = null
 	$Controller/Timeline.text = "| %s|" % Global.draw_bar(100, 20, true)
 	$Controller/TimeLeft.text = format_timer(song_length)

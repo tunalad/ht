@@ -5,16 +5,16 @@ extends Control
 @export_multiline var text : String
 @export var subtract_white : bool = false
 
-@onready var AUDIO_PLAYER = $AudioStreamPlayer
-@onready var diary_text = $diary/CenterContainer/text
+@onready var AUDIO_PLAYER := $AudioStreamPlayer
+@onready var diary_text := $diary/CenterContainer/text
 
 
-func _process(_delta):
+func _process(_delta : float) -> void:
 	if Engine.is_editor_hint():
 		set_text_background()
 
 
-func _input(event):
+func _input(event : InputEvent) -> void:
 	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")) and DevConsole.visible == false:
 		Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-close-fx.wav"))
 		$"tape-hiss".stop()
@@ -24,9 +24,8 @@ func _input(event):
 		DevConsole.menu()
 
 
-func _ready():
+func _ready() -> void:
 	TransitionScreen.fade_to_normal()
-	
 	set_text_background()
 	
 	Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-open-fx.wav"))
@@ -35,7 +34,7 @@ func _ready():
 	Global.play_sound($"tape-hiss", load("res://SFX/green-tape-hiss-fx.wav"))
 
 
-func set_text_background():
+func set_text_background() -> void:
 	if !subtract_white:
 		$diary.material = null
 	
@@ -50,7 +49,7 @@ func set_text_background():
 		diary_text.visible = false
 
 
-func _on_btn_menu_pressed():
+func _on_btn_menu_pressed() -> void:
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 	TransitionScreen.transition(2)
 	await TransitionScreen.on_transition_finished

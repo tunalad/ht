@@ -1,12 +1,12 @@
 extends Control
 
-@onready var AUDIO_PLAYER = get_tree().current_scene.get_node("AudioStreamPlayer")
-@onready var MENU_MAIN = $menu_main.get_children()
-@onready var MENU_SELECT = $menu_select.get_children()
-@onready var MENU_OPTS = $menu_options/VBoxContainer/HBoxContainer/menu_options_left.get_children()
+@onready var AUDIO_PLAYER := get_tree().current_scene.get_node("AudioStreamPlayer")
+@onready var MENU_MAIN := $menu_main.get_children()
+@onready var MENU_SELECT := $menu_select.get_children()
+@onready var MENU_OPTS := $menu_options/VBoxContainer/HBoxContainer/menu_options_left.get_children()
 
 
-func _ready():
+func _ready() -> void:
 	# make sure the correct menu is active
 	$menu_main.show()
 	$menu_select.hide()
@@ -34,12 +34,12 @@ func _ready():
 	TransitionScreen.fade_to_normal(4)
 
 
-func load_settings():
-	var video_settings = ConfigHandler.load_video_settings()
-	var audio_settings = ConfigHandler.load_audio_settings()
-	var misc_settings = ConfigHandler.load_misc_settings()
+func load_settings() -> void:
+	var video_settings := ConfigHandler.load_video_settings()
+	var audio_settings := ConfigHandler.load_audio_settings()
+	var misc_settings := ConfigHandler.load_misc_settings()
 	
-	var labels = {
+	var labels := {
 		"fullscreen_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/fullscreen_indicator,
 		"volume_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator,
 		"crt_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/crt_indicator,
@@ -57,14 +57,14 @@ func load_settings():
 	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
 
 
-func vol_missing_warn():
+func vol_missing_warn() -> void:
 	DevConsole.echo("vol1.pck not found next to the executable.")
 	DevConsole.echo("You can find it at https://tunalad.itch.io/helens-tapes")
 	DevConsole.console("open")
 
 
-func set_skipped_sound(buttons : Array, state : bool):
-	for btn in buttons:
+func set_skipped_sound(buttons : Array, state : bool) -> void:
+	for btn : TextureButton in buttons:
 		btn.skipped_sound = state
 
 
@@ -73,7 +73,7 @@ func set_skipped_sound(buttons : Array, state : bool):
 # # # # # # # # # # # # #
 
 
-func _on_btn_select_vol_pressed():
+func _on_btn_select_vol_pressed() -> void:
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	# show the selection menu instead
@@ -94,7 +94,7 @@ func _on_btn_select_vol_pressed():
 	set_skipped_sound(MENU_MAIN, !true)
 
 
-func _on_btn_opts_pressed():
+func _on_btn_opts_pressed() -> void:
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	# show the options menu instead
@@ -108,7 +108,7 @@ func _on_btn_opts_pressed():
 	set_skipped_sound(MENU_MAIN, !true)
 
 
-func _on_btn_quit_pressed():
+func _on_btn_quit_pressed() -> void:
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
 	
 	TransitionScreen.transition(2, 0.5)
@@ -122,7 +122,7 @@ func _on_btn_quit_pressed():
 # # # # # # # # # # # # # #
 
 
-func _on_btn_back_pressed():
+func _on_btn_back_pressed() -> void:
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_back"])
 	
 	# show the selection menu instead
@@ -135,12 +135,12 @@ func _on_btn_back_pressed():
 	set_skipped_sound(MENU_MAIN, true)
 
 
-func _on_locked_pressed():
+func _on_locked_pressed() -> void:
 	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 
 
-func _on_btn_vol_1_pressed():
-	var songs = DevConsole.load_song().split("\n")
+func _on_btn_vol_1_pressed() -> void:
+	var songs := DevConsole.load_song().split("\n")
 	
 	if !songs.has("v1s1"):
 		Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
@@ -157,7 +157,7 @@ func _on_btn_vol_1_pressed():
 # # # # # # # # # # # # # #
 
 
-func _on_btn_opt_back_pressed():
+func _on_btn_opt_back_pressed() -> void:
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_back"])
 	
 	# show the selection menu instead
@@ -170,15 +170,15 @@ func _on_btn_opt_back_pressed():
 	set_skipped_sound(MENU_MAIN, true)
 
 
-func _on_btn_opt_fullscreen_pressed():
-	var video_settings = ConfigHandler.load_video_settings()
+func _on_btn_opt_fullscreen_pressed() -> void:
+	var video_settings := ConfigHandler.load_video_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	ConfigHandler.save_video_settings("fullscreen", !video_settings["fullscreen"])
 	load_settings()
 
 
-func _on_btn_opt_vol_left_key_pressed():
-	var audio_settings = ConfigHandler.load_audio_settings()
+func _on_btn_opt_vol_left_key_pressed() -> void:
+	var audio_settings := ConfigHandler.load_audio_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	audio_settings["master_volume"] -= 0.1
@@ -191,8 +191,8 @@ func _on_btn_opt_vol_left_key_pressed():
 	load_settings()
 
 
-func _on_btn_opt_vol_right_key_pressed():
-	var audio_settings = ConfigHandler.load_audio_settings()
+func _on_btn_opt_vol_right_key_pressed() -> void:
+	var audio_settings := ConfigHandler.load_audio_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	
 	audio_settings["master_volume"] += 0.1
@@ -205,15 +205,15 @@ func _on_btn_opt_vol_right_key_pressed():
 	load_settings()
 
 
-func _on_btn_opt_crt_pressed():
-	var misc_settings = ConfigHandler.load_misc_settings()
+func _on_btn_opt_crt_pressed() -> void:
+	var misc_settings := ConfigHandler.load_misc_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	ConfigHandler.save_misc_settings("crt_shader", !misc_settings["crt_shader"])
 	load_settings()
 
 
-func _on_btn_opt_humm_pressed():
-	var misc_settings = ConfigHandler.load_misc_settings()
+func _on_btn_opt_humm_pressed() -> void:
+	var misc_settings := ConfigHandler.load_misc_settings()
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
 	load_settings()
@@ -224,7 +224,7 @@ func _on_btn_opt_humm_pressed():
 # # # # # # # # # # # # # #
 
 
-func _on_dev_console_console_closed():
+func _on_dev_console_console_closed() -> void:
 	if $menu_main.visible:
 		MENU_MAIN[0].grab_focus()
 	if $menu_select.visible:
