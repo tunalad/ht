@@ -11,6 +11,7 @@ extends Control
 
 var song_length : float = 0.0
 var song_position : float = 0.0
+var reached_end : bool = false
 
 
 func _ready() -> void:
@@ -49,14 +50,6 @@ func _ready() -> void:
 	#await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
 	$SongTimer.start(song_length - (fade_out * 2.0))
 	await $SongTimer.timeout
-	
-	TransitionScreen.transition(fade_out, fade_out / 2.0)
-	await TransitionScreen.on_transition_finished
-	
-	if (next_scene):
-		DevConsole.load_song(next_scene)
-	else:
-		DevConsole.menu()
 
 
 func _input(event : InputEvent) -> void:
@@ -126,8 +119,10 @@ func pause_song() -> void:
 	
 	if $Pause.visible:
 		TransitionScreen.animation_player.speed_scale = 0
-	#else:
-	#	TransitionScreen.transition(fade_out, fade_out / 2.0)
+	else:
+		if reached_end:
+			_on_btn_skip_pressed()
+		#TransitionScreen.transition(fade_out, fade_out / 2.0)
 
 
 func rewind_song(stop : bool = false, forwards : bool = false) -> void:
@@ -141,7 +136,8 @@ func rewind_song(stop : bool = false, forwards : bool = false) -> void:
 		$Pause/Label.text = ">> REWINDING >>"
 		song_position += .25
 		if song_position > song_length:
-			song_position = song_length - .1
+			song_position = song_length - .24
+			reached_end = true
 	elif !forwards:
 		$Pause/Label.text = "<< REWINDING <<"
 		song_position -= .25
@@ -168,3 +164,11 @@ func _on_music_player_finished() -> void:
 	$Controller/Timeline.text = "| %s|" % Global.draw_bar(100, 20, true)
 	$Controller/TimeLeft.text = format_timer(song_length)
 	$Controller/TimeRight.text = format_timer(song_length)
+	
+	TransitionScreen.transition(fade_out, fade_out / 2.0)
+	await TransitionScreen.on_transition_finished
+	
+	if (next_scene):
+		DevConsole.load_song(next_scene)
+	else:
+		DevConsole.menu()
