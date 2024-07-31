@@ -62,6 +62,9 @@ func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("ui_pause"):
 		pause_song()
 	
+	if event.is_action_pressed("reload"):
+		DevConsole.load_song(self.get_parent().name)
+	
 	if $Pause.visible:
 		if event.is_action_pressed("rewind_back"):
 			$Rewind.play()
@@ -110,7 +113,9 @@ func pause_song() -> void:
 	$SongTimer.paused = $Pause.visible
 	
 	if $Pause.visible:
-		TransitionScreen.animation_player.speed_scale = 0
+		#TransitionScreen.animation_player.speed_scale = 0
+		if TransitionScreen.color_rect.visible:
+			TransitionScreen.color_rect.visible = false
 	else:
 		if reached_end:
 			_on_btn_skip_pressed()
@@ -132,6 +137,7 @@ func rewind_song(stop : bool = false, forwards : bool = false) -> void:
 	elif !forwards:
 		$Pause/Label.text = "<< REWINDING <<"
 		song_position -= .25
+		reached_end = false
 		if song_position < 0.0:
 			song_position = 0.0
 	
