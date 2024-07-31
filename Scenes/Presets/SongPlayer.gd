@@ -3,12 +3,13 @@ extends Control
 @export var game_background : Texture2D # main background image
 @export var song_name : String = "Song name" # track title that fades in and out
 @export var audio_file : AudioStream # the song file
-@export var text_fade_in: float = 2 # seconds that the text (and background) stays on the screen for
-@export var song_start_delay : float = 2 # delay before the fadeout
-@export var fade_out : float = 4
+@export var text_fade_in: float = 2 # text fading in speed
+@export var song_start_delay : float = 2 # delay before the song starts
+@export var fade_out : float = 4 # time it takes for the song to fade out
 @export var next_scene : String
 @export var previous_scene : String
 
+const hold_time : float = 4.0
 var song_length : float = 0.0
 var song_position : float = 0.0
 var reached_end : bool = false
@@ -16,38 +17,29 @@ var reached_end : bool = false
 
 func _ready() -> void:
 	DevConsole.connect("console_pause", pause_song)
-	
 	# setup
-	$GameBackground.texture = game_background
-	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
-	$Intro.visible = true
-	$Exit.visible = true
+	scene_setup()
 	
-	if !next_scene:
-		$Controller/btn_skip.set_disabled(true)
-		$Controller/btn_back/ButtonText.visible = false
-	
-	if !previous_scene:
-		$Controller/btn_back.set_disabled(true)
-		$Controller/btn_back/ButtonText.visible = false
-	
-	# fade the text in and stay for like 2 seconds
+	# fade the text in (stays for like 2 seconds)
+	# (this doesn't halt anything down)
 	$AnimationPlayer.speed_scale = $AnimationPlayer.get_animation("text_fade_in").length / text_fade_in
-	$AnimationPlayer.play("text_fade_in") # fades the track name in
+	$AnimationPlayer.play("text_fade_in")
 	
-	$MusicPlayer.stream = audio_file
-	song_length = $MusicPlayer.stream.get_length()
-	
+	# starting the song delay
 	$SongTimer.start(song_start_delay)
 	await $SongTimer.timeout
 	
+	# starting the song itself
 	Global.play_sound($MusicPlayer, audio_file)
 	
-	$SongTimer.start(4)
+	# hold title for `hold_time` seconds
+	$SongTimer.start(hold_time)
 	await $SongTimer.timeout
-	$AnimationPlayer.play("fade_in") # fade in
 	
-	#await get_tree().create_timer($MusicPlayer.stream.get_length() - fade_out * 2.0).timeout
+	# then fade the text out into the visual
+	$AnimationPlayer.play("fade_in")
+	
+	# and hold the timer for the song length (minus the fade_out * 2)
 	$SongTimer.start(song_length - (fade_out * 2.0))
 	await $SongTimer.timeout
 
@@ -122,7 +114,6 @@ func pause_song() -> void:
 	else:
 		if reached_end:
 			_on_btn_skip_pressed()
-		#TransitionScreen.transition(fade_out, fade_out / 2.0)
 
 
 func rewind_song(stop : bool = false, forwards : bool = false) -> void:
@@ -143,10 +134,27 @@ func rewind_song(stop : bool = false, forwards : bool = false) -> void:
 		song_position -= .25
 		if song_position < 0.0:
 			song_position = 0.0
-		
+	
 	$SongTimer.wait_time = song_length - (fade_out * 2.0)
 	$MusicPlayer.play(song_position)
 	$MusicPlayer.stream_paused = true
+
+
+func scene_setup() -> void:
+	$GameBackground.texture = game_background
+	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
+	$Intro.visible = true
+	
+	if !next_scene:
+		$Controller/btn_skip.set_disabled(true)
+		$Controller/btn_back/ButtonText.visible = false
+	
+	if !previous_scene:
+		$Controller/btn_back.set_disabled(true)
+		$Controller/btn_back/ButtonText.visible = false
+		
+	$MusicPlayer.stream = audio_file
+	song_length = $MusicPlayer.stream.get_length()
 
 
 func _on_btn_back_pressed() -> void:
