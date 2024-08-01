@@ -7,7 +7,7 @@ func _ready() -> void:
 	if FileAccess.file_exists(SETTINGS):
 		config.load(SETTINGS)
 	
-	ensure_setting("video", "fullscreen", false)
+	ensure_setting("video", "fullscreen", true)
 	ensure_setting("audio", "master_volume", 1.0)
 	ensure_setting("misc", 	"crt_shader", true)
 	ensure_setting("misc", 	"pc_humm", true)

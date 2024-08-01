@@ -3,6 +3,11 @@ extends Node
 const vol1_json := "res://vol1.json"
 var generated_scenes := []
 
+
+func _ready() -> void:
+	ensure_folder()
+
+
 func volumes_generator() -> void:
 	var song_scenes := []
 	var json_data := json_to_array(FileAccess.get_file_as_string(vol1_json))
@@ -250,3 +255,8 @@ func ensure_texture(path: String) -> Texture2D:
 	
 	return image_texture
 
+
+func ensure_folder() -> void:
+	var dir := DirAccess.open("user://")
+	if dir and not dir.dir_exists("user://Scenes/Levels"):
+		dir.make_dir_recursive("user://Scenes/Levels")
