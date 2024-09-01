@@ -123,4 +123,3 @@ func load_customs() -> void:
 			SceneGenerator.customs_generator()
 		else:
 			print("Failed to open `custom` folder.")
-

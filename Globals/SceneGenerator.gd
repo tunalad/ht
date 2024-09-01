@@ -68,12 +68,8 @@ func delete_levels(levels: Array) -> void:
 
 
 func create_scene(node_name : String, song_data : Dictionary, res_path : String) -> Array:
-	# check if scene already exists
-	if FileAccess.file_exists(res_path):
-		print("Scene already exists: ", res_path)
-		return []
-	
 	var main := Control.new()
+	
 	main.name = node_name
 	main.set_anchors_preset(Control.PRESET_FULL_RECT)
 	
