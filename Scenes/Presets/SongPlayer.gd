@@ -13,7 +13,7 @@ const hold_time : float = 4.0
 var song_length : float = 0.0
 var song_position : float = 0.0
 var reached_end : bool = false
-
+var transitioning : bool = false
 
 func _ready() -> void:
 	DevConsole.connect("console_pause", pause_song)
@@ -108,6 +108,9 @@ func format_timer(time_seconds: float) -> String:
 
 
 func pause_song() -> void:
+	if transitioning:
+		return
+	
 	$Pause.visible = !$Pause.visible
 	$MusicPlayer.stream_paused = $Pause.visible
 	$SongTimer.paused = $Pause.visible
@@ -150,6 +153,7 @@ func scene_setup() -> void:
 	$GameBackground.texture = game_background
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
 	$Intro.visible = true
+	$ChangingTrack.visible = false
 	
 	if !next_scene:
 		$Controller/btn_skip.set_disabled(true)
@@ -174,10 +178,14 @@ func _on_btn_skip_pressed() -> void:
 
 
 func _on_music_player_finished() -> void:
+	transitioning = true
 	$MusicPlayer.stream = null
 	$Controller/Timeline.text = "| %s|" % Global.draw_bar(100, 20, true)
 	$Controller/TimeLeft.text = format_timer(song_length)
 	$Controller/TimeRight.text = format_timer(song_length)
+	
+	$ChangingTrack.visible = true
+	$AnimationPlayer.play("changing_track")
 	
 	TransitionScreen.transition(fade_out, fade_out / 2.0)
 	await TransitionScreen.on_transition_finished

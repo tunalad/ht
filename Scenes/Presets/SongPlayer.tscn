@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bigxa41wb7jpb"]
+[gd_scene load_steps=10 format=3 uid="uid://bigxa41wb7jpb"]
 
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_bn63o"]
 [ext_resource type="Script" path="res://Scenes/Presets/SongPlayer.gd" id="1_n0888"]
@@ -53,6 +53,35 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SongPlayer/ChangingTrack:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qicrn"]
+resource_name = "changing_track"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SongPlayer/ChangingTrack:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_n7u1b"]
@@ -154,6 +183,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i23tr"]
 _data = {
 "RESET": SubResource("Animation_ls7p8"),
+"changing_track": SubResource("Animation_qicrn"),
 "fade_in": SubResource("Animation_n7u1b"),
 "fade_out": SubResource("Animation_u4fyb"),
 "text_fade_in": SubResource("Animation_pws8g")
@@ -329,6 +359,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "❚❚"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChangingTrack" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHANGING TRACK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
