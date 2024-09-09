@@ -3,6 +3,7 @@ extends CanvasLayer
 var expression := Expression.new()
 var history_list := []
 var history_index := -1
+var blacklist_for_browser := ["host_framerate", "quit"]
 
 @onready var history_label := $MarginContainer/console/ScrollContainer/VBoxContainer/history
 @onready var input_label := $MarginContainer/console/input
@@ -242,7 +243,6 @@ func tab_completion(partial_command : String) -> String:
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
-
 func _on_line_edit_text_submitted(new_text : String) -> void:
 	input_label.text = ""
 	
@@ -263,6 +263,10 @@ func _on_line_edit_text_submitted(new_text : String) -> void:
 	history_label.text += "\n> " + full_command
 	history_index = -1
 	
+	if OS.get_name() == "Web" and command in blacklist_for_browser:
+		echo("Error: \"" + command + "\" is not available on browser platform.")
+		return
+	
 	if not has_method(command):
 		var error_message : String = "\"" + command + "\" is not a valid command"
 		echo("Error: " + error_message)
@@ -274,7 +278,6 @@ func _on_line_edit_text_submitted(new_text : String) -> void:
 	
 	if result != null:
 		echo(str(result))
-
 
 # because of static typing, I need to implement a function for converting arguments...
 func convert_args(command : String, args : Array) -> Array:
