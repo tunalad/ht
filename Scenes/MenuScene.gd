@@ -52,9 +52,9 @@ func load_settings() -> void:
 	labels["volume_label"].text = Global.draw_bar(audio_settings["master_volume"] * 100, 10)
 	
 	# video settings setup
-	labels["fullscreen_label"].text = "ON" if video_settings["fullscreen"] else "OFF"
-	labels["crt_label"].text = "ON" if misc_settings["crt_shader"] else "OFF"
-	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
+	labels["fullscreen_label"].text = "ON" 	if video_settings["fullscreen"] else "OFF"
+	labels["crt_label"].text = "ON" 		if misc_settings["crt_shader"] 	else "OFF"
+	labels["humm_label"].text = "ON" 		if misc_settings["pc_humm"] 	else "OFF"
 
 
 func vol_missing_warn() -> void:
@@ -66,6 +66,11 @@ func vol_missing_warn() -> void:
 func set_skipped_sound(buttons : Array, state : bool) -> void:
 	for btn : TextureButton in buttons:
 		btn.skipped_sound = state
+
+
+func update_settings_info():
+	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
+	load_settings()
 
 
 # # # # # # # # # # # # #
@@ -171,52 +176,38 @@ func _on_btn_opt_back_pressed() -> void:
 
 
 func _on_btn_opt_fullscreen_pressed() -> void:
-	var video_settings := ConfigHandler.load_video_settings()
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
-	ConfigHandler.save_video_settings("fullscreen", !video_settings["fullscreen"])
-	load_settings()
+	DevConsole.fullscreen()
+	update_settings_info()
 
 
 func _on_btn_opt_vol_left_key_pressed() -> void:
 	var audio_settings := ConfigHandler.load_audio_settings()
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
-	
 	audio_settings["master_volume"] -= 0.1
 	
-	if audio_settings["master_volume"] > 1.0:
-		audio_settings["master_volume"] = 1.0
-	if audio_settings["master_volume"] < 0.0:
-		audio_settings["master_volume"] = 0.0
-	ConfigHandler.save_audio_settings("master_volume", audio_settings["master_volume"])
-	load_settings()
+	DevConsole.volume(audio_settings["master_volume"])
+	update_settings_info()
 
 
 func _on_btn_opt_vol_right_key_pressed() -> void:
 	var audio_settings := ConfigHandler.load_audio_settings()
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
-	
 	audio_settings["master_volume"] += 0.1
 	
+	# limiting settings volume to 100%
 	if audio_settings["master_volume"] > 1.0:
 		audio_settings["master_volume"] = 1.0
-	if audio_settings["master_volume"] < 0.0:
-		audio_settings["master_volume"] = 0.0
-	ConfigHandler.save_audio_settings("master_volume", audio_settings["master_volume"])
-	load_settings()
+	
+	DevConsole.volume(audio_settings["master_volume"])
+	update_settings_info()
 
 
 func _on_btn_opt_crt_pressed() -> void:
-	var misc_settings := ConfigHandler.load_misc_settings()
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
-	ConfigHandler.save_misc_settings("crt_shader", !misc_settings["crt_shader"])
-	load_settings()
+	DevConsole.crt_shader()
+	update_settings_info()
 
 
 func _on_btn_opt_humm_pressed() -> void:
-	var misc_settings := ConfigHandler.load_misc_settings()
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
-	ConfigHandler.save_misc_settings("pc_humm", !misc_settings["pc_humm"])
-	load_settings()
+	DevConsole.pc_humm()
+	update_settings_info()
 
 
 # # # # # # # # # # # # # #
