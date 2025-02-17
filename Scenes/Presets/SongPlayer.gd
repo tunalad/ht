@@ -48,7 +48,7 @@ func _input(event : InputEvent) -> void:
 	if DevConsole.visible:
 		return
 	
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") && !DevConsole.visible:
 		TransitionScreen.transition(1, 0.5)
 		await TransitionScreen.on_transition_finished
 		DevConsole.menu()
