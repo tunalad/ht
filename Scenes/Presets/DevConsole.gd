@@ -57,9 +57,12 @@ func commands() -> String:
 			"convert_args"
 		]
 	
+	
 	for method : Dictionary in methods:
 		if method.name not in excluded_methods:
 			command_list.append(method.name)
+	
+	command_list.sort()
 	
 	return "Available commands:\n- " + "\n- ".join(PackedStringArray(command_list))
 
@@ -200,6 +203,9 @@ func mouse_hidden() -> String:
 
 func pause() -> void:
 	console_pause.emit()
+
+func version() -> String:
+	return str(ProjectSettings.get_setting("application/config/version"))
 
 # # # # # # # # # # # # # # # # # # # # # # 
 

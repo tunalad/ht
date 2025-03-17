@@ -22,6 +22,11 @@ var homemade_sounds := {
 func _ready() -> void:
 	sounds = homemade_sounds
 	
+	if (DevConsole.version()).ends_with("dev"):
+		DevConsole.echo("If you are seeing this, you are running a development build")
+		DevConsole.echo("Or the dev might have forgot to change the game's version before releasing it...")
+		DevConsole.console("open")
+	
 	var success := ProjectSettings.load_resource_pack("res://vol1.pck")
 	
 	if success or DevConsole.load_song().split("\n").has("v1s1"):

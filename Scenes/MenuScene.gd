@@ -68,7 +68,7 @@ func set_skipped_sound(buttons : Array, state : bool) -> void:
 		btn.skipped_sound = state
 
 
-func update_settings_info():
+func update_settings_info() -> void:
 	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_select"])
 	load_settings()
 
