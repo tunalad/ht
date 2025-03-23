@@ -53,6 +53,15 @@ func _input(event : InputEvent) -> void:
 		await TransitionScreen.on_transition_finished
 		DevConsole.menu()
 	
+	if event.is_action_pressed("volume_up"):
+		Global.increase_vol()
+		display_volume()
+
+
+	if event.is_action_pressed("volume_down"):
+		Global.decrease_vol()
+		display_volume()
+	
 	if event.is_action_pressed("song_back"):
 		_on_btn_back_pressed()
 	
@@ -154,6 +163,7 @@ func scene_setup() -> void:
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
 	$Intro.visible = true
 	$ChangingTrack.visible = false
+	$VolumeIndicator.visible = false
 	
 	if !next_scene:
 		$Controller/btn_skip.set_disabled(true)
@@ -165,6 +175,12 @@ func scene_setup() -> void:
 		
 	$MusicPlayer.stream = audio_file
 	song_length = $MusicPlayer.stream.get_length()
+
+
+func display_volume() -> void:
+	$VolumeAnimation.stop()
+	$VolumeAnimation.play("volume_indicator")
+	$VolumeIndicator.text = "Volume:\n - | %s | +" % Global.draw_bar(ConfigHandler.load_audio_settings()["master_volume"] * 100, 10)
 
 
 func _on_btn_back_pressed() -> void:

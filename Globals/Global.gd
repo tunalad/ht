@@ -128,3 +128,20 @@ func load_customs() -> void:
 			SceneGenerator.customs_generator()
 		else:
 			print("Failed to open `custom` folder.")
+
+
+func increase_vol() -> void:
+	var audio_settings := ConfigHandler.load_audio_settings()
+	audio_settings["master_volume"] += 0.1
+	
+	# limiting settings volume to 100%
+	if audio_settings["master_volume"] > 1.0:
+		audio_settings["master_volume"] = 1.0
+	
+	DevConsole.volume(audio_settings["master_volume"])
+
+func decrease_vol() -> void:
+	var audio_settings := ConfigHandler.load_audio_settings()
+	audio_settings["master_volume"] -= 0.1
+	
+	DevConsole.volume(audio_settings["master_volume"])

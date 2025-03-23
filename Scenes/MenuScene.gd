@@ -181,22 +181,12 @@ func _on_btn_opt_fullscreen_pressed() -> void:
 
 
 func _on_btn_opt_vol_left_key_pressed() -> void:
-	var audio_settings := ConfigHandler.load_audio_settings()
-	audio_settings["master_volume"] -= 0.1
-	
-	DevConsole.volume(audio_settings["master_volume"])
+	Global.decrease_vol()
 	update_settings_info()
 
 
 func _on_btn_opt_vol_right_key_pressed() -> void:
-	var audio_settings := ConfigHandler.load_audio_settings()
-	audio_settings["master_volume"] += 0.1
-	
-	# limiting settings volume to 100%
-	if audio_settings["master_volume"] > 1.0:
-		audio_settings["master_volume"] = 1.0
-	
-	DevConsole.volume(audio_settings["master_volume"])
+	Global.increase_vol()
 	update_settings_info()
 
 
