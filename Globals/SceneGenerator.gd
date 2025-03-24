@@ -1,5 +1,6 @@
 extends Node
 
+const main_json := "res://main.json"
 const vol1_json := "res://vol1.json"
 var generated_scenes := []
 
@@ -10,7 +11,7 @@ func _ready() -> void:
 
 func volumes_generator() -> void:
 	var song_scenes := []
-	var json_data := json_to_array(FileAccess.get_file_as_string(vol1_json))
+	var json_data := json_to_array(FileAccess.get_file_as_string(vol1_json)) + json_to_array(FileAccess.get_file_as_string(main_json))
 	
 	for i in range(len(json_data)):
 		var song : Dictionary = json_data[i]
@@ -82,9 +83,12 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 			# manual intervention for some fields xdd
 			if key == "background":
 				var texture := ensure_texture(song_data[key])
+				var video := ensure_video(song_data[key])
 				#if texture and texture is CompressedTexture2D:
 				if texture and texture is Texture2D:
 					song_player.set("game_background", texture)
+				elif video and video is VideoStream:
+					song_player.set("video_background", video)
 				else:
 					print("Failed to load texture for key: ", key)
 			elif key == "audio_file":
@@ -250,6 +254,31 @@ func ensure_texture(path: String) -> Texture2D:
 	var image_texture := ImageTexture.create_from_image(image)
 	
 	return image_texture
+
+
+func ensure_video(path: String) -> VideoStream:
+	# vibe coded this function real function icl #quirkyy!
+	# Check if stream already exists
+	var existing_resource := ResourceLoader.load(path)
+	if existing_resource and existing_resource is VideoStream:
+		return existing_resource as VideoStream
+	
+	path = "res://" + path
+	
+	# Load the video stream
+	var video_stream := ResourceLoader.load(path)
+	
+	# Validate the loaded resource
+	if !video_stream or !(video_stream is VideoStream):
+		print("Failed to load video stream from file: %s" % path)
+		return null
+		
+	# Verify it's specifically a VideoStreamTheora (required format)
+	if !(video_stream is VideoStreamTheora):
+		print("Video must be in Ogg Theora format (.ogv): %s" % path)
+		return null
+		
+	return video_stream
 
 
 func ensure_folder() -> void:

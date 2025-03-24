@@ -1,6 +1,7 @@
 extends Control
 
 @export var game_background : Texture2D # main background image
+@export var video_background : VideoStream
 @export var song_name : String = "Song name" # track title that fades in and out
 @export var audio_file : AudioStream # the song file
 @export var text_fade_in: float = 2 # text fading in speed
@@ -159,11 +160,17 @@ func rewind_song(stop : bool = false, forwards : bool = false) -> void:
 
 
 func scene_setup() -> void:
-	$GameBackground.texture = game_background
 	$Intro/VBoxContainer/TrackTitle.bbcode_text = "[center] %s [/center]" % song_name
 	$Intro.visible = true
 	$ChangingTrack.visible = false
 	$VolumeIndicator.visible = false
+	
+	if game_background:
+		$GameBackground.texture = game_background
+	if video_background:
+		$VideoBackground.stream = video_background
+		$VideoBackground.loop = true
+		$VideoBackground.play()
 	
 	if !next_scene:
 		$Controller/btn_skip.set_disabled(true)

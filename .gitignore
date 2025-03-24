@@ -19,3 +19,7 @@ mono_crash.*.json
 Music/Vol1/*
 Exports
 vol1.pck
+
+# extensions
+TODO.cfg
+addons

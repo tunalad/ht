@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgjg2yxkxlj01"]
+
+[ext_resource type="PackedScene" uid="uid://bigxa41wb7jpb" path="res://Scenes/Presets/SongPlayer.tscn" id="1_aj0j1"]
+[ext_resource type="VideoStream" path="res://GFX/Vol2/trainride.ogv" id="2_yq6ln"]
+[ext_resource type="AudioStream" uid="uid://ddf42kaqc86eb" path="res://Music/Vol1/v1s1.mp3" id="3_rb5dy"]
+
+[node name="AnimTest" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SongPlayer" parent="." instance=ExtResource("1_aj0j1")]
+layout_mode = 1
+video_background = ExtResource("2_yq6ln")
+song_name = "animation test"
+audio_file = ExtResource("3_rb5dy")
+text_fade_in = 5.0
+song_start_delay = 0.0

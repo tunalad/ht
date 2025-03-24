@@ -140,6 +140,7 @@ func increase_vol() -> void:
 	
 	DevConsole.volume(audio_settings["master_volume"])
 
+
 func decrease_vol() -> void:
 	var audio_settings := ConfigHandler.load_audio_settings()
 	audio_settings["master_volume"] -= 0.1
