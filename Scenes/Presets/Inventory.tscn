@@ -1,0 +1,175 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgpy6tm72o1um"]
+
+[ext_resource type="Script" path="res://Scenes/Presets/Inventory.gd" id="1_1akru"]
+[ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="1_nyn6h"]
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="2_nnqes"]
+[ext_resource type="Resource" uid="uid://txiv34msndbp" path="res://Resources/InvRecorder.tres" id="3_mqytj"]
+[ext_resource type="Resource" uid="uid://c5a0qj16p7kxh" path="res://Resources/InvTape.tres" id="4_75k3d"]
+[ext_resource type="Resource" uid="uid://dvph32dlqe5cq" path="res://Resources/InvMusicplayer.tres" id="5_uq6hw"]
+[ext_resource type="PackedScene" uid="uid://ponwys65np3d" path="res://Scenes/Presets/InventoryField.tscn" id="7_u4lvi"]
+[ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="8_ffwwp"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1akru")
+pocket_items = Array[ExtResource("2_nnqes")]([ExtResource("3_mqytj"), ExtResource("4_75k3d"), ExtResource("5_uq6hw")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.54902)
+metadata/_edit_lock_ = true
+
+[node name="TopMenu" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 16.0
+offset_right = 576.0
+offset_bottom = 56.0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
+custom_minimum_size = Vector2(122.002, 20)
+layout_mode = 2
+text = "(I)NVENTORY"
+arrow_margin = 71
+
+[node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
+custom_minimum_size = Vector2(80.0028, 20)
+layout_mode = 2
+text = "(T)APES"
+arrow_margin = 50
+
+[node name="DescBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 96.0
+offset_right = 408.0
+offset_bottom = 341.0
+metadata/_edit_group_ = true
+
+[node name="DescTitle" type="Label" parent="DescBox"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "DESCRIPTION"
+
+[node name="MarginContainer" type="MarginContainer" parent="DescBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescBox/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DescBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et dolor et tortor accumsan eleifend vel nec leo."
+autowrap_mode = 3
+
+[node name="GridPocket" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 96.0
+offset_right = 218.0
+offset_bottom = 241.0
+columns = 2
+metadata/_edit_group_ = true
+
+[node name="PocketTitle" type="Label" parent="GridPocket"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "POCKETS"
+
+[node name="DummyItem" type="Label" parent="GridPocket"]
+custom_minimum_size = Vector2(66, 0)
+layout_mode = 2
+
+[node name="PocketPos1" parent="GridPocket" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="PocketPos2" parent="GridPocket" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="PocketPos3" parent="GridPocket" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="PocketPos4" parent="GridPocket" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="GridBackpack" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 96.0
+offset_right = 578.0
+offset_bottom = 369.0
+columns = 2
+metadata/_edit_group_ = true
+
+[node name="BpTitle" type="Label" parent="GridBackpack"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "BACKPACK"
+autowrap_mode = 2
+
+[node name="DummyItem" type="Label" parent="GridBackpack"]
+custom_minimum_size = Vector2(66, 0)
+layout_mode = 2
+
+[node name="BpPos1" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos2" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos3" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos4" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos5" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos6" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos7" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="BpPos8" parent="GridBackpack" instance=ExtResource("7_u4lvi")]
+layout_mode = 2
+
+[node name="Keychain" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 219.0
+offset_bottom = 392.0
+
+[node name="KcTitle" type="Label" parent="Keychain"]
+layout_mode = 2
+text = "KEYCHAIN"
+
+[node name="KcList" type="ItemList" parent="Keychain"]
+custom_minimum_size = Vector2(155, 115)
+layout_mode = 2
+theme = ExtResource("8_ffwwp")
+item_count = 3
+item_0/text = "Bakery key"
+item_1/text = "Appartment"
+item_2/text = "Basement"
+metadata/_edit_group_ = true
+
+[connection signal="focus_entered" from="Keychain/KcList" to="." method="_on_kc_list_focus_entered"]
+[connection signal="focus_exited" from="Keychain/KcList" to="." method="_on_kc_list_focus_exited"]

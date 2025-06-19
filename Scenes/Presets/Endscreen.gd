@@ -54,4 +54,3 @@ func _on_btn_menu_pressed() -> void:
 	TransitionScreen.transition(2)
 	await TransitionScreen.on_transition_finished
 	DevConsole.menu()
-

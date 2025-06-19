@@ -1,8 +1,44 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://phckjkeryl6u"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://phckjkeryl6u"]
 
 [ext_resource type="FontFile" uid="uid://bftdyaqa3ort6" path="res://GFX/Fonts/SilentChill.ttf" id="1_ilj81"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6safo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xef1b"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.188235, 0.188235, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pl5h3"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.188235, 0.188235, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cpao"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0.215686)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6m72v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12h5g"]
+draw_center = false
+border_width_bottom = 1
+border_color = Color(1, 0.188235, 0.188235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvqfi"]
+draw_center = false
+border_width_bottom = 2
+border_color = Color(1, 0.188235, 0.188235, 1)
+border_blend = true
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7bla"]
 
@@ -11,7 +47,12 @@
 [resource]
 default_font = ExtResource("1_ilj81")
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/styles/focus = SubResource("StyleBoxEmpty_6safo")
+Button/styles/focus = SubResource("StyleBoxFlat_xef1b")
+Button/styles/hover = SubResource("StyleBoxFlat_pl5h3")
+Button/styles/normal = SubResource("StyleBoxFlat_1cpao")
+ItemList/styles/focus = SubResource("StyleBoxEmpty_6m72v")
+ItemList/styles/selected = SubResource("StyleBoxFlat_12h5g")
+ItemList/styles/selected_focus = SubResource("StyleBoxFlat_mvqfi")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)

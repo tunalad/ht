@@ -75,6 +75,9 @@ func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("reload"):
 		DevConsole.load_song(self.get_parent().name)
 	
+	if event.is_action_pressed("ui_inventory"):
+		DevConsole.inventory()
+	
 	if $Pause.visible:
 		if event.is_action_pressed("rewind_back"):
 			$Rewind.play()

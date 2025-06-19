@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://dvph32dlqe5cq"]
+
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_cj8f4"]
+
+[resource]
+script = ExtResource("1_cj8f4")
+title = "TreeP3"
+description = "Some cheap bootleg portable media player. It has colors for artworks and everything!"
