@@ -113,6 +113,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="GridBackpack" type="GridContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 424.0
 offset_top = 96.0

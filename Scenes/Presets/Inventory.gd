@@ -3,7 +3,6 @@ extends Control
 @export var pocket_items : Array[InventoryItem]
 @export var backpack_items : Array[InventoryItem]
 @export var keychain_items : Array[InventoryItem]
-@export var hide_backpack : bool
 
 var inventory_dict : Dictionary
 
@@ -19,14 +18,10 @@ func _ready() -> void:
 	populate_backpack()
 	populate_keychain()
 	$GridPocket/PocketPos1.grab_focus()
-	
-	if hide_backpack:
-		$GridBackpack.visible = false
 
 
 func _input(event: InputEvent) -> void:
 	if $".".visible and event is InputEventKey and event.is_released():
-		print(get_focused_node_name())
 		# description handling
 		if get_focused_node_name() == "KcList":
 			var selected_item_id : int = $Keychain/KcList.get_selected_items()[0]
@@ -54,7 +49,6 @@ func populate_pockets() -> void:
 
 func populate_backpack() -> void:
 	for item in backpack_items.size():
-		print(item)
 		if backpack_items[item]:
 			print("add `", backpack_items[item].title, "` to the backpack")
 			var grid_item_name : String = "BpPos%d" % (item + 1)
@@ -69,7 +63,6 @@ func populate_backpack() -> void:
 
 func populate_keychain() -> void:
 	for item in keychain_items.size():
-		print(item)
 		if keychain_items[item]:
 			print(item, ": add `", keychain_items[item].title, "` to the keychain")
 			$Keychain/KcList.add_item(keychain_items[item].title)

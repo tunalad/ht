@@ -9,6 +9,7 @@ extends Control
 @export var fade_out : float = 4 # time it takes for the song to fade out
 @export var next_scene : String
 @export var previous_scene : String
+@export var hide_backpack : bool = false
 
 const hold_time : float = 4.0
 var song_length : float = 0.0
@@ -185,6 +186,11 @@ func scene_setup() -> void:
 		
 	$MusicPlayer.stream = audio_file
 	song_length = $MusicPlayer.stream.get_length()
+	
+	if hide_backpack:
+		DevConsole.backpack("hide")
+	else:
+		DevConsole.backpack("show")
 
 
 func display_volume() -> void:
