@@ -3,15 +3,15 @@ extends Control
 @export var pocket_items : Array[InventoryItem]
 @export var backpack_items : Array[InventoryItem]
 @export var keychain_items : Array[InventoryItem]
+@export var hide_backpack : bool
 
 var inventory_dict : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
-	DevConsole.connect("on_inventory_closed", _on_inventory_closed)
-	DevConsole.connect("on_inventory_opened", _on_inventory_opened)
-	DevConsole.connect("on_inventory_toggle", _on_inventory_toggle)
+	DevConsole.connect("inventory_do", _on_inventory_do)
+	DevConsole.connect("backpack_do", _on_backpack_do)
 	
 	$".".visible = false
 	
@@ -19,6 +19,9 @@ func _ready() -> void:
 	populate_backpack()
 	populate_keychain()
 	$GridPocket/PocketPos1.grab_focus()
+	
+	if hide_backpack:
+		$GridBackpack.visible = false
 
 
 func _input(event: InputEvent) -> void:
@@ -47,6 +50,7 @@ func populate_pockets() -> void:
 				"title": pocket_items[item].title,
 				"description": pocket_items[item].description
 			}
+
 
 func populate_backpack() -> void:
 	for item in backpack_items.size():
@@ -85,22 +89,29 @@ func get_focused_node_name() -> String:
 func _on_dev_console_console_closed() -> void:
 	$GridPocket/PocketPos1.grab_focus()
 	pass
-	
-func _on_inventory_closed() -> void:
-	print("do sth when we close the inv idk")
-	$".".visible = false
-	pass
 
-func _on_inventory_opened() -> void:
-	print("do sth when we open the inv idk")
-	$".".visible = true
-	DevConsole.console("close")
 
-func _on_inventory_toggle() -> void:
-	if $".".visible:
-		_on_inventory_closed()
-	else:
-		_on_inventory_opened()
+func _on_inventory_do(action : String) -> void:
+	if action == "close":
+		$".".visible = false
+	elif action == "open":
+		$".".visible = true
+		DevConsole.console("close")
+	elif action == "toggle":
+		if $".".visible:
+			$".".visible = false
+		else:
+			$".".visible = true
+			DevConsole.console("close")
+
+
+func _on_backpack_do(action : String) -> void:
+	if action == "show":
+		$GridBackpack.visible = true
+	elif action == "hide":
+		$GridBackpack.visible = false
+	elif action == "toggle":
+		$GridBackpack.visible = !$GridBackpack.visible
 
 
 func _on_kc_list_focus_entered() -> void:

@@ -9,9 +9,8 @@ var blacklist_for_browser := ["host_framerate", "quit"]
 @onready var input_label := $MarginContainer/console/input
 
 signal on_terminal_closed
-signal on_inventory_closed
-signal on_inventory_opened
-signal on_inventory_toggle
+signal inventory_do(action : String)
+signal backpack_do(action : String)
 signal console_pause
 
 func _ready() -> void:
@@ -82,24 +81,32 @@ func console(value : String = "") -> void:
 		self.visible = false
 		on_terminal_closed.emit()
 	elif value == "open":
-		on_inventory_closed.emit()
+		inventory_do.emit("close")
 		input_label.grab_focus()
 		self.visible = true
 	else:
 		self.visible = !self.visible
 		if self.visible:
-			on_inventory_closed.emit()
+			inventory_do.emit("close")
 			input_label.grab_focus()
 		else:
 			on_terminal_closed.emit()
 
 func inventory(value : String = "") -> void:
 	if value == "close":
-		on_inventory_closed.emit()
+		inventory_do.emit("close")
 	elif value == "open":
-		on_inventory_opened.emit()
+		inventory_do.emit("open")
 	else:
-		on_inventory_toggle.emit()
+		inventory_do.emit("toggle")
+
+func backpack(value : String = "") -> void:
+	if value == "show":
+		backpack_do.emit("show")
+	elif value == "hide":
+		backpack_do.emit("hide")
+	else:
+		backpack_do.emit("toggle")
 
 func load_song(song : String = "") -> String:
 	const all_paths := ["user://Scenes/Levels/", "res://Scenes/Levels/"]

@@ -51,7 +51,7 @@ text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(80.0014, 20)
+custom_minimum_size = Vector2(80.0007, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50
