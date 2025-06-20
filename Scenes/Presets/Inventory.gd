@@ -2,6 +2,7 @@ extends Control
 
 @export var pocket_items : Array[InventoryItem]
 @export var backpack_items : Array[InventoryItem]
+@export var keychain_items : Array[InventoryItem]
 
 var inventory_dict : Dictionary
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	
 	populate_pockets()
 	populate_backpack()
+	populate_keychain()
 	$GridPocket/PocketPos1.grab_focus()
 
 
@@ -23,7 +25,11 @@ func _input(event: InputEvent) -> void:
 	if $".".visible and event is InputEventKey and event.is_released():
 		print(get_focused_node_name())
 		# description handling
-		if inventory_dict.has(get_focused_node_name()):
+		if get_focused_node_name() == "KcList":
+			var selected_item_id : int = $Keychain/KcList.get_selected_items()[0]
+			var selected_item : InventoryItem = keychain_items[selected_item_id]
+			$DescBox/MarginContainer/VBoxContainer/Label.text = selected_item.title + " - "  + selected_item.description
+		elif inventory_dict.has(get_focused_node_name()):
 			var now_focused : Dictionary = inventory_dict[get_focused_node_name()]
 			if now_focused:
 				$DescBox/MarginContainer/VBoxContainer/Label.text = now_focused.title + " - "  + now_focused.description
@@ -39,7 +45,6 @@ func populate_pockets() -> void:
 			var grid_item_name : String = "PocketPos%d" % (item + 1)
 			var grid_item := $GridPocket.get_node(grid_item_name)
 			grid_item.text = pocket_items[item].title
-			#grid_item.text = str(item)
 			inventory_dict[grid_item_name] = {
 				"title": pocket_items[item].title,
 				"description": pocket_items[item].description
@@ -57,6 +62,18 @@ func populate_backpack() -> void:
 			inventory_dict[grid_item_name] = {
 				"title": backpack_items[item].title,
 				"description": backpack_items[item].description
+			}
+
+
+func populate_keychain() -> void:
+	for item in keychain_items.size():
+		print(item)
+		if keychain_items[item]:
+			print(item, ": add `", keychain_items[item].title, "` to the keychain")
+			$Keychain/KcList.add_item(keychain_items[item].title)
+			inventory_dict["Key"+str(item)] = {
+				"title": keychain_items[item].title,
+				"description": keychain_items[item].description
 			}
 
 

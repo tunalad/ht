@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://8f5o6dpbop7a"]
+
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_y4ixn"]
+
+[resource]
+script = ExtResource("1_y4ixn")
+title = "Bakery Key"
+description = "My bakery's key. Unlike for my apparment, I have two more backup keys!"

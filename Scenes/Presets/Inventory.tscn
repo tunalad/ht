@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgpy6tm72o1um"]
+[gd_scene load_steps=12 format=3 uid="uid://bgpy6tm72o1um"]
 
 [ext_resource type="Script" path="res://Scenes/Presets/Inventory.gd" id="1_1akru"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="1_nyn6h"]
@@ -6,6 +6,9 @@
 [ext_resource type="Resource" uid="uid://txiv34msndbp" path="res://Resources/InvRecorder.tres" id="3_mqytj"]
 [ext_resource type="Resource" uid="uid://c5a0qj16p7kxh" path="res://Resources/InvTape.tres" id="4_75k3d"]
 [ext_resource type="Resource" uid="uid://dvph32dlqe5cq" path="res://Resources/InvMusicplayer.tres" id="5_uq6hw"]
+[ext_resource type="Resource" uid="uid://bykjpx5gco483" path="res://Resources/InvTapeCased.tres" id="6_0oa7u"]
+[ext_resource type="Resource" uid="uid://8f5o6dpbop7a" path="res://Resources/KeyHome.tres" id="6_u27e6"]
+[ext_resource type="Resource" uid="uid://yqc0f1iuljov" path="res://Resources/KeyBakery.tres" id="7_8gftm"]
 [ext_resource type="PackedScene" uid="uid://ponwys65np3d" path="res://Scenes/Presets/InventoryField.tscn" id="7_u4lvi"]
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="8_ffwwp"]
 
@@ -18,6 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1akru")
 pocket_items = Array[ExtResource("2_nnqes")]([ExtResource("3_mqytj"), ExtResource("4_75k3d"), ExtResource("5_uq6hw")])
+backpack_items = Array[ExtResource("2_nnqes")]([ExtResource("6_0oa7u"), ExtResource("6_0oa7u"), null, null, null, null, null, null])
+keychain_items = Array[ExtResource("2_nnqes")]([ExtResource("6_u27e6"), ExtResource("7_8gftm")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -40,13 +45,13 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(122.002, 20)
+custom_minimum_size = Vector2(122.001, 20)
 layout_mode = 2
 text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(80.0028, 20)
+custom_minimum_size = Vector2(80.0014, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50
@@ -165,10 +170,6 @@ text = "KEYCHAIN"
 custom_minimum_size = Vector2(155, 115)
 layout_mode = 2
 theme = ExtResource("8_ffwwp")
-item_count = 3
-item_0/text = "Bakery key"
-item_1/text = "Appartment"
-item_2/text = "Basement"
 metadata/_edit_group_ = true
 
 [connection signal="focus_entered" from="Keychain/KcList" to="." method="_on_kc_list_focus_entered"]

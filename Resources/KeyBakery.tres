@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://yqc0f1iuljov"]
+
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_y2qbl"]
+
+[resource]
+script = ExtResource("1_y2qbl")
+title = "Helen's Appartment key"
+description = "My only appartment key. I don't have a backup one, so I often tripple check myself if I have it on me."
