@@ -12,6 +12,7 @@ extends Control
 func _process(_delta : float) -> void:
 	if Engine.is_editor_hint():
 		set_text_background()
+	pass
 
 
 func _input(event : InputEvent) -> void:
@@ -37,6 +38,9 @@ func _ready() -> void:
 func set_text_background() -> void:
 	if !subtract_white:
 		$diary.material = null
+	
+	$background.visible = true
+	diary_text.visible = true
 	
 	if background:
 		$background.texture = background

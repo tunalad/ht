@@ -39,9 +39,7 @@ func _input(event: InputEvent) -> void:
 
 func populate_pockets() -> void:
 	for item in pocket_items.size():
-		print(item)
 		if pocket_items[item]:
-			print("add `", pocket_items[item].title, "` to the pocket")
 			var grid_item_name : String = "PocketPos%d" % (item + 1)
 			var grid_item := $GridPocket.get_node(grid_item_name)
 			grid_item.text = pocket_items[item].title
