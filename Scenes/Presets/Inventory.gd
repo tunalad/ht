@@ -79,6 +79,13 @@ func get_focused_node_name() -> String:
 	return ""
 
 
+func keychain_position() -> void:
+	if $GridBackpack.visible:
+		$Keychain.set_position(Vector2(64, 256))
+	else:
+		$Keychain.set_position(Vector2(424, 96))
+
+
 func _on_dev_console_console_closed() -> void:
 	$GridPocket/PocketPos1.grab_focus()
 	pass
@@ -105,6 +112,7 @@ func _on_backpack_do(action : String) -> void:
 		$GridBackpack.visible = false
 	elif action == "toggle":
 		$GridBackpack.visible = !$GridBackpack.visible
+	keychain_position()
 
 
 func _on_kc_list_focus_entered() -> void:

@@ -45,13 +45,13 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(122.001, 20)
+custom_minimum_size = Vector2(134.5, 20)
 layout_mode = 2
 text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(80.0007, 20)
+custom_minimum_size = Vector2(103, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50
@@ -113,7 +113,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="GridBackpack" type="GridContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 424.0
 offset_top = 96.0
@@ -171,6 +170,7 @@ text = "KEYCHAIN"
 custom_minimum_size = Vector2(155, 115)
 layout_mode = 2
 theme = ExtResource("8_ffwwp")
+theme_override_font_sizes/font_size = 12
 metadata/_edit_group_ = true
 
 [connection signal="focus_entered" from="Keychain/KcList" to="." method="_on_kc_list_focus_entered"]
