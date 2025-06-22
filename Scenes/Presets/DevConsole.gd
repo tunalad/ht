@@ -260,12 +260,12 @@ func tab_completion(partial_command : String) -> String:
 			matches.append(command)
 	
 	if matches.size() == 1:
-		return matches[0]
+		return matches[0] + " "
 	elif matches.size() > 1:
 		history_label.text += "\n" + str(matches.size()) + " possible options:\n " + "\n ".join(matches)
-		return partial_command
+		return partial_command + " "
 	
-	return partial_command
+	return partial_command + " "
 
 # # # # # # # # # # # # # # # # # # # # # # 
 
