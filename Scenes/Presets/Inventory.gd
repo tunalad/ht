@@ -40,7 +40,12 @@ func populate_pockets() -> void:
 		if pocket_items[item]:
 			var grid_item_name : String = "PocketPos%d" % (item + 1)
 			var grid_item := $GridPocket.get_node(grid_item_name)
-			grid_item.text = pocket_items[item].title
+			
+			if !pocket_items[item].icon:
+				grid_item.text = pocket_items[item].title
+			else:
+				grid_item.icon = pocket_items[item].icon
+			
 			inventory_dict[grid_item_name] = {
 				"title": pocket_items[item].title,
 				"description": pocket_items[item].description
@@ -53,7 +58,10 @@ func populate_backpack() -> void:
 			print("add `", backpack_items[item].title, "` to the backpack")
 			var grid_item_name : String = "BpPos%d" % (item + 1)
 			var grid_item := $GridBackpack.get_node(grid_item_name)
-			grid_item.text = backpack_items[item].title
+			if !backpack_items[item].icon:
+				grid_item.text = backpack_items[item].title
+			else:
+				grid_item.icon = backpack_items[item].icon
 			#grid_item.text = str(item)
 			inventory_dict[grid_item_name] = {
 				"title": backpack_items[item].title,

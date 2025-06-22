@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://txiv34msndbp"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://txiv34msndbp"]
 
+[ext_resource type="Texture2D" uid="uid://dbua5ulxrrffq" path="res://GFX/Inventory/icon-taprec-small.png" id="1_hurqr"]
 [ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_tc04k"]
 
 [resource]
 script = ExtResource("1_tc04k")
 title = "Tape recorder"
 description = "An old tape recorder that my dad gave a while ago. I use it as a sort of diary, recoding my own thoughts and feling in the moment. I don't know, it's cute."
+icon = ExtResource("1_hurqr")

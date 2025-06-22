@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://c5a0qj16p7kxh"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://c5a0qj16p7kxh"]
 
+[ext_resource type="Texture2D" uid="uid://cwv5jutqqpugg" path="res://GFX/Inventory/icon-tape-small.png" id="1_2lrtu"]
 [ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_bbldr"]
 
 [resource]
 script = ExtResource("1_bbldr")
 title = "MC-60 microtape"
 description = "Tape designed for my tape recorder. At the name suggests, tt can hold up to 60 minutes! "
+icon = ExtResource("1_2lrtu")

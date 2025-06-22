@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://ponwys65np3d"]
+[gd_scene load_steps=5 format=3 uid="uid://ponwys65np3d"]
 
+[ext_resource type="Shader" path="res://Scenes/Shaders/icon_tamer.gdshader" id="1_pa0nn"]
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="1_u0ws1"]
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryField.gd" id="3_kye6n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hoi12"]
+shader = ExtResource("1_pa0nn")
+shader_parameter/brightness_compensation = 0.4
+shader_parameter/white_preservation = 0.9
+shader_parameter/detail_boost = 0.735
+shader_parameter/shadow_offset_x = 9.5e-07
+shader_parameter/shadow_offset_y = 9.5e-07
+shader_parameter/shadow_blur = 2.0
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_alpha_threshold = 0.1
 
 [node name="InvBtn" type="Button"]
 custom_minimum_size = Vector2(75, 60)
@@ -9,3 +22,13 @@ offset_bottom = 60.0
 theme = ExtResource("1_u0ws1")
 text_overrun_behavior = 1
 autowrap_mode = 3
+script = ExtResource("3_kye6n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hoi12")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
