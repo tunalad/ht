@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1akru")
 pocket_items = Array[ExtResource("2_nnqes")]([ExtResource("3_mqytj"), ExtResource("4_75k3d"), ExtResource("5_uq6hw")])
-backpack_items = Array[ExtResource("2_nnqes")]([ExtResource("6_0oa7u"), ExtResource("6_0oa7u"), null, null, null, null, null, null])
+backpack_items = Array[ExtResource("2_nnqes")]([ExtResource("6_0oa7u"), ExtResource("6_0oa7u")])
 keychain_items = Array[ExtResource("2_nnqes")]([ExtResource("6_u27e6"), ExtResource("7_8gftm")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -45,13 +45,13 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(122.008, 20)
+custom_minimum_size = Vector2(131.376, 20)
 layout_mode = 2
 text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(80.014, 20)
+custom_minimum_size = Vector2(97.2509, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50

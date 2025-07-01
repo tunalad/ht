@@ -11,6 +11,7 @@ var blacklist_for_browser := ["host_framerate", "quit"]
 signal on_terminal_closed
 signal inventory_do(action : String)
 signal backpack_do(action : String)
+signal give_item(action : String)
 signal console_pause
 
 func _ready() -> void:
@@ -107,6 +108,9 @@ func backpack(value : String = "") -> void:
 		backpack_do.emit("hide")
 	else:
 		backpack_do.emit("toggle")
+
+func give(value : String = "") -> void:
+	give_item.emit(int(value))
 
 func load_song(song : String = "") -> String:
 	const all_paths := ["user://Scenes/Levels/", "res://Scenes/Levels/"]

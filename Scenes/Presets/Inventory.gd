@@ -6,11 +6,27 @@ extends Control
 
 var inventory_dict : Dictionary
 
+enum ItemKind {
+	POCKET,
+	BACKPACK,
+	KEY
+}
+
+enum ItemResource {
+	MUSIC_PLAYER,
+	RECORDER,
+	TAPE,
+	TAPE_CASED,
+	KEY_BAKERY,
+	KEY_HOME
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
 	DevConsole.connect("inventory_do", _on_inventory_do)
 	DevConsole.connect("backpack_do", _on_backpack_do)
+	DevConsole.connect("give_item", add_to_inventory)
 	
 	$".".visible = false
 	
@@ -18,6 +34,9 @@ func _ready() -> void:
 	populate_backpack()
 	populate_keychain()
 	$GridPocket/PocketPos1.grab_focus()
+	
+	add_to_inventory(ItemResource.TAPE, ItemKind.BACKPACK)
+	add_to_inventory(ItemResource.TAPE, ItemKind.BACKPACK)
 
 
 func _input(event: InputEvent) -> void:
@@ -92,6 +111,42 @@ func keychain_position() -> void:
 		$Keychain.set_position(Vector2(64, 256))
 	else:
 		$Keychain.set_position(Vector2(424, 96))
+
+
+func add_to_inventory(item : ItemResource, item_kind: ItemKind = ItemKind.BACKPACK, notify: bool = false) -> void:
+	match item_kind:
+		ItemKind.BACKPACK:
+			backpack_items.append(get_resource(item))
+			populate_backpack()
+			print("add to backpack")
+		ItemKind.POCKET:
+			pocket_items.append(get_resource(item))
+			populate_pockets()
+			print("add to pocket")
+		ItemKind.KEY:
+			keychain_items.append(get_resource(item))
+			populate_keychain()
+			print("add to keychain")
+	if notify:
+		print("item added to inventory")
+
+
+func get_resource(type: ItemResource) -> Resource:
+	match type:
+		ItemResource.MUSIC_PLAYER:
+			return preload("res://Resources/InvMusicplayer.tres")
+		ItemResource.RECORDER:
+			return preload("res://Resources/InvRecorder.tres")
+		ItemResource.TAPE:
+			return preload("res://Resources/InvTape.tres")
+		ItemResource.TAPE_CASED:
+			return preload("res://Resources/InvTapeCased.tres")
+		ItemResource.KEY_BAKERY:
+			return preload("res://Resources/KeyBakery.tres")
+		ItemResource.KEY_HOME:
+			return preload("res://Resources/KeyHome.tres")
+		_:
+			return null
 
 
 func _on_dev_console_console_closed() -> void:
