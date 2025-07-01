@@ -338,6 +338,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Intro" type="ColorRect" parent="."]
+visible = false
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -423,6 +424,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Inventory" parent="." instance=ExtResource("4_7ceyy")]
+visible = false
 layout_mode = 1
 
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

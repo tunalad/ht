@@ -112,6 +112,10 @@ func backpack(value : String = "") -> void:
 func give(value : String = "") -> void:
 	give_item.emit(int(value))
 
+func notify(value : String) -> void:
+	Notification.notify(value)
+	pass
+
 func load_song(song : String = "") -> String:
 	const all_paths := ["user://Scenes/Levels/", "res://Scenes/Levels/"]
 	var all_files := []
@@ -279,13 +283,28 @@ func _on_line_edit_text_submitted(new_text : String) -> void:
 	if new_text.strip_edges() == "":
 		echo(">")
 		return
-	
-	var parts : Array = new_text.split(" ", false, 2)
+		
+	var parts : Array = new_text.split(" ", false, 1)
 	var command : String = parts[0]
 	var args := []
 	
 	if parts.size() > 1:
-		args = parts[1].split(" ")
+		var args_string : String = parts[1]
+		var current_arg := ""
+		var in_quotes := false
+		
+		for char in args_string:
+			if char == '"':
+				in_quotes = !in_quotes
+			elif char == ' ' and not in_quotes:
+				if current_arg != "":
+					args.append(current_arg)
+					current_arg = ""
+			else:
+				current_arg += char
+	
+		if current_arg != "":
+			args.append(current_arg)
 	
 	var full_command : String = new_text
 	
