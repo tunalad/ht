@@ -45,13 +45,13 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(131.376, 20)
+custom_minimum_size = Vector2(122.037, 20)
 layout_mode = 2
 text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(97.2509, 20)
+custom_minimum_size = Vector2(80.0674, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50

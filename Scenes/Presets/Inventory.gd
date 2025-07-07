@@ -6,21 +6,6 @@ extends Control
 
 var inventory_dict : Dictionary
 
-enum ItemKind {
-	POCKET,
-	BACKPACK,
-	KEY
-}
-
-enum ItemResource {
-	MUSIC_PLAYER,
-	RECORDER,
-	TAPE,
-	TAPE_CASED,
-	KEY_BAKERY,
-	KEY_HOME
-}
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DevConsole.connect("on_terminal_closed", _on_dev_console_console_closed)
@@ -34,9 +19,6 @@ func _ready() -> void:
 	populate_backpack()
 	populate_keychain()
 	$GridPocket/PocketPos1.grab_focus()
-	
-	add_to_inventory(ItemResource.TAPE, ItemKind.BACKPACK)
-	add_to_inventory(ItemResource.TAPE, ItemKind.BACKPACK)
 
 
 func _input(event: InputEvent) -> void:
@@ -113,37 +95,40 @@ func keychain_position() -> void:
 		$Keychain.set_position(Vector2(424, 96))
 
 
-func add_to_inventory(item : ItemResource, item_kind: ItemKind = ItemKind.BACKPACK, notify: bool = false) -> void:
+func add_to_inventory(item : Defs.InvItem, item_kind: Defs.InvKind = Defs.InvKind.BACKPACK, notify: bool = false) -> void:
+	var resource : Resource = get_resource(item)
+	
 	match item_kind:
-		ItemKind.BACKPACK:
-			backpack_items.append(get_resource(item))
+		Defs.InvKind.BACKPACK:
+			backpack_items.append(resource)
 			populate_backpack()
-			print("add to backpack")
-		ItemKind.POCKET:
-			pocket_items.append(get_resource(item))
+			#print("added %s to backpack" % resource.title)
+		Defs.InvKind.POCKET:
+			pocket_items.append(resource)
 			populate_pockets()
-			print("add to pocket")
-		ItemKind.KEY:
-			keychain_items.append(get_resource(item))
+			#print("added %s to pocket" % resource.title)
+		Defs.InvKind.KEY:
+			keychain_items.append(resource)
 			populate_keychain()
-			print("add to keychain")
+			#print("added %s to keychain" % resource.title)
 	if notify:
 		print("item added to inventory")
+		DevConsole.notify("Helen found:\n\"%s\"" % resource.title)
 
 
-func get_resource(type: ItemResource) -> Resource:
+func get_resource(type: Defs.InvItem) -> Resource:
 	match type:
-		ItemResource.MUSIC_PLAYER:
+		Defs.InvItem.MUSIC_PLAYER:
 			return preload("res://Resources/InvMusicplayer.tres")
-		ItemResource.RECORDER:
+		Defs.InvItem.RECORDER:
 			return preload("res://Resources/InvRecorder.tres")
-		ItemResource.TAPE:
+		Defs.InvItem.TAPE:
 			return preload("res://Resources/InvTape.tres")
-		ItemResource.TAPE_CASED:
+		Defs.InvItem.TAPE_CASED:
 			return preload("res://Resources/InvTapeCased.tres")
-		ItemResource.KEY_BAKERY:
+		Defs.InvItem.KEY_BAKERY:
 			return preload("res://Resources/KeyBakery.tres")
-		ItemResource.KEY_HOME:
+		Defs.InvItem.KEY_HOME:
 			return preload("res://Resources/KeyHome.tres")
 		_:
 			return null
