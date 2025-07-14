@@ -10,6 +10,9 @@ extends Control
 @export var next_scene : String
 @export var previous_scene : String
 @export var hide_backpack : bool = false
+@export var find_on_start : Array[Defs.InvItem]
+
+@onready var Inventory := $Inventory
 
 const hold_time : float = 4.0
 var song_length : float = 0.0
@@ -21,6 +24,8 @@ func _ready() -> void:
 	DevConsole.connect("console_pause", pause_song)
 	# setup
 	scene_setup()
+	
+	await give_on_start()
 	
 	# fade the text in (stays for like 2 seconds)
 	# (this doesn't halt anything down)
@@ -104,6 +109,16 @@ func _process(_delta : float) -> void:
 			rewind_song(false, false)
 		elif Input.is_action_pressed("rewind_forth"):
 			rewind_song(false, true)
+
+
+func give_on_start() -> void:
+	$SongTimer.start(0.25)
+	await $SongTimer.timeout
+	
+	for item in find_on_start:
+		Inventory.add_to_inventory(item, Defs.InvKind.BACKPACK, true)
+		$SongTimer.start(3)
+		await $SongTimer.timeout
 
 
 func track_percentage() -> int:

@@ -5,7 +5,8 @@
 		"song_name": "animation test",
 		"audio_file": "Music/Vol1/v1s1.mp3",
 		"song_start_delay": 1.0,
-		"fade_out": 10.0
+		"fade_out": 10.0,
+		"find_on_start" : [ 3, 3 ]
 	},
 	{
 		"scene_name": "diary1",

@@ -19,6 +19,8 @@ mono_crash.*.json
 Music/Vol1/*
 Exports
 vol1.pck
+Music/Vol2/*
+vol2.pck
 
 # extensions
 TODO.cfg

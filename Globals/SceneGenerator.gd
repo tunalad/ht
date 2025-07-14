@@ -98,10 +98,16 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 				else:
 					print("Failed to load audio stream for key: ", key)
 			elif key == "hide_backpack":
-				print("generating hide_backpack for ", song_data["song_name"])
-				print("hide_backpack: ", song_data["hide_backpack"])
 				var should_hide : bool = song_data[key]
 				song_player.set("hide_backpack", should_hide)
+			elif key == "find_on_start":
+				var items_array : Array[Defs.InvItem] = []
+				for item_id in song_data[key]:
+					items_array.append(item_id as Defs.InvItem)
+				song_player.set("find_on_start", items_array)
+				print("adding find_on_start for %s" % node_name)
+				print(song_player.get("find_on_start"))
+				pass
 			else:
 				song_player.set(key, song_data[key])
 		

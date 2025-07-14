@@ -160,7 +160,7 @@ func _on_backpack_do(action : String) -> void:
 		$GridBackpack.visible = false
 	elif action == "toggle":
 		$GridBackpack.visible = !$GridBackpack.visible
-	keychain_position()
+	#keychain_position()
 
 
 func _on_kc_list_focus_entered() -> void:
