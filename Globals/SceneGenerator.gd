@@ -2,6 +2,7 @@ extends Node
 
 const main_json := "res://main.json"
 const vol1_json := "res://vol1.json"
+const vol2_json := "res://vol2.json"
 var generated_scenes := []
 
 
@@ -11,7 +12,11 @@ func _ready() -> void:
 
 func volumes_generator() -> void:
 	var song_scenes := []
-	var json_data := json_to_array(FileAccess.get_file_as_string(vol1_json)) + json_to_array(FileAccess.get_file_as_string(main_json))
+	var json_data := (
+		json_to_array(FileAccess.get_file_as_string(vol1_json)) + 
+		json_to_array(FileAccess.get_file_as_string(vol2_json)) +
+		json_to_array(FileAccess.get_file_as_string(main_json))
+	)
 	
 	for i in range(len(json_data)):
 		var song : Dictionary = json_data[i]
@@ -102,12 +107,9 @@ func create_scene(node_name : String, song_data : Dictionary, res_path : String)
 				song_player.set("hide_backpack", should_hide)
 			elif key == "find_on_start":
 				var items_array : Array[Defs.InvItem] = []
-				for item_id in song_data[key]:
+				for item_id : int in song_data[key]:
 					items_array.append(item_id as Defs.InvItem)
 				song_player.set("find_on_start", items_array)
-				print("adding find_on_start for %s" % node_name)
-				print(song_player.get("find_on_start"))
-				pass
 			else:
 				song_player.set(key, song_data[key])
 		

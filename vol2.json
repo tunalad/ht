@@ -1,0 +1,27 @@
+[
+	{
+		"scene_name": "v2s1",
+		"background": "GFX/Vol2/vkquake0002.png",
+		"song_name": "packing up at dawn",
+		"audio_file": "Music/Vol1/v1s5.mp3",
+		"hide_backpack": false,
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s2",
+		"background": "GFX/Vol2/vkquake0008.png",
+		"song_name": "hometown train station",
+		"audio_file": "Music/Vol1/v1s5.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s3",
+		"background": "GFX/Vol2/trainride.ogv",
+		"song_name": "completely empty train",
+		"audio_file": "Music/Vol1/v1s5.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	}
+]

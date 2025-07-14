@@ -293,15 +293,15 @@ func _on_line_edit_text_submitted(new_text : String) -> void:
 		var current_arg := ""
 		var in_quotes := false
 		
-		for char in args_string:
-			if char == '"':
+		for chr in args_string:
+			if chr == '"':
 				in_quotes = !in_quotes
-			elif char == ' ' and not in_quotes:
+			elif chr == ' ' and not in_quotes:
 				if current_arg != "":
 					args.append(current_arg)
 					current_arg = ""
 			else:
-				current_arg += char
+				current_arg += chr
 	
 		if current_arg != "":
 			args.append(current_arg)
