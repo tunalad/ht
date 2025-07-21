@@ -14,13 +14,19 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
-# HELEN'S TAPES
+# # # # # # # # #
+# HELEN'S TAPES #
+# # # # # # # # #
 
 Music/Vol1/*
 Exports
 vol1.pck
 Music/Vol2/*
 vol2.pck
+
+# temporarily hiding, so I don't spoil the story xd
+vol2.json
+GFX/Vol2/*
 
 # extensions
 TODO.cfg
