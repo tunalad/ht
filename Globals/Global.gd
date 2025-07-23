@@ -6,25 +6,27 @@ var found_vol1 := false
 
 func _ready() -> void:
 	sounds = Defs.homemade_sounds
-	
+
 	if (DevConsole.version()).ends_with("dev"):
 		DevConsole.echo("If you are seeing this, you are running a development build")
-		DevConsole.echo("Or the dev might have forgot to change the game's version before releasing it...")
+		DevConsole.echo(
+			"Or the dev might have forgot to change the game's version before releasing it..."
+		)
 		DevConsole.console("open")
-	
+
 	var success := ProjectSettings.load_resource_pack("res://vol1.pck")
-	
+
 	if success or DevConsole.load_song().split("\n").has("v1s1"):
 		found_vol1 = true
-		
+
 		SceneGenerator.volumes_generator()
-		
+
 		DevConsole.echo("Volume 1 loaded.")
-		
+
 	load_customs()
 
 
-func play_sound(node : AudioStreamPlayer, sound : AudioStream) -> void:
+func play_sound(node: AudioStreamPlayer, sound: AudioStream) -> void:
 	node.set_stream(sound)
 	node.play()
 
@@ -33,58 +35,57 @@ func load_settings() -> void:
 	var video_settings := ConfigHandler.load_video_settings()
 	var audio_settings := ConfigHandler.load_audio_settings()
 	var misc_settings := ConfigHandler.load_misc_settings()
-	
+
 	# video settings setup
 	if video_settings["fullscreen"]:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	
+
 	# audio settings setup
 	AudioServer.set_bus_volume_db(
-		AudioServer.get_bus_index("Master"),
-		linear_to_db(audio_settings["master_volume"])
+		AudioServer.get_bus_index("Master"), linear_to_db(audio_settings["master_volume"])
 	)
-	
+
 	# misc settings setup
 	Crt.toggle_crt()
 	AudioServer.set_bus_mute(2, !misc_settings["pc_humm"])
-	
+
 	if !misc_settings["hide_mouse"]:
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 	else:
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 
 
-func draw_bar(percentage : int, bars : int = 20, extra_bar : bool = false) -> String:
+func draw_bar(percentage: int, bars: int = 20, extra_bar: bool = false) -> String:
 	var filled := "█ "
 	#var empty := "○ "
 	var empty := "- "
 	var filled_bars := int((percentage / 100.0) * bars)
-	
+
 	if extra_bar:
 		filled_bars += 1
-	
+
 	if filled_bars > bars:
 		filled_bars = bars
-	
+
 	return filled.repeat(filled_bars) + empty.repeat(bars - filled_bars)
 
 
-func setup_neighbours(buttons : Array, is_horizontal : bool = false) -> void:
+func setup_neighbours(buttons: Array, is_horizontal: bool = false) -> void:
 	var top := SIDE_TOP
 	var bottom := SIDE_BOTTOM
-	
+
 	if is_horizontal:
 		top = SIDE_LEFT
 		bottom = SIDE_RIGHT
-	
-	for b : TextureButton in buttons:
+
+	for b: TextureButton in buttons:
 		var my_pos := buttons.find(b, 0)
-		
+
 		if not is_instance_valid(b.focus_neighbor_top):
 			b.set_focus_neighbor(top, buttons[my_pos - 1].get_path())
-		
+
 		if not is_instance_valid(b.focus_neighbor_bottom):
 			if my_pos + 1 >= len(buttons):
 				b.set_focus_neighbor(bottom, buttons[0].get_path())
@@ -95,21 +96,22 @@ func setup_neighbours(buttons : Array, is_horizontal : bool = false) -> void:
 func load_customs() -> void:
 	var exec_path := OS.get_executable_path()
 	var custom_folder_path := exec_path.get_base_dir().replace(exec_path, "") + "/customs"
-	
+
 	if DirAccess.dir_exists_absolute(custom_folder_path):
 		var dir := DirAccess.open(custom_folder_path)
-		
+
 		if dir != null:
 			dir.list_dir_begin()
-			
+
 			while true:
 				var filename := dir.get_next()
-				if filename == "": break
-				
+				if filename == "":
+					break
+
 				if filename.ends_with(".pck"):
 					DevConsole.echo("Loaded %s" % filename)
 					ProjectSettings.load_resource_pack(custom_folder_path + "/" + filename)
-			
+
 			SceneGenerator.customs_generator()
 		else:
 			print("Failed to open `custom` folder.")
@@ -118,16 +120,16 @@ func load_customs() -> void:
 func increase_vol() -> void:
 	var audio_settings := ConfigHandler.load_audio_settings()
 	audio_settings["master_volume"] += 0.1
-	
+
 	# limiting settings volume to 100%
 	if audio_settings["master_volume"] > 1.0:
 		audio_settings["master_volume"] = 1.0
-	
+
 	DevConsole.volume(audio_settings["master_volume"])
 
 
 func decrease_vol() -> void:
 	var audio_settings := ConfigHandler.load_audio_settings()
 	audio_settings["master_volume"] -= 0.1
-	
+
 	DevConsole.volume(audio_settings["master_volume"])

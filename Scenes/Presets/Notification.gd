@@ -5,7 +5,7 @@ extends Control
 @onready var timer := $Timer
 @onready var sfx_player := $AudioStreamPlayer
 
-@export var duration : int = 3
+@export var duration: int = 3
 
 
 func _ready() -> void:
@@ -14,12 +14,12 @@ func _ready() -> void:
 	anim_player.play("notify-off")
 
 
-func notify(message : String) -> void:
+func notify(message: String) -> void:
 	if !message:
 		return
-	
+
 	label.text = message
-	
+
 	sfx_player.play()
 	anim_player.play("notify-in")
 	timer.start(duration)
