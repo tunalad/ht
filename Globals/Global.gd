@@ -2,26 +2,23 @@ extends Node
 
 var sounds := {}
 var found_vol1 := false
+var found_vol2 := false
 
 
 func _ready() -> void:
 	sounds = Defs.homemade_sounds
 
 	if (DevConsole.version()).ends_with("dev"):
-		DevConsole.echo("If you are seeing this, you are running a development build")
+		DevConsole.echo("If you are seeing this, you are running a development build.")
 		DevConsole.echo(
 			"Or the dev might have forgot to change the game's version before releasing it..."
 		)
 		DevConsole.console("open")
 
-	var success := ProjectSettings.load_resource_pack("res://vol1.pck")
+	found_vol1 = load_vol_pck("vol1.pck")
+	found_vol2 = load_vol_pck("vol2.pck")
 
-	if success or DevConsole.load_song().split("\n").has("v1s1"):
-		found_vol1 = true
-
-		SceneGenerator.volumes_generator()
-
-		DevConsole.echo("Volume 1 loaded.")
+	SceneGenerator.volumes_generator()
 
 	load_customs()
 
@@ -133,3 +130,13 @@ func decrease_vol() -> void:
 	audio_settings["master_volume"] -= 0.1
 
 	DevConsole.volume(audio_settings["master_volume"])
+
+
+func load_vol_pck(pck_name: String = "vol1.pck", check_for_scene: String = "v1s1") -> bool:
+	var success := ProjectSettings.load_resource_pack("res://%s" % pck_name)
+
+	if success or DevConsole.load_song().split("\n").has(check_for_scene):
+		DevConsole.echo("'%s' loaded." % pck_name)
+
+		return true
+	return false
