@@ -26,7 +26,10 @@ func _input(event: InputEvent) -> void:
 		Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-close-fx.wav"))
 		$"tape-hiss".stop()
 		#TransitionScreen.transition(2)
-		TransitionScreen.transition(0.1, 3)
+		if is_intermission:
+			TransitionScreen.transition(0.1, 1)
+		else:
+			TransitionScreen.transition(0.1, 3)
 		await TransitionScreen.on_transition_finished
 		if len(next_scene) > 0 and is_intermission:
 			DevConsole.load_song(next_scene)
