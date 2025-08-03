@@ -148,6 +148,12 @@ func create_end_scene(node: Node, song_data: Dictionary, res_path: String) -> Ar
 	endscreen.set("background", load(song_data["background"]))
 	endscreen.set("text", song_data["text"])
 
+	if song_data.has("previous_scene") and song_data["previous_scene"]:
+		endscreen.set("previous_scene", song_data["previous_scene"])
+
+	if song_data.has("next_scene") and song_data["next_scene"]:
+		endscreen.set("next_scene", song_data["next_scene"])
+
 	node.add_child(endscreen)
 	endscreen.set_owner(node)
 

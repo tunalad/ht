@@ -4,6 +4,9 @@ extends Control
 @export var background: CompressedTexture2D
 @export_multiline var text: String
 @export var subtract_white: bool = false
+@export var next_scene: String
+@export var previous_scene: String
+@export var is_intermission: bool = false
 
 @onready var AUDIO_PLAYER := $AudioStreamPlayer
 @onready var diary_text := $diary/CenterContainer/text
@@ -25,7 +28,13 @@ func _input(event: InputEvent) -> void:
 		#TransitionScreen.transition(2)
 		TransitionScreen.transition(0.1, 3)
 		await TransitionScreen.on_transition_finished
-		DevConsole.menu()
+		if len(next_scene) > 0 and is_intermission:
+			DevConsole.load_song(next_scene)
+		else:
+			DevConsole.menu()
+
+	if event.is_action_pressed("song_back") and len(previous_scene) > 0:
+		DevConsole.load_song(previous_scene)
 
 
 func _ready() -> void:
@@ -54,10 +63,3 @@ func set_text_background() -> void:
 		diary_text.text = text
 	else:
 		diary_text.visible = false
-
-
-func _on_btn_menu_pressed() -> void:
-	Global.play_sound(AUDIO_PLAYER, Global.sounds["menu_quit"])
-	TransitionScreen.transition(2)
-	await TransitionScreen.on_transition_finished
-	DevConsole.menu()
