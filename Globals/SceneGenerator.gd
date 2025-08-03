@@ -12,36 +12,38 @@ func _ready() -> void:
 
 func volumes_generator() -> void:
 	var song_scenes := []
-	var json_data := (
-		json_to_array(FileAccess.get_file_as_string(main_json))
-		+ json_to_array(FileAccess.get_file_as_string(vol1_json))
-		+ json_to_array(FileAccess.get_file_as_string(vol2_json))
-	)
 
-	for i in range(len(json_data)):
-		var song: Dictionary = json_data[i]
+	var jsons := [
+		json_to_array(FileAccess.get_file_as_string(main_json)),
+		json_to_array(FileAccess.get_file_as_string(vol1_json)),
+		json_to_array(FileAccess.get_file_as_string(vol2_json)),
+	]
 
-		if i == 0:
-			song["previous_scene"] = null
-			if len(json_data) > 1:
-				song["next_scene"] = json_data[i + 1]["scene_name"]
-			else:
+	for json_data in jsons:
+		for i in range(len(json_data)):
+			var song: Dictionary = json_data[i]
+
+			if i == 0:
+				song["previous_scene"] = null
+				if len(json_data) > 1:
+					song["next_scene"] = json_data[i + 1]["scene_name"]
+				else:
+					song["next_scene"] = null
+			elif i == len(json_data) - 1:
+				song["previous_scene"] = json_data[i - 1]["scene_name"]
 				song["next_scene"] = null
-		elif i == len(json_data) - 1:
-			song["previous_scene"] = json_data[i - 1]["scene_name"]
-			song["next_scene"] = null
-		else:
-			song["previous_scene"] = json_data[i - 1]["scene_name"]
-			song["next_scene"] = json_data[i + 1]["scene_name"]
+			else:
+				song["previous_scene"] = json_data[i - 1]["scene_name"]
+				song["next_scene"] = json_data[i + 1]["scene_name"]
 
-		#print("%s: {%s | %s}" % [song["scene_name"], song["previous_scene"], song["next_scene"]])
+			#print("%s: {%s | %s}" % [song["scene_name"], song["previous_scene"], song["next_scene"]])
 
-		var scene_paths := create_scene(
-			song["scene_name"], song, "user://Scenes/Levels/%s.tscn" % song["scene_name"]
-		)
-		if scene_paths.size() > 0:
-			generated_scenes.append(scene_paths[0])
-		song_scenes.append(song["scene_name"])
+			var scene_paths := create_scene(
+				song["scene_name"], song, "user://Scenes/Levels/%s.tscn" % song["scene_name"]
+			)
+			if scene_paths.size() > 0:
+				generated_scenes.append(scene_paths[0])
+			song_scenes.append(song["scene_name"])
 
 
 func json_to_array(json_string: String) -> Array:
