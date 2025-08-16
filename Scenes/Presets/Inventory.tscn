@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgpy6tm72o1um"]
+[gd_scene load_steps=13 format=3 uid="uid://bgpy6tm72o1um"]
 
 [ext_resource type="Script" path="res://Scenes/Presets/Inventory.gd" id="1_1akru"]
 [ext_resource type="PackedScene" uid="uid://cmsyhrr1coo1u" path="res://Scenes/Presets/MenuButton.tscn" id="1_nyn6h"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bykjpx5gco483" path="res://Resources/InvTapeCased.tres" id="6_0oa7u"]
 [ext_resource type="Resource" uid="uid://8f5o6dpbop7a" path="res://Resources/KeyHome.tres" id="6_u27e6"]
 [ext_resource type="Resource" uid="uid://yqc0f1iuljov" path="res://Resources/KeyBakery.tres" id="7_8gftm"]
+[ext_resource type="Resource" uid="uid://bkfafjw57peh7" path="res://Resources/InvUmbrella.tres" id="7_b8nt3"]
 [ext_resource type="PackedScene" uid="uid://ponwys65np3d" path="res://Scenes/Presets/InventoryField.tscn" id="7_u4lvi"]
 [ext_resource type="Theme" uid="uid://phckjkeryl6u" path="res://GFX/Theme.tres" id="8_ffwwp"]
 
@@ -21,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1akru")
 pocket_items = Array[ExtResource("2_nnqes")]([ExtResource("3_mqytj"), ExtResource("4_75k3d"), ExtResource("5_uq6hw")])
-backpack_items = Array[ExtResource("2_nnqes")]([ExtResource("6_0oa7u"), ExtResource("6_0oa7u")])
+backpack_items = Array[ExtResource("2_nnqes")]([ExtResource("6_0oa7u"), ExtResource("6_0oa7u"), ExtResource("7_b8nt3")])
 keychain_items = Array[ExtResource("2_nnqes")]([ExtResource("6_u27e6"), ExtResource("7_8gftm")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -45,13 +46,13 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(131.377, 20)
+custom_minimum_size = Vector2(126.688, 20)
 layout_mode = 2
 text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(97.2542, 20)
+custom_minimum_size = Vector2(88.6271, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50

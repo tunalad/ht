@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://bkfafjw57peh7"]
+
+[ext_resource type="Texture2D" uid="uid://gnlh2yy3mcnd" path="res://GFX/Inventory/icon-umbrella-small.png" id="1_m0ils"]
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_mo8fj"]
+
+[resource]
+script = ExtResource("1_mo8fj")
+title = "Umbrella"
+description = "My little travel umbrella that I might have paid a bit too much for. But compared to the cheaper ones, this one doesn't break by the stronger winds."
+icon = ExtResource("1_m0ils")
