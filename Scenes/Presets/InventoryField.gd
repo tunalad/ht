@@ -57,7 +57,6 @@ func _handle_icon_change(new_icon: Texture2D) -> void:
 		_icon_rect.texture = new_icon
 
 func _on_crt_change(action: String) -> void:
-	print("we got da signal ", action)
 	if action == "off":
 		icons_filter_settings(crt_off)
 	elif action == "on":

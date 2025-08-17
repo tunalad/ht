@@ -19,7 +19,7 @@ func volumes_generator() -> void:
 		json_to_array(FileAccess.get_file_as_string(vol2_json)),
 	]
 
-	for json_data in jsons:
+	for json_data: Array in jsons:
 		for i in range(len(json_data)):
 			var song: Dictionary = json_data[i]
 
@@ -275,6 +275,9 @@ func ensure_texture(path: String) -> Texture2D:
 	if existing_resource and existing_resource is CompressedTexture2D:
 		return existing_resource as CompressedTexture2D
 
+	if existing_resource is VideoStream:
+		return null
+
 	path = "res://" + path
 
 	# Create and load the image
@@ -302,12 +305,15 @@ func ensure_video(path: String) -> VideoStream:
 	if existing_resource and existing_resource is VideoStream:
 		return existing_resource as VideoStream
 
+	if existing_resource is CompressedTexture2D:
+		return null
+
 	path = "res://" + path
 
-	# Load the video stream
+	# load the video stream
 	var video_stream := ResourceLoader.load(path)
 
-	# Validate the loaded resource
+	# validate the loaded resource
 	if !video_stream or !(video_stream is VideoStream):
 		print("Failed to load video stream from file: %s" % path)
 		return null

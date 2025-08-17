@@ -60,7 +60,7 @@ func populate_pockets() -> void:
 func populate_backpack() -> void:
 	for item in backpack_items.size():
 		if backpack_items[item]:
-			print("add `", backpack_items[item].title, "` to the backpack")
+			#print("add `", backpack_items[item].title, "` to the backpack")
 			var grid_item_name: String = "BpPos%d" % (item + 1)
 			var grid_item := $GridBackpack.get_node(grid_item_name)
 			if !backpack_items[item].icon:
@@ -76,7 +76,7 @@ func populate_backpack() -> void:
 func populate_keychain() -> void:
 	for item in keychain_items.size():
 		if keychain_items[item]:
-			print(item, ": add `", keychain_items[item].title, "` to the keychain")
+			#print(item, ": add `", keychain_items[item].title, "` to the keychain")
 			$Keychain/KcList.add_item(keychain_items[item].title)
 			inventory_dict["Key" + str(item)] = {
 				"title": keychain_items[item].title, "description": keychain_items[item].description
@@ -116,7 +116,7 @@ func add_to_inventory(
 			populate_keychain()
 			#print("added %s to keychain" % resource.title)
 	if notify:
-		print("item added to inventory")
+		#print("item added to inventory")
 		DevConsole.notify('Helen found:\n"%s"' % resource.title)
 
 
