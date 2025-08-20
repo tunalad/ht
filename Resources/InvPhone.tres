@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://bs61cgtxvferr"]
+
+[ext_resource type="Texture2D" uid="uid://bbjlivjp0dy6l" path="res://GFX/Inventory/icon-phone-small.png" id="1_hi85j"]
+[ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="1_tbyc2"]
+
+[resource]
+script = ExtResource("1_tbyc2")
+title = "Phone"
+description = "My little \"music\" phone, with its prepaid card running dry most of the time. I just use it for accepting calls, I don't really like talking via phone"
+icon = ExtResource("1_hi85j")

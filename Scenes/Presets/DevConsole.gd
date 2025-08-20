@@ -118,6 +118,12 @@ func backpack(value: String = "") -> void:
 
 
 func give(value: String = "") -> void:
+	if value == "":
+		var items_dict := {}
+		for i in range(Defs.InvItem.size()):
+			items_dict[i] = Defs.InvItem.keys()[i]
+		echo(str(items_dict))
+		return
 	give_item.emit(int(value))
 
 

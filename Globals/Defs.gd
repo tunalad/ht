@@ -20,4 +20,15 @@ var homemade_sounds := {
 
 enum InvKind { POCKET, BACKPACK, KEY }
 
-enum InvItem { MUSIC_PLAYER, RECORDER, TAPE, TAPE_CASED, KEY_BAKERY, KEY_HOME }
+enum InvItem { MUSIC_PLAYER, RECORDER, TAPE, TAPE_CASED, KEY_BAKERY, KEY_HOME, UMBRELLA, PHONE }
+
+var resources := {
+	InvItem.MUSIC_PLAYER: "res://Resources/InvMusicplayer.tres",
+	InvItem.RECORDER: "res://Resources/InvRecorder.tres",
+	InvItem.TAPE: "res://Resources/InvTape.tres",
+	InvItem.TAPE_CASED: "res://Resources/InvTapeCased.tres",
+	InvItem.UMBRELLA: "res://Resources/InvUmbrella.tres",
+	InvItem.PHONE: "res://Resources/InvPhone.tres",
+	InvItem.KEY_BAKERY: "res://Resources/KeyBakery.tres",
+	InvItem.KEY_HOME: "res://Resources/KeyHome.tres"
+}

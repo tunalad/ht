@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scenes/Presets/InventoryItem.gd" id="2_nnqes"]
 [ext_resource type="Resource" uid="uid://txiv34msndbp" path="res://Resources/InvRecorder.tres" id="3_mqytj"]
 [ext_resource type="Resource" uid="uid://c5a0qj16p7kxh" path="res://Resources/InvTape.tres" id="4_75k3d"]
-[ext_resource type="Resource" uid="uid://dvph32dlqe5cq" path="res://Resources/InvMusicplayer.tres" id="5_uq6hw"]
+[ext_resource type="Resource" uid="uid://bs61cgtxvferr" path="res://Resources/InvPhone.tres" id="5_iffk3"]
 [ext_resource type="Resource" uid="uid://bykjpx5gco483" path="res://Resources/InvTapeCased.tres" id="6_0oa7u"]
 [ext_resource type="Resource" uid="uid://8f5o6dpbop7a" path="res://Resources/KeyHome.tres" id="6_u27e6"]
 [ext_resource type="Resource" uid="uid://yqc0f1iuljov" path="res://Resources/KeyBakery.tres" id="7_8gftm"]
@@ -21,7 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1akru")
-pocket_items = Array[ExtResource("2_nnqes")]([ExtResource("3_mqytj"), ExtResource("4_75k3d"), ExtResource("5_uq6hw")])
+pocket_items = Array[ExtResource("2_nnqes")]([ExtResource("3_mqytj"), ExtResource("4_75k3d"), ExtResource("5_iffk3")])
 backpack_items = Array[ExtResource("2_nnqes")]([ExtResource("6_0oa7u"), ExtResource("6_0oa7u"), ExtResource("7_b8nt3")])
 keychain_items = Array[ExtResource("2_nnqes")]([ExtResource("6_u27e6"), ExtResource("7_8gftm")])
 
@@ -46,13 +46,13 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="BtnInventory" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(126.688, 20)
+custom_minimum_size = Vector2(122.586, 20)
 layout_mode = 2
 text = "(I)NVENTORY"
 arrow_margin = 71
 
 [node name="BtnTapes" parent="TopMenu" instance=ExtResource("1_nyn6h")]
-custom_minimum_size = Vector2(88.6271, 20)
+custom_minimum_size = Vector2(81.0784, 20)
 layout_mode = 2
 text = "(T)APES"
 arrow_margin = 50

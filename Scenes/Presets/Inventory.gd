@@ -121,21 +121,10 @@ func add_to_inventory(
 
 
 func get_resource(type: Defs.InvItem) -> Resource:
-	match type:
-		Defs.InvItem.MUSIC_PLAYER:
-			return preload("res://Resources/InvMusicplayer.tres")
-		Defs.InvItem.RECORDER:
-			return preload("res://Resources/InvRecorder.tres")
-		Defs.InvItem.TAPE:
-			return preload("res://Resources/InvTape.tres")
-		Defs.InvItem.TAPE_CASED:
-			return preload("res://Resources/InvTapeCased.tres")
-		Defs.InvItem.KEY_BAKERY:
-			return preload("res://Resources/KeyBakery.tres")
-		Defs.InvItem.KEY_HOME:
-			return preload("res://Resources/KeyHome.tres")
-		_:
-			return null
+	if Defs.resources.has(type):
+		print(Defs.resources[type])
+		return load(Defs.resources[type])
+	return null
 
 
 func _on_dev_console_console_closed() -> void:
