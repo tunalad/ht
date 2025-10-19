@@ -42,11 +42,18 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	TransitionScreen.fade_to_normal()
+	
+	# is intermission skipping on?
+	if is_intermission and should_we_skip():
+		await get_tree().create_timer(0.000001).timeout
+		DevConsole.load_song(next_scene)
+		return
+	
 	set_text_background()
-
+	
 	Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-open-fx.wav"))
 	await get_tree().create_timer(0.25).timeout
-
+	
 	Global.play_sound($"tape-hiss", load("res://SFX/green-tape-hiss-fx.wav"))
 
 
@@ -66,3 +73,10 @@ func set_text_background() -> void:
 		diary_text.text = text
 	else:
 		diary_text.visible = false
+
+func should_we_skip() -> bool:
+	var misc_settings := ConfigHandler.load_misc_settings()
+	
+	if misc_settings["skip_interm"]:
+		return true
+	return false

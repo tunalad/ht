@@ -13,6 +13,7 @@ func _ready() -> void:
 	ensure_setting("misc", "crt_shader", true)
 	ensure_setting("misc", "pc_humm", true)
 	ensure_setting("misc", "hide_mouse", true)
+	ensure_setting("misc", "skip_interm", false)
 
 	config.save(SETTINGS)
 

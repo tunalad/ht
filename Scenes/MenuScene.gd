@@ -45,7 +45,8 @@ func load_settings() -> void:
 		"volume_label":
 		$menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator,
 		"crt_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/crt_indicator,
-		"humm_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/humm_indicator
+		"humm_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/humm_indicator,
+		"interm_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/interm_indicator
 	}
 
 	Global.load_settings()
@@ -57,6 +58,7 @@ func load_settings() -> void:
 	labels["fullscreen_label"].text = "ON" if video_settings["fullscreen"] else "OFF"
 	labels["crt_label"].text = "ON" if misc_settings["crt_shader"] else "OFF"
 	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
+	labels["interm_label"].text = "ON" if misc_settings["skip_interm"] else "OFF"
 
 
 func vol_missing_warn() -> void:
@@ -201,6 +203,10 @@ func _on_btn_opt_humm_pressed() -> void:
 	DevConsole.pc_humm()
 	update_settings_info()
 
+
+func _on_btn_opt_interm_pressed() -> void:
+	DevConsole.skip_interm()
+	update_settings_info()
 
 # # # # # # # # # # # # # #
 # # # OTHER SIGNALS # # # #

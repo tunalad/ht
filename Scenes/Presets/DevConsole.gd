@@ -271,6 +271,14 @@ func version() -> String:
 	return str(ProjectSettings.get_setting("application/config/version"))
 
 
+func skip_interm() -> String:
+	var misc_settings := ConfigHandler.load_misc_settings()
+	
+	ConfigHandler.save_misc_settings("skip_interm", !misc_settings["skip_interm"])
+	Global.load_settings()
+	
+	return str(misc_settings["skip_interm"])
+
 # # # # # # # # # # # # # # # # # # # # # #
 
 
