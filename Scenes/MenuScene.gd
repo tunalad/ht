@@ -58,7 +58,7 @@ func load_settings() -> void:
 	labels["fullscreen_label"].text = "ON" if video_settings["fullscreen"] else "OFF"
 	labels["crt_label"].text = "ON" if misc_settings["crt_shader"] else "OFF"
 	labels["humm_label"].text = "ON" if misc_settings["pc_humm"] else "OFF"
-	labels["interm_label"].text = "ON" if misc_settings["skip_interm"] else "OFF"
+	labels["interm_label"].text = "ON" if !misc_settings["skip_interm"] else "OFF"
 
 
 func vol_missing_warn() -> void:
@@ -92,8 +92,13 @@ func _on_btn_select_vol_pressed() -> void:
 	# locking vol1 if we can't find the scene file
 	if !Global.found_vol1:
 		$menu_select/btn_vol1.text = "LOCKED"
-		$menu_select/btn_vol1.arrow_margin = 47
+		$menu_select/btn_vol1.arrow_margin = 52
 		$menu_select/btn_vol1.setup_text()
+
+	if !Global.found_vol2:
+		$menu_select/btn_vol2.text = "LOCKED"
+		$menu_select/btn_vol2.arrow_margin = 52
+		$menu_select/btn_vol2.setup_text()
 
 	# focus on the 1st button
 	MENU_SELECT[0].grab_focus()
@@ -159,6 +164,18 @@ func _on_btn_vol_1_pressed() -> void:
 	TransitionScreen.transition(2.2, 1)
 	await TransitionScreen.on_transition_finished
 	DevConsole.load_song("v1s1")
+
+func _on_btn_vol_2_pressed() -> void:
+	var songs := DevConsole.load_song().split("\n")
+
+	if !songs.has("v2s1"):
+		Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
+		return
+
+	Global.play_sound($AudioStreamPlayer, Global.sounds["menu_quit"])
+	TransitionScreen.transition(2.2, 1)
+	await TransitionScreen.on_transition_finished
+	DevConsole.load_song("v2s1")
 
 
 # # # # # # # # # # # # # #
