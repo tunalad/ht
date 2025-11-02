@@ -6,11 +6,19 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.load_settings()
-
-	TransitionScreen.fade_to_normal(2)
-	await get_tree().create_timer(5.0).timeout
-
-	load_menu()
+	
+	if OS.get_cmdline_args().find("--novid"):
+		$CenterContainer/text.visible = false
+		# transitions cuz I don't want anything flashing on boot
+		TransitionScreen.transition(0.001, 0.001)
+		await TransitionScreen.on_transition_finished
+		DevConsole.menu()
+	else:
+		$CenterContainer/text.visible = true
+		TransitionScreen.fade_to_normal(2)
+		await get_tree().create_timer(5.0).timeout
+		
+		load_menu()
 
 
 func _input(event: InputEvent) -> void:

@@ -33,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="text" type="Label" parent="CenterContainer"]
+visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 text = "Disclaimer!
