@@ -7,7 +7,7 @@ extends Control
 func _ready() -> void:
 	Global.load_settings()
 	
-	if OS.get_cmdline_args().find("--novid"):
+	if !OS.get_cmdline_args().find("--novid") < 0:
 		$CenterContainer/text.visible = false
 		# transitions cuz I don't want anything flashing on boot
 		TransitionScreen.transition(0.001, 0.001)
