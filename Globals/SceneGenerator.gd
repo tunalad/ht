@@ -113,6 +113,10 @@ func create_scene(node_name: String, song_data: Dictionary, res_path: String) ->
 					song_player.set(key, audio_stream)
 				else:
 					print("Failed to load audio stream for key: ", key)
+			elif key == "ambi_sfx":
+				var audio_stream := ensure_mp3(song_data[key])
+				if audio_stream and audio_stream is AudioStream:
+					song_player.set("ambiance_sfx", audio_stream)
 			elif key == "hide_backpack":
 				var should_hide: bool = song_data[key]
 				song_player.set("hide_backpack", should_hide)

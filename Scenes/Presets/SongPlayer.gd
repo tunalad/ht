@@ -4,6 +4,7 @@ extends Control
 @export var video_background: VideoStream
 @export var song_name: String = "Song name"  # track title that fades in and out
 @export var audio_file: AudioStream  # the song file
+@export var ambiance_sfx: AudioStream # optional ambiance sfx
 @export var text_fade_in: float = 2  # text fading in speed
 @export var song_start_delay: float = 2  # delay before the song starts
 @export var fade_out: float = 4  # time it takes for the song to fade out
@@ -200,10 +201,14 @@ func scene_setup() -> void:
 	if !previous_scene:
 		$Controller/btn_back.set_disabled(true)
 		$Controller/btn_back/ButtonText.visible = false
-
+	
 	$MusicPlayer.stream = audio_file
 	song_length = $MusicPlayer.stream.get_length()
-
+	
+	if ambiance_sfx:
+		$AmbiPlayer.stream = ambiance_sfx
+		$AmbiPlayer.play()
+	
 	if hide_backpack:
 		DevConsole.backpack("hide")
 	else:

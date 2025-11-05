@@ -237,6 +237,10 @@ stream = ExtResource("3_4wmuc")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="AmbiPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"ambi"
+
 [node name="VideoBackground" type="VideoStreamPlayer" parent="."]
 layout_mode = 0
 autoplay = true
