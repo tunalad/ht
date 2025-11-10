@@ -22,6 +22,10 @@ bus = &"sfx"
 volume_db = -10.0
 bus = &"sfx"
 
+[node name="AmbiPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"ambi"
+
 [node name="blackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15

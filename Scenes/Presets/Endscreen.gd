@@ -7,6 +7,7 @@ extends Control
 @export var next_scene: String
 @export var previous_scene: String
 @export var is_intermission: bool = false
+@export var ambiance_sfx: AudioStream # optional ambiance sfx
 
 @onready var AUDIO_PLAYER := $AudioStreamPlayer
 @onready var diary_text := $diary/CenterContainer/text
@@ -50,6 +51,10 @@ func _ready() -> void:
 		return
 	
 	set_text_background()
+	
+	if ambiance_sfx:
+		$AmbiPlayer.stream = ambiance_sfx
+		$AmbiPlayer.play()
 	
 	Global.play_sound(AUDIO_PLAYER, load("res://SFX/tapedeck-open-fx.wav"))
 	await get_tree().create_timer(0.25).timeout

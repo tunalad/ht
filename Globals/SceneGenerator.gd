@@ -154,6 +154,11 @@ func create_end_scene(node: Node, song_data: Dictionary, res_path: String) -> Ar
 	endscreen.set("background", load(song_data["background"]))
 	endscreen.set("text", song_data["text"])
 
+	if song_data.has("ambi_sfx"):
+		var audio_stream := ensure_mp3(song_data["ambi_sfx"])
+		if audio_stream and audio_stream is AudioStream:
+			endscreen.set("ambiance_sfx", audio_stream)
+
 	if song_data.has("is_intermission") and song_data.get("is_intermission", false):
 		endscreen.set("is_intermission", song_data["is_intermission"])
 
