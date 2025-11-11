@@ -60,7 +60,10 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("ui_cancel") && !DevConsole.visible:
-		quit_to_menu()
+		if Inventory.visible:
+			DevConsole.inventory("close")
+		else:
+			quit_to_menu()
 
 	if event.is_action_pressed("volume_up"):
 		Global.increase_vol()
