@@ -20,7 +20,7 @@ var song_length: float = 0.0
 var song_position: float = 0.0
 var reached_end: bool = false
 var transitioning: bool = false
-
+var quit_prompt_on: bool = false
 
 func _ready() -> void:
 	DevConsole.connect("console_pause", pause_song)
@@ -60,9 +60,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("ui_cancel") && !DevConsole.visible:
-		TransitionScreen.transition(1, 0.5)
-		await TransitionScreen.on_transition_finished
-		DevConsole.menu()
+		quit_to_menu()
 
 	if event.is_action_pressed("volume_up"):
 		Global.increase_vol()
@@ -222,6 +220,28 @@ func display_volume() -> void:
 		"Volume:\n - | %s | +"
 		% Global.draw_bar(ConfigHandler.load_audio_settings()["master_volume"] * 100, 10)
 	)
+
+
+func quit_to_menu() -> void:
+	var notif := Notification
+	
+	if quit_prompt_on:
+		TransitionScreen.transition(1, 0.5)
+		await TransitionScreen.on_transition_finished
+		DevConsole.menu()
+		notif.timer.stop()
+		notif.timer.emit_signal("timeout")
+		notif.visible = false
+		return
+	
+	
+	notif.notify("Press [ESC] again to quit.")
+	
+	quit_prompt_on = true
+	
+	await notif.on_notify_finished
+	
+	quit_prompt_on = false
 
 
 func _on_btn_back_pressed() -> void:

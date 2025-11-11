@@ -1,5 +1,7 @@
 extends Control
 
+signal on_notify_finished
+
 @onready var anim_player := $AnimationPlayer
 @onready var label := $Label
 @onready var timer := $Timer
@@ -18,6 +20,7 @@ func notify(message: String) -> void:
 	if !message:
 		return
 
+	$".".visible = true
 	label.text = message
 
 	sfx_player.play()
@@ -25,6 +28,11 @@ func notify(message: String) -> void:
 	timer.start(duration)
 
 
+func notify_update(new_message: String) -> void:
+	label.text = new_message
+
+
 func _on_timer_timeout() -> void:
 	anim_player.play_backwards("notify-in")
 	timer.stop()
+	on_notify_finished.emit()
