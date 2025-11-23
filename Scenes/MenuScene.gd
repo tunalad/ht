@@ -4,7 +4,7 @@ extends Control
 @onready var MENU_MAIN := $menu_main.get_children()
 @onready var MENU_SELECT := $menu_select.get_children()
 @onready var MENU_OPTS := $menu_options/VBoxContainer/HBoxContainer/menu_options_left.get_children()
-
+@onready var BACKGROUND := $Background
 
 func _ready() -> void:
 	# make sure the correct menu is active
@@ -31,7 +31,29 @@ func _ready() -> void:
 	Global.setup_neighbours(MENU_SELECT)
 	Global.setup_neighbours(MENU_OPTS)
 
+	# locking vol1 if we can't find the scene file
+	if !Global.found_vol1:
+		$menu_select/btn_vol1.text = "LOCKED"
+		$menu_select/btn_vol1.arrow_margin = 52
+		$menu_select/btn_vol1.setup_text()
+
+	# locking vol2 if we can't find the scene file
+	if !Global.found_vol2:
+		$menu_select/btn_vol2.text = "LOCKED"
+		$menu_select/btn_vol2.arrow_margin = 52
+		$menu_select/btn_vol2.setup_text()
+	else:
+		BACKGROUND.texture = load("res://GFX/ht-menu2.png")
+
 	TransitionScreen.fade_to_normal(4)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") && !DevConsole.visible:
+		if $menu_select.visible:
+			_on_btn_back_pressed()
+		elif $menu_options.visible:
+			_on_btn_opt_back_pressed()
 
 
 func load_settings() -> void:
@@ -63,7 +85,7 @@ func load_settings() -> void:
 
 func vol_missing_warn() -> void:
 	DevConsole.echo("vol1.pck not found next to the executable.")
-	DevConsole.echo("You can find it at https://tunalad.itch.io/helens-tapes")
+	DevConsole.echo("You can find vol1.pck and future volumes at https://tunalad.itch.io/helens-tapes")
 	DevConsole.console("open")
 
 
@@ -89,19 +111,11 @@ func _on_btn_select_vol_pressed() -> void:
 	$menu_main.hide()
 	$menu_select.show()
 
-	# locking vol1 if we can't find the scene file
-	if !Global.found_vol1:
-		$menu_select/btn_vol1.text = "LOCKED"
-		$menu_select/btn_vol1.arrow_margin = 52
-		$menu_select/btn_vol1.setup_text()
-
-	if !Global.found_vol2:
-		$menu_select/btn_vol2.text = "LOCKED"
-		$menu_select/btn_vol2.arrow_margin = 52
-		$menu_select/btn_vol2.setup_text()
-
-	# focus on the 1st button
-	MENU_SELECT[0].grab_focus()
+	# focus on the latest volume
+	if Global.found_vol2:
+		MENU_SELECT[1].grab_focus()
+	else:
+		MENU_SELECT[0].grab_focus()
 
 	# activate sounds for menu_select items
 	set_skipped_sound(MENU_SELECT, true)
@@ -154,9 +168,7 @@ func _on_locked_pressed() -> void:
 
 
 func _on_btn_vol_1_pressed() -> void:
-	var songs := DevConsole.load_song().split("\n")
-
-	if !songs.has("v1s1"):
+	if !Global.found_vol1:
 		Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 		return
 
@@ -165,10 +177,9 @@ func _on_btn_vol_1_pressed() -> void:
 	await TransitionScreen.on_transition_finished
 	DevConsole.load_song("v1s1")
 
-func _on_btn_vol_2_pressed() -> void:
-	var songs := DevConsole.load_song().split("\n")
 
-	if !songs.has("v2s1"):
+func _on_btn_vol_2_pressed() -> void:
+	if !Global.found_vol2:
 		Global.play_sound($AudioStreamPlayer, Global.sounds["menu_locked"])
 		return
 
@@ -176,6 +187,15 @@ func _on_btn_vol_2_pressed() -> void:
 	TransitionScreen.transition(2.2, 1)
 	await TransitionScreen.on_transition_finished
 	DevConsole.load_song("v2s1")
+
+
+func _on_btn_vol_1_focus_entered() -> void:
+	BACKGROUND.texture = load("res://GFX/ht-menu-8bit.png")
+
+
+func _on_btn_vol_2_focus_entered() -> void:
+	if Global.found_vol2:
+		BACKGROUND.texture = load("res://GFX/ht-menu2.png")
 
 
 # # # # # # # # # # # # # #
