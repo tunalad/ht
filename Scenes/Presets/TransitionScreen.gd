@@ -1,3 +1,6 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends CanvasLayer
 
 signal on_transition_finished

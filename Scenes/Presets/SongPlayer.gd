@@ -1,10 +1,13 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends Control
 
 @export var game_background: Texture2D  # main background image
 @export var video_background: VideoStream
 @export var song_name: String = "Song name"  # track title that fades in and out
 @export var audio_file: AudioStream  # the song file
-@export var ambiance_sfx: AudioStream # optional ambiance sfx
+@export var ambiance_sfx: AudioStream  # optional ambiance sfx
 @export var text_fade_in: float = 2  # text fading in speed
 @export var song_start_delay: float = 2  # delay before the song starts
 @export var fade_out: float = 4  # time it takes for the song to fade out
@@ -21,6 +24,7 @@ var song_position: float = 0.0
 var reached_end: bool = false
 var transitioning: bool = false
 var quit_prompt_on: bool = false
+
 
 func _ready() -> void:
 	DevConsole.connect("console_pause", pause_song)
@@ -202,14 +206,14 @@ func scene_setup() -> void:
 	if !previous_scene:
 		$Controller/btn_back.set_disabled(true)
 		$Controller/btn_back/ButtonText.visible = false
-	
+
 	$MusicPlayer.stream = audio_file
 	song_length = $MusicPlayer.stream.get_length()
-	
+
 	if ambiance_sfx:
 		$AmbiPlayer.stream = ambiance_sfx
 		$AmbiPlayer.play()
-	
+
 	if hide_backpack:
 		DevConsole.backpack("hide")
 	else:
@@ -227,7 +231,7 @@ func display_volume() -> void:
 
 func quit_to_menu() -> void:
 	var notif := Notification
-	
+
 	if quit_prompt_on:
 		TransitionScreen.transition(1, 0.5)
 		await TransitionScreen.on_transition_finished
@@ -236,14 +240,13 @@ func quit_to_menu() -> void:
 		notif.timer.emit_signal("timeout")
 		notif.visible = false
 		return
-	
-	
+
 	notif.notify("Press [ESC] again to quit.")
-	
+
 	quit_prompt_on = true
-	
+
 	await notif.on_notify_finished
-	
+
 	quit_prompt_on = false
 
 

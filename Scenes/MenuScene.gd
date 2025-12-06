@@ -1,3 +1,6 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends Control
 
 @onready var AUDIO_PLAYER := get_tree().current_scene.get_node("AudioStreamPlayer")
@@ -5,6 +8,7 @@ extends Control
 @onready var MENU_SELECT := $menu_select.get_children()
 @onready var MENU_OPTS := $menu_options/VBoxContainer/HBoxContainer/menu_options_left.get_children()
 @onready var BACKGROUND := $Background
+
 
 func _ready() -> void:
 	# make sure the correct menu is active
@@ -68,7 +72,8 @@ func load_settings() -> void:
 		$menu_options/VBoxContainer/HBoxContainer/menu_options_right/volume_indicator,
 		"crt_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/crt_indicator,
 		"humm_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/humm_indicator,
-		"interm_label": $menu_options/VBoxContainer/HBoxContainer/menu_options_right/interm_indicator
+		"interm_label":
+		$menu_options/VBoxContainer/HBoxContainer/menu_options_right/interm_indicator
 	}
 
 	Global.load_settings()
@@ -85,7 +90,9 @@ func load_settings() -> void:
 
 func vol_missing_warn() -> void:
 	DevConsole.echo("vol1.pck not found next to the executable.")
-	DevConsole.echo("You can find vol1.pck and future volumes at https://tunalad.itch.io/helens-tapes")
+	DevConsole.echo(
+		"You can find vol1.pck and future volumes at https://tunalad.itch.io/helens-tapes"
+	)
 	DevConsole.console("open")
 
 
@@ -244,6 +251,7 @@ func _on_btn_opt_humm_pressed() -> void:
 func _on_btn_opt_interm_pressed() -> void:
 	DevConsole.skip_interm()
 	update_settings_info()
+
 
 # # # # # # # # # # # # # #
 # # # OTHER SIGNALS # # # #

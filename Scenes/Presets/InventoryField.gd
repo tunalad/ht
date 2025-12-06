@@ -1,3 +1,6 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends Button
 
 # not this is something extremely hacky. Shader that I wrote for combating white blowup

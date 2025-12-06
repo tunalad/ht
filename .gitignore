@@ -24,10 +24,6 @@ vol1.pck
 Music/Vol2/*
 vol2.pck
 
-# temporarily hiding, so I don't spoil the story xd
-vol2.json
-GFX/Vol2/*
-
 # extensions
 TODO.cfg
 addons

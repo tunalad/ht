@@ -1,3 +1,6 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends Node
 
 var config: ConfigFile = ConfigFile.new()

@@ -1,3 +1,6 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends Control
 
 @export var menu_scene: PackedScene
@@ -6,7 +9,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.load_settings()
-	
+
 	if !OS.get_cmdline_args().find("--novid") < 0:
 		$CenterContainer/text.visible = false
 		# transitions cuz I don't want anything flashing on boot
@@ -17,7 +20,7 @@ func _ready() -> void:
 		$CenterContainer/text.visible = true
 		TransitionScreen.fade_to_normal(2)
 		await get_tree().create_timer(5.0).timeout
-		
+
 		load_menu()
 
 

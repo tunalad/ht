@@ -1,5 +1,7 @@
+// Copyright (c) 2025 tunalad
+// SPDX-License-Identifier: BSD-2-Clause
+// See LICENSE file for details
 shader_type canvas_item;
-// DISCLAIMER: VIBECODED!!
 
 // Parameters to combat the CRT shader
 uniform float brightness_compensation : hint_range(0.0, 3.0) = 0.4;

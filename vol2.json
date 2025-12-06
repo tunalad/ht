@@ -1,0 +1,153 @@
+[
+	{
+		"scene_name": "v2s1",
+		"background": "GFX/Vol2/vkquake0047.png",
+		"song_name": "packing up at dawn",
+		"audio_file": "Music/Vol2/v2s1.mp3",
+		"hide_backpack": false,
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2i1",
+		"background": "GFX/Vol2/vkquake0045.png",
+		"is_ending": true,
+		"is_intermission": true,
+		"hide_backpack": true,
+		"text": "October 13th, 2007\n\nI'm about to head to the train station to visit granny. I tried calling her, but of course I don't have any call credit left... And it's super early in the morning, everything's probably closed because weekend. This is the only train I can take, so I can't really wait for something to open...\n\nSo yeah... Let's just call this a surprise visit, I guess.\n\nI will also talk a bit more into this thing while on the road, to pretend like I'm not alone or something like that...\n\n- Helen"
+	},
+	{
+		"scene_name": "v2s2",
+		"background": "GFX/Vol2/station-v2.ogv",
+		"song_name": "hometown train station",
+		"audio_file": "Music/Vol2/v2s2.mp3",
+		"ambi_sfx": "SFX/ambiance/ambi_rain1.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s3",
+		"background": "GFX/Vol2/trainride-v3.ogv",
+		"song_name": "not a soul in sight",
+		"audio_file": "Music/Vol2/v2s3.mp3",
+		"ambi_sfx": "SFX/ambiance/ambi_trainrain.mp3",
+		"song_start_delay": 3.0,
+		"fade_out": 3.0
+	},
+	{
+		"scene_name": "v2i2",
+		"background": "GFX/Vol2/vkquake0043.png",
+		"ambi_sfx": "SFX/ambiance/ambi_trainrain.mp3",
+		"is_ending": true,
+		"is_intermission": true,
+		"hide_backpack": true,
+		"text": "Octob- I won't repeat myself...\n\nSo I just got into the train and it seems pretty empty. I'm waiting for the conductor to purchase the ticket, but nobody came in like 30 minutes already. I'm not complaining though, ticket for this ride isn't cheap.\n\nI'll listen to some music and try not to fall asleep, I have to get the ticket whether I like it or not.\n\n- Helen"
+	},
+	{
+		"scene_name": "v2s4",
+		"background": "GFX/Vol2/vkquake0048.png",
+		"song_name": "sweet illness of mine\n(lifelover instrumental cover)",
+		"audio_file": "Music/Vol2/v2s4.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s5",
+		"background": "GFX/Vol2/trainmare-v2.ogv",
+		"song_name": "nightmare trainride part 1",
+		"audio_file": "Music/Vol2/v2s5.mp3",
+		"ambi_sfx": "SFX/ambiance/ambi_trainrain.mp3",
+		"song_start_delay": 3.0,
+		"fade_out": 3.0
+	},
+	{
+		"scene_name": "v2s6",
+		"background": "GFX/Vol2/vkquake0028.png",
+		"song_name": "nightmare trainride part 2",
+		"audio_file": "Music/Vol2/v2s6.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s7",
+		"background": "GFX/Vol2/station-village-v2.ogv",
+		"song_name": "village train station",
+		"audio_file": "Music/Vol2/v2s7.mp3",
+		"ambi_sfx": "SFX/ambiance/ambi_rain1.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2i3",
+		"background": "GFX/Vol2/vkquake0040.png",
+		"ambi_sfx": "SFX/ambiance/ambi_rain1.mp3",
+		"is_ending": true,
+		"is_intermission": true,
+		"hide_backpack": true,
+		"text": "Had another nightmare. I thought they only happened back at my apartment, but I guess I dream about wherever I fall asleep now.\n\nWhen I woke up, the train was already slowing into the village. That's probably what pulled me out of it.\n\nRain also seems to be slowing down a little bit. I think I will wait it out under this abandoned station.\n\n- Helen"
+	},
+	{
+		"scene_name": "v2s8",
+		"background": "GFX/Vol2/vkquake0030.png",
+		"song_name": "village",
+		"audio_file": "Music/Vol2/v2s8.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s9",
+		"background": "GFX/Vol2/vkquake0032.png",
+		"song_name": "little swing in front of the house",
+		"audio_file": "Music/Vol2/v2s9.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s10",
+		"background": "GFX/Vol2/vkquake0060.png",
+		"song_name": "granny, I'm here!",
+		"audio_file": "Music/Vol2/v2s10.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s11",
+		"background": "GFX/Vol2/vkquake0034.png",
+		"song_name": "she leaves yarn like this sometimes",
+		"audio_file": "Music/Vol2/v2s11.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2s12",
+		"background": "GFX/Vol2/vkquake0036.png",
+		"song_name": "probably sleeping at the neighbours...\nI should rest too",
+		"audio_file": "Music/Vol2/v2s12.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2i4",
+		"background": "GFX/Vol2/vkquake0039.png",
+		"is_ending": true,
+		"is_intermission": true,
+		"hide_backpack": true,
+		"text": "So... Granny's not home, and the door was unlocked. I guess that's normal here. Everyone here knows everyone, and nobody bothers locking up.\n\nShe's probably over at the neighbour's place, doing whatever old women do... Maybe staying the night since it's so late. She used to do that before.\n\nAnyway, I'm exhausted. I'll just crash in her bed.\n\n- Helen"
+	},
+	{
+		"scene_name": "v2s13",
+		"background": "GFX/Vol2/vkquake0037.png",
+		"song_name": "closet room light",
+		"audio_file": "Music/Vol2/v2s13.mp3",
+		"song_start_delay": 1.0,
+		"fade_out": 1.0
+	},
+	{
+		"scene_name": "v2end",
+		"background": "GFX/Vol2/vkquake0056.png",
+		"is_ending": true,
+		"is_intermission": false,
+		"hide_backpack": true,
+		"text": ". . ."
+	},
+]

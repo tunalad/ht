@@ -1,3 +1,6 @@
+# Copyright (c) 2025 tunalad
+# SPDX-License-Identifier: BSD-2-Clause
+# See LICENSE file for details
 extends ScrollContainer
 var max_scroll_length: float = 0
 @onready var scrollbar := get_v_scroll_bar()
