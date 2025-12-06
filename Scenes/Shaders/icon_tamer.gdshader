@@ -1,5 +1,5 @@
 shader_type canvas_item;
-// DISCLAIMER: VIDECODED!!
+// DISCLAIMER: VIBECODED!!
 
 // Parameters to combat the CRT shader
 uniform float brightness_compensation : hint_range(0.0, 3.0) = 0.4;
